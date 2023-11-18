@@ -10,12 +10,32 @@ from pybricks.ev3devices import Motor,TouchSensor
 from pybricks.parameters import Port
 from pybricks.robotics import DriveBase, Stop
 
-# Initialize the EV3 Brick.
-ev3 = EV3Brick()
-ev3.speaker.set_volume(100)
+import Colors
+import Color
 
-# Initialize the motors.
-leftMotor = Motor(Port.B)
-rightMotor = Motor(Port.C)
-grabber= Motor(Port.A)
-touch_sensor = TouchSensor(Port.S1)
+@singleton
+
+class Robot:
+    def __init__(self):
+        self.config()
+    
+    def config(self):
+        # Initialize the EV3 Brick.
+        self.ev3 = EV3Brick()
+        self.ev3.speaker.set_volume(100)
+
+        # Initialize the motors.
+        self.leftMotor = Motor(Port.B)
+        self.rightMotor = Motor(Port.C)
+        self.grabber= Motor(Port.A)
+        self.touch_sensor = TouchSensor(Port.S1)
+        # Initialize the drive base.
+        self.robotDriveBase = DriveBase(leftMotor, rightMotor, wheel_diameter=25.5, axle_track=145)
+
+    def move(self,quadriculas):
+        i=0
+        self.robotDriveBase.straight(slotDistance*5+10)
+        while(i<quadriculas):
+            if(Colors.colorLineIntercection.isColor()):
+                i=i+1
+        self.robotDriveBase.stop()
