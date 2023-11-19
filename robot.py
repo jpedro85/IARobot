@@ -13,3 +13,18 @@ leftMotor = Motor(Port.B)
 rightMotor = Motor(Port.C)
 grabber= Motor(Port.A)
 touch_sensor = TouchSensor(Port.S1)
+
+WHEEL_DIAMETER=25.5
+AXLE_TRACK=145
+
+def rotate(angle):
+    # Converta o ângulo para milímetros usando o diâmetro da roda e pi.
+    # Uma revolução é 2 * pi * diâmetro da roda milímetros.
+    millimeters = (angle / 360) * 2 * pi * WHEEL_DIAMETER
+
+    # Calcule a velocidade do motor para alcançar a rotação desejada.
+    # Ajuste esta fórmula para controlar a velocidade e a rotação do seu robô.
+    speed = (millimeters / 1000) * 100
+
+    # Roda o robô usando a base de acionamento.
+    robotDriveBase.drive(0, speed)
