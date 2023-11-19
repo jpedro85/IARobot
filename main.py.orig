@@ -1,5 +1,6 @@
 #!/usr/bin/env pybricks-micropython
 
+<<<<<<< HEAD
 # Initialize the EV3 Brick.
 ev3 = EV3Brick()
 ev3.speaker.set_volume(100)
@@ -43,3 +44,5 @@ robotDriveBase = DriveBase(leftMotor, rightMotor, wheel_diameter=25.5, axle_trac
 # ev3.speaker.play_file("f1_pit_stop.wav")
 # ev3.speaker.say("Do you even lift bro!")
 # ev3.speaker.say("Bet you dont even bench 225")
+=======
+>>>>>>> origin/main
