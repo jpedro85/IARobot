@@ -1,16 +1,16 @@
 #!/usr/bin/env pybricks-micropython
 from pybricks.hubs import EV3Brick
-from pybricks.ev3devices import Motor,TouchSensor
+from pybricks.ev3devices import Motor,TouchSensor,ColorSensor
 from pybricks.parameters import Port
 from pybricks.robotics import DriveBase, Stop
 from pybricks.tools import wait
 from math import pi
 
-import Colors
-import Color
-import utils
+from Colors import Colors
+from Color import Color
+from utils import singleton
+from board import *
 
-@singleton
 class Robot:
 
     def __init__(self):
@@ -26,47 +26,54 @@ class Robot:
         self.rightMotor = Motor(Port.C)
         self.grabber= Motor(Port.A)
         self.touch_sensor = TouchSensor(Port.S1)
+        self.colorSensor = ColorSensor(Port.S3)
+        self.colors = Colors()
         # Initialize the drive base.
-        self.robotDriveBase = DriveBase(leftMotor, rightMotor, wheel_diameter=25.5, axle_track=145)
+        self.robotDriveBase = DriveBase(self.leftMotor, self.rightMotor, wheel_diameter=25.5, axle_track=145)
+
+    def test(self):
+        while True:
+            print( self.touch_sensor.pressed())
+            if not  self.touch_sensor.pressed():
+                self.grabber.run(1000)
+            else:
+                self.grabber.stop(Stop.HOLD)
+                self.grabber.run_until_stalled(-1000,Stop.HOLD)
+                break
+    
+    def test2(self):
+        while True:
+           print(self.colorSensor.reflection())
 
     def move(self,quadriculas):
         i=0
-        self.robotDriveBase.straight(slotDistance* 5+10 )
+        self.robotDriveBase.drive(100,0)
         while(i<quadriculas):
-            if(Colors.colorLineIntercection.isColor()):
+            if(self.colors.colorLineInterception.isColor(self.colorSensor.reflection())):
                 i=i+1
+            wait(120)
+        
         self.robotDriveBase.stop()
-
-    def grab():
+       
+    def grab(self):
         print("Grabbing The Object!")
         #Close The Grabber And The Arm Will Rise
-        grabber.run(1000)
+        self.grabber.run(1000)
         #Wait Until The Touch Sensor Is Pressed
-        while not touch_sensor.pressed():    
+        while not self.touch_sensor.pressed():    
             pass
         # This Loop Waits For The Touch Sensor To Be Pressed
-        grabber.stop()
+        self.grabber.stop()
 
-    def release():
+    def release(self):
         #The motor is working in the opposite direction in order to open the grabber
         print("Releasing Object!")
-        grabber.run(-1000) # Adjusts velocity when needed
-        wait(2000) # Waits 2000 milliseconds (2 seconds) in order to give time to the grabber to open 
-        grabber.stop(Stop.BRAKE) # Stops the motor
+        self.grabber.run_until_stalled(-500) # Adjusts velocity when needed
+        # wait(2000) # Waits 2000 milliseconds (2 seconds) in order to give time to the grabber to open 
+        self.grabber.stop(Stop.BRAKE) # Stops the motor
 
-    def rotate(angle):
-        # Converta o ângulo para milímetros usando o diâmetro da roda e pi.
-        # Uma revolução é 2 * pi * diâmetro da roda milímetros.
-        millimeters = (angle / 360) * 2 * pi * WHEEL_DIAMETER
-
-        # Calcule a velocidade do motor para alcançar a rotação desejada.
-        # Ajuste esta fórmula para controlar a velocidade e a rotação do seu robô.
-        speed = (millimeters / 1000) * 100
-
-        # Roda o robô usando a base de acionamento.
-        robotDriveBase.drive(0, speed)
-
-        # Initialize the motors.
+    def rotate(self,angle):
+        self.robotDriveBase.turn(angle)
 
 
 # leftMotor = Motor(Port.B)

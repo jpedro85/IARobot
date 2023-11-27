@@ -1,0 +1,1 @@
+slotDistance = 300
