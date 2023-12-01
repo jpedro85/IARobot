@@ -69,12 +69,15 @@ class Robot:
 
     def move(self,slots):
         i=0
+        enterColor = False
         self.robotDriveBase.drive(100,0)
         while(i<=slots):
+
             if(Colors.getInstance().colorLineInterception.isColor(self.colorSensor.reflection())):
-                print("At Interception" , i)
+                enterColor = True
+
+            elif(enterColor):
                 i=i+1
-            wait(self.minWaitingOverInterception)
         
         self.robotDriveBase.stop()
 
@@ -152,7 +155,7 @@ class Robot:
             elif(Colors.getInstance().colorPieceMinus.isColor(self.colorSensor.reflection())):
                 Board.getInstance().pieces.append(PieceMinus())
                 
-            elif(Colors.getInstance().colorStatus.isColor(self.colorSensor.reflection()))
+            elif(Colors.getInstance().colorStatus.isColor(self.colorSensor.reflection())):
                 print("Finished reading Pieces!")
                 break
 

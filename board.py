@@ -1,4 +1,18 @@
 from point import *
+from piece import *
+import random
+
+class Slot:
+
+    def __init__(self,x,y,piece = None):
+        self.point = Point(x,y)
+        if(piece == None):
+            self.piece = PieceNone()
+        else:
+            self.piece = piece 
+
+    def __str__(self):
+        return " ( {0} P:{1} )".format(str(self.point),str(self.piece))
 
 class Board:
 
@@ -7,39 +21,64 @@ class Board:
     @classmethod
     def getInstance(cls):
         if(cls.__instance == None):
-            cls.__instance = Robot()
+            cls.__instance = Board()
         
         return cls.__instance
 
     def __init__(self):
         
+        self.size = 5
         self.pieces = []
         self.slots = []
-        y = -1
-        for i in range(25):
-            if(i%5 == 0):
-                y += 1
-            slots.append(Slot(i%5,y))
+        for i in range(5):
+            self.slots.append([])
+
+            for y in range(5):
+
+                s = Slot(i,y)
+                r = random.randint(0,3)
+
+                if(r == 0):
+                    s.piece = PiecePlus()
+                elif(r == 1):
+                    s.piece = PieceMinus()
+                elif(r == 2):
+                    s.piece = PieceO()
+                elif(r == 3):
+                    s.piece = PieceX()
+
+                self.slots[i].append(s)
+
+    def getSlotsWithPiecesOfType(self,piceType):
+
+        pieces = []
+        for x in range( self.size ):
+            for y in range( self.size ):
+
+                if(type(slot.piece) == piceType):
+                    pieces.append(self.slots[x][y])
+
+        return pieces
+
+    def clearShapes(self):
+
+        for x in range(5):
+            for y in range(5):
+                slot = self.slots[x][y]
+                piece = slot.piece
+                if(piece != None and type(piece) != PieceNone ):
+                    if(type(piece) == PieceMinus):
+                        piece.shape.clearCompletedShapeBasedOnPoint(slot,self)
+                
 
     def __str__(self):
 
         line = ""
-        for i in range(25):
-            if(i%5 == 0):
-                print(line)
-                line = ""
-            line += slots[i]
-
-    class Slot:
-
-        def __init__(self,x,y,piece = None):
-            self.point = Point(x,y)
-            if(piece == None):
-                self.piece = PieceNone()
-            else:
-                self.piece = piece 
-
-        def __str__(self):
-            return "X: {self.point}, Y: {self.piece}"
+        for i in range(5):
+            line += "\n"
+            for y in range(5):
+                line += str(self.slots[i][y]) + ";"
+        
+        return line
 
         
