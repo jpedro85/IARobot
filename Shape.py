@@ -20,11 +20,11 @@ class Shape:
 
         pointArray = self.existCompletedShapeBasedOnPoint(slot,board)
 
-        if(pointArray):
-            print("pieceFount")
-            for p in pointArray:
-                print(str(p))
-            print("pieceFount!")
+       # if(pointArray):
+       #     print("pieceFount")
+       #     for p in pointArray:
+       #         print(str(p))
+       #     print("pieceFount!")
 
         count = 0
         if(pointArray):
@@ -74,27 +74,28 @@ class ShapePlus(Shape):
         x = slot.point.x
         y = slot.point.y
 
-        if(x > y):
-            N = board.size - x
-        else:
-            N = board.size - y
+        NX = board.size - x
+        NY = board.size - y
+        N = NY if NX > NY else NX
 
         if( N >= 3):
 
-            for size in range(2,N+1):
+            for size in range(N,2,-1):
 
-                pointArray = self.getShape(size)
-                numberOfPieces = self.getPieceNumberFromSideLength(size)
+                if(size%2 != 0):
 
-                if(pointArray):
-                    count = 0
-                    for point in pointArray:
+                    pointArray = self.getShape(size)
+                    numberOfPieces = self.getPieceNumberFromSideLength(size)
 
-                        if(type(board.slots[x + point.x][y + point.y].piece.shape) == ShapePlus):
-                            count += 1
+                    if(pointArray):
+                        count = 0
+                        for point in pointArray:
 
-                    if(count == numberOfPieces):
-                        return pointArray
+                            if(type(board.slots[x + point.x][y + point.y].piece.shape) == ShapePlus):
+                                count += 1
+
+                        if(count == numberOfPieces):
+                            return pointArray
 
 
         return None
@@ -122,7 +123,7 @@ class ShapePlus(Shape):
             return pointArray
         else:
 
-            if(sideLength >= 3 and sideLength%2 != 0):
+            if(sideLength > 3 and sideLength%2 == 0):
                 print("Does not exist shape Plus with side {}.".format(sideLength))
                 return None
 
@@ -130,7 +131,7 @@ class ShapePlus(Shape):
 
             for i in range(sideLength):
                 if( i != sideLength//2):
-                    pointArray.append(Point(sideLength//2,i))   #middle colum
+                    pointArray.append(Point(sideLength//2,i))   #middle colum except middle point
                 pointArray.append(Point(i,sideLength//2)) #middle line 
                 
             self.shapes.update({sideLength : pointArray})
@@ -263,7 +264,7 @@ class ShapeX(Shape):
             return sideLength*2 -1 
         else:
             print("Does not exist shape X with side {}.".format(sideLength))
-            return -1
+            return None
 
     def existCompletedShapeBasedOnPoint(self,slot,board):
         """
@@ -280,7 +281,7 @@ class ShapeX(Shape):
         x = slot.point.x
         y = slot.point.y
 
-        print("analizando x:{0} y:{1}".format(x,y))
+        #print("analizando x:{0} y:{1}".format(x,y))
 
         NX = board.size - x
         NY = board.size - y
@@ -289,6 +290,8 @@ class ShapeX(Shape):
         if(N >= 3):
 
             for size in range(N,2,-1):
+
+                #print(size)
 
                 if(size%2 != 0):
 
@@ -299,13 +302,13 @@ class ShapeX(Shape):
 
                         count = 0
                         for point in pointArray:
-                            print(str(point))
+                            #print(str(point))
 
                             if(type(board.slots[x + point.x][y + point.y].piece.shape) == ShapeX):
                                 count += 1
 
                         if(count == numberOfPieces):
-                            print("returning:", numberOfPieces , size)
+                            #print("returning:", numberOfPieces , size)
                             return pointArray
 
         return None
@@ -325,7 +328,7 @@ class ShapeX(Shape):
             return pointArray
         else:
 
-            if(sideLength >= 3 and sideLength%2 != 0):
+            if(sideLength > 3 and sideLength%2 == 0):
                 print("Does not exist shape X with side {}.".format(sideLength))
                 return None
 
@@ -392,7 +395,7 @@ class ShapeO(Shape):
 
             for size in range(N,1,-1):
 
-                print(size)
+               # print(size)
 
                 pointArray = self.getShape(size)
                 numberOfPieces = self.getPieceNumberFromSideLength(size)
