@@ -46,8 +46,9 @@ class Robot:
         #vars
         self.startPoint = Point(0,0)
         self.minObjectDetectDistance = 40
-        self.minWaitingOverInterception = 150
         self.seePiecesInterval = 1000
+        self.adjustForTurn = 30
+        self.adjustAfterTurn = -70
 
     def test(self):
         while True:
@@ -77,7 +78,11 @@ class Robot:
                 enterColor = True
 
             elif(enterColor):
+                print("At interception: ", i)
                 i=i+1
+                #wait(90)
+                enterColor = False
+
         
         self.robotDriveBase.stop()
 
@@ -85,16 +90,17 @@ class Robot:
         self.robotDriveBase.straight(110)
         self.grab()
         self.rotate(180)
-        self.robotDriveBase.straight(50)
+        self.move(0) #move(0) same as move until Interception
+        self.robotDriveBase.straight(self.adjustForTurn)
         self.rotate(-90)
-        self.robotDriveBase.straight(-70)
+        self.robotDriveBase.straight(self.adjustAfterTurn)
 
     
     def dropPiece(self):
         self.rotate(45)
-        self.robotDriveBase.straight(110)
+        self.robotDriveBase.straight(120)
         self.release()
-        self.robotDriveBase.straight(-110)
+        self.robotDriveBase.straight(-120)
         self.rotate(125)
         self.robotDriveBase.straight(-130)
        
@@ -109,7 +115,7 @@ class Robot:
 
     def release(self):
         #The motor is working in the opposite direction in order to open the grabber
-        self.grabber.run_until_stalled(-300) # Adjusts velocity when needed
+        self.grabber.run_until_stalled(-450) # Adjusts velocity when needed
         # wait(2000) # Waits 2000 milliseconds (2 seconds) in order to give time to the grabber to open 
         self.grabber.stop(Stop.BRAKE) # Stops the motor
         print("Released Piece!")
@@ -119,15 +125,16 @@ class Robot:
 
     def moveFromStartToPoint(self,point):
         self.move(point.x - self.startPoint.x)
-        self.robotDriveBase.straight(50)#Adjust for turn
+        self.robotDriveBase.straight(self.adjustForTurn)
         self.rotate(90)
-        self.robotDriveBase.straight(-130)#Adjust for turn
+        self.robotDriveBase.straight(self.adjustAfterTurn)
         self.move(point.y - self.startPoint.y)
 
     def moveFromPointToStart(self,point):
         self.move(point.y - self.startPoint.y )
-        self.robotDriveBase.straight(50)#Adjust for turn
+        self.robotDriveBase.straight(self.adjustForTurn)
         self.rotate(-90)
+        self.robotDriveBase.straight(self.adjustAfterTurn)
         self.move(point.x - self.startPoint.x)
 
     def placePiece(self,point):
@@ -135,9 +142,9 @@ class Robot:
         self.moveFromStartToPoint(point)
         self.dropPiece()
         self.moveFromPointToStart(point)
-        self.robotDriveBase.straight(50)#Adjust for turn
+        self.robotDriveBase.straight(self.adjustForTurn)
         self.rotate(90)
-        self.robotDriveBase.straight(-55)
+        self.robotDriveBase.straight(self.adjustAfterTurn)
 
     def seePieces(self):
 
