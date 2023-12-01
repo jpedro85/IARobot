@@ -21,8 +21,10 @@ class Shape:
         pointArray = self.existCompletedShapeBasedOnPoint(slot,board)
 
         if(pointArray):
+            print("pieceFount")
             for p in pointArray:
                 print(str(p))
+            print("pieceFount!")
 
         count = 0
         if(pointArray):
@@ -177,7 +179,7 @@ class ShapeMinus(Shape):
         x = slot.point.x
         y = slot.point.y
 
-        print("analizando x:{0} y:{1}".format(x,y))
+       # print("analizando x:{0} y:{1}".format(x,y))
 
         N = board.size - y
 
@@ -191,9 +193,9 @@ class ShapeMinus(Shape):
 
                 pointArray = self.getShape(size)
 
-                if(pointArray):
-                    for p in pointArray:
-                        print(str(p))
+              #  if(pointArray):
+             #       for p in pointArray:
+                        #print(str(p))
 
                 numberOfPieces = self.getPieceNumberFromSideLength(size)
                 
@@ -205,7 +207,7 @@ class ShapeMinus(Shape):
                             count += 1
 
                     if(count == numberOfPieces):
-                        print("returning")
+                        #print("returning")
                         return pointArray
 
         return None
@@ -278,14 +280,15 @@ class ShapeX(Shape):
         x = slot.point.x
         y = slot.point.y
 
-        if(x > y):
-            N = board.size - x
-        else:
-            N = board.size - y
+        print("analizando x:{0} y:{1}".format(x,y))
+
+        NX = board.size - x
+        NY = board.size - y
+        N = NY if NX > NY else NX
 
         if(N >= 3):
 
-            for size in range(3,N+1):
+            for size in range(N,2,-1):
 
                 if(size%2 != 0):
 
@@ -293,13 +296,16 @@ class ShapeX(Shape):
                     numberOfPieces = self.getPieceNumberFromSideLength(size)
 
                     if(pointArray):
+
                         count = 0
                         for point in pointArray:
+                            print(str(point))
 
                             if(type(board.slots[x + point.x][y + point.y].piece.shape) == ShapeX):
                                 count += 1
 
                         if(count == numberOfPieces):
+                            print("returning:", numberOfPieces , size)
                             return pointArray
 
         return None
@@ -354,7 +360,7 @@ class ShapeO(Shape):
     def getPieceNumberFromSideLength(self,sideLength):
 
         if( sideLength >= 2 ):
-            return (sideLength^2) - (sideLength-2)^2
+            return (sideLength**2) - ((sideLength-2)**2)
         else:
             print("Does not exist shape O with side {}.".format(sideLength))
             return -1
@@ -372,20 +378,29 @@ class ShapeO(Shape):
         found.
         """
 
+        
         x = slot.point.x
         y = slot.point.y
 
-        if(x > y):
-            N = board.size - x
-        else:
-            N = board.size - y
+      #  print("analizando x:{0} y:{1}".format(x,y))
+
+        NX = board.size - x
+        NY = board.size - y
+        N = NY if NX > NY else NX
 
         if( N >= 2):
 
-            for size in range(2,N+1):
+            for size in range(N,1,-1):
+
+                print(size)
 
                 pointArray = self.getShape(size)
                 numberOfPieces = self.getPieceNumberFromSideLength(size)
+
+
+             #   if(pointArray):
+              #      for p in pointArray:
+               #         print(str(p))
 
                 count = 0
                 for point in pointArray:
@@ -394,6 +409,7 @@ class ShapeO(Shape):
                         count += 1
 
                 if(count == numberOfPieces):
+                   # print("returning:", numberOfPieces , size)
                     return pointArray
 
 
@@ -416,11 +432,12 @@ class ShapeO(Shape):
 
             for i in range(sideLength):
                 pointArray.append(Point(0,i))               #fist line
-                pointArray.append(Point(sideLength-1,i))    #last line
 
                 if( i!= 0 and i != sideLength-1):
                     pointArray.append(Point(i,0))               #fist colum expect first and last point
                     pointArray.append(Point(i,sideLength-1))    #last colum expect first and last point
                 
+                pointArray.append(Point(sideLength-1,i))    #last line
+
             self.shapes.update({sideLength : pointArray})
             return pointArray

@@ -39,13 +39,13 @@ class Board:
                 r = random.randint(0,3)
 
                 if(r == 0):
-                    s.piece = PiecePlus()
-                elif(r == 1):
-                    s.piece = PieceMinus()
-                elif(r == 2):
                     s.piece = PieceO()
+                elif(r == 1):
+                    s.piece = PieceO()
+                elif(r == 2):
+                    s.piece = PiecePlus()
                 elif(r == 3):
-                    s.piece = PieceX()
+                    s.piece = PieceO()
 
                 self.slots[i].append(s)
 
@@ -67,7 +67,7 @@ class Board:
                 slot = self.slots[x][y]
                 piece = slot.piece
                 if(piece != None and type(piece) != PieceNone ):
-                    if(type(piece) == PieceMinus):
+                    if(type(piece) == PieceO):
                         piece.shape.clearCompletedShapeBasedOnPoint(slot,self)
                 
 
