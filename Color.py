@@ -7,7 +7,8 @@ class Color:
 
 
     def isColor(self,sensorReflection):
-        if(self.__minReflex <= sensorReflection <= self.__maxReflex): #Verify if the color of the sensor is between the accepted values
+        #print(sensorReflection) #Verify if the color of the sensor is between the accepted values
+        if(self.__minReflex <= sensorReflection <= self.__maxReflex):
             return True                    #if the color is between return true
         else:
             return False                   #if the color is outside the accepted values returns false

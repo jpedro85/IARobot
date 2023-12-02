@@ -78,9 +78,9 @@ class Robot:
                 enterColor = True
 
             elif(enterColor):
+                print(self.colorSensor.reflection())
                 print("At interception: ", i)
                 i=i+1
-                #wait(90)
                 enterColor = False
 
         

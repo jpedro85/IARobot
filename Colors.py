@@ -16,8 +16,7 @@ class Colors:
         self.colorPieceX=Color(0,1)               #Color of the X pieces
         self.colorPiecePlus=Color(0,1)            #Color of the plus pieces
         self.colorPieceMinus=Color(0,1)           #Color of the Minus pieces
-        #self.colorLineInterception=Color(7,10)     #Color of the Line intercection
-        #self.colorLineInterception=Color(47,59)  
-        self.colorLineInterception=Color(70,95)  
+        self.colorLineInterception=Color(50,70)   #tabuleiro oficial
+        #self.colorLineInterception=Color(70,95)  # casa
         self.colorLine=Color(0,1)                 #Color of the line
         self.colorStatus=Color(0,1)               #Current color status
