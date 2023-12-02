@@ -5,8 +5,9 @@
 	"debug.openDebug": "neverOpen",
 	"python.defaultInterpreterPath": ".\\.venv\\Scripts\\python.exe",
 	"python.terminal.activateEnvironment": true,
-	"python.languageServer": "None",
 	"cSpell.words": [
-		"Lenthg"
-	]
+		"micropython",
+		"pybricks"
+	],
+	// "python.languageServer": "None",
 }
