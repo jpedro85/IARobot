@@ -6,8 +6,8 @@ from pybricks.robotics import DriveBase, Stop
 from pybricks.tools import wait
 from math import pi
 
-from Colors import Colors
-from Color import Color
+from Colors import *
+from Color import *
 from utils import *
 from board import *
 from point import *
@@ -25,6 +25,7 @@ class Robot:
 
     def __init__(self):
         self.config()
+        self.testTuplo = []
     
     def config(self):
         # Initialize the EV3 Brick.
@@ -47,7 +48,7 @@ class Robot:
         self.startPoint = Point(0,0)
         self.minObjectDetectDistance = 40
         self.seePiecesInterval = 1000
-        self.adjustForTurn = 30
+        self.adjustForTurn = 50
         self.adjustAfterTurn = -70
 
     def test(self):
@@ -64,6 +65,14 @@ class Robot:
         while True:
            print(self.colorSensor.reflection())
 
+    def testColorRGB(self):
+        while True:
+           rgbColor = self.colorSensor.rgb()
+           print(rgbColor)
+          # if(ColorsRGB.getInstance().colorLineInterception.isColorRgb(rgbColor)):
+           # self.ev3.speaker.beep()
+
+
     def testUltrasonicDistance(self):
         while(True):
            print(self.ultrasonicSensor.distance(True))
@@ -74,14 +83,20 @@ class Robot:
         self.robotDriveBase.drive(100,0)
         while(i<=slots):
 
-            if(Colors.getInstance().colorLineInterception.isColor(self.colorSensor.reflection())):
+            rgbColor = self.colorSensor.rgb()
+            result = ColorsRGB.getInstance().colorLineInterception.isColorRgb(rgbColor)
+            if(result):
                 enterColor = True
-
+                self.testTuplo.append(("Amarelo", result , ": ",rgbColor))
             elif(enterColor):
-                print(self.colorSensor.reflection())
+                self.ev3.speaker.beep()
+                self.testTuplo.append(("Fora", result , ": ",rgbColor))
                 print("At interception: ", i)
+                #self.testTuplo.append(self.colorSensor.rgb())
                 i=i+1
                 enterColor = False
+            else:
+                self.testTuplo.append(("Else", result , ": ",rgbColor))
 
         
         self.robotDriveBase.stop()
@@ -91,7 +106,7 @@ class Robot:
         self.grab()
         self.rotate(180)
         self.move(0) #move(0) same as move until Interception
-        self.robotDriveBase.straight(self.adjustForTurn)
+        self.robotDriveBase.straight(self.adjustForTurn-10)
         self.rotate(-90)
         self.robotDriveBase.straight(self.adjustAfterTurn)
 
@@ -125,15 +140,15 @@ class Robot:
 
     def moveFromStartToPoint(self,point):
         self.move(point.x - self.startPoint.x)
-        self.robotDriveBase.straight(self.adjustForTurn)
-        self.rotate(90)
+        self.robotDriveBase.straight(self.adjustForTurn-10)
+        self.rotate(85)
         self.robotDriveBase.straight(self.adjustAfterTurn)
         self.move(point.y - self.startPoint.y)
 
     def moveFromPointToStart(self,point):
         self.move(point.y - self.startPoint.y )
         self.robotDriveBase.straight(self.adjustForTurn)
-        self.rotate(-90)
+        self.rotate(-85)
         self.robotDriveBase.straight(self.adjustAfterTurn)
         self.move(point.x - self.startPoint.x)
 
@@ -150,19 +165,19 @@ class Robot:
 
         print("Started reading Pieces!")
         while(True):
-            if(Colors.getInstance().colorPiece0.isColor(self.colorSensor.reflection())):
+            if(ColorsRGB.getInstance().colorPiece0.isColor(self.colorSensor.reflection())):
                 Board.getInstance().pieces.append(PieceO())
 
-            elif(Colors.getInstance().colorPieceX.isColor(self.colorSensor.reflection())):
+            elif(ColorsRGB.getInstance().colorPieceX.isColor(self.colorSensor.reflection())):
                 Board.getInstance().pieces.append(PieceX())
 
-            elif(Colors.getInstance().colorPiecePlus.isColor(self.colorSensor.reflection())):
+            elif(ColorsRGB.getInstance().colorPiecePlus.isColor(self.colorSensor.reflection())):
                 Board.getInstance().pieces.append(PiecePlus())
 
-            elif(Colors.getInstance().colorPieceMinus.isColor(self.colorSensor.reflection())):
+            elif(ColorsRGB.getInstance().colorPieceMinus.isColor(self.colorSensor.reflection())):
                 Board.getInstance().pieces.append(PieceMinus())
                 
-            elif(Colors.getInstance().colorStatus.isColor(self.colorSensor.reflection())):
+            elif(ColorsRGB.getInstance().colorStatus.isColor(self.colorSensor.reflection())):
                 print("Finished reading Pieces!")
                 break
 

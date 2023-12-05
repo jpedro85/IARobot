@@ -5,15 +5,16 @@ from point import *
 
 robot = Robot.getInstance()
 
-#robot.testColorReflection()
-# robot.release()
+#robot.release()
+robot.testColorRGB()
 #robot.testUltrasonicDistance()
-#robot.placePiece(Point(1,3))
-
-#robot.move(4)
+#robot.placePiece(Point(2,2))
+#robot.grab()
+robot.move(3)
+print(robot.testTuplo)
 #b = Board.getInstance()
 #print(b)
 #b.clearShapes()
 #print(b)
 
-#robot.moveFromStartToPoint(Point(2,2))
+#robot.moveFromStartToPoint(Point(2,2))2255
