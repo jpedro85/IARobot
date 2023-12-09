@@ -17,19 +17,19 @@ class PiecePlus(Piece):
 class PieceX(Piece):
 
     def __init__(self):
-        super().__init__("X",ShapePlus.getInstance())
+        super().__init__("X",ShapeX.getInstance())
 
 
 class PieceMinus(Piece):
 
     def __init__(self):
-        super().__init__("-",ShapePlus.getInstance())
+        super().__init__("-",ShapeMinus.getInstance())
 
 
 class PieceO(Piece):
     
     def __init__(self):
-        super().__init__("O",ShapePlus.getInstance())
+        super().__init__("O",ShapeO.getInstance())
 
 
 class PieceNone(Piece):
