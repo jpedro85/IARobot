@@ -36,6 +36,6 @@ class ColorsRGB:
         self.colorPieceX = ColorRGB(RGB(35,3,1),RGB(54,7,5))            #Red
         self.colorPiecePlus = ColorRGB(RGB(15,38,17),RGB(18,44,21))       #Green
         self.colorPieceMinus = ColorRGB(RGB(6,26,48),RGB(8,33,58))        #Blue
-        self.colorLineInterception = ColorRGB(RGB(34,4,2),RGB(55,9,6))    #Red Another Type
+        self.colorLineInterception = ColorRGB(RGB(30,4,2),RGB(55,9,6))    #Red Another Type
         self.colorLine = ColorRGB(RGB(0,0,0),RGB(12,16,14))               #Black TODO
         self.colorStatus = ColorRGB(RGB(0,0,0),RGB(12,16,14))             #Black  

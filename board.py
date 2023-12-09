@@ -33,19 +33,20 @@ class Board:
             self.slots.append([])
 
             for y in range(5):
-                s = Slot(i, y)
-                r = random.randint(0, 3)
+                sl = Slot(i, y)
+                sl.piece = PieceNone()
+                self.slots[i].append(sl)
 
-                if r == 0:
-                    s.piece = PieceMinus()
-                elif r == 1:
-                    s.piece = PiecePlus()
-                elif r == 2:
-                    s.piece = PieceO()
-                elif r == 3:
-                    s.piece =PieceX()
-
-                self.slots[i].append(s)
+                # r = random.randint(0, 3)
+                # if r == 0:
+                #     s.piece = PieceMinus()
+                # elif r == 1:
+                #     s.piece = PiecePlus()
+                # elif r == 2:
+                #     s.piece = PieceO()
+                # elif r == 3:
+                #     s.piece =PieceX()
+                #self.slots[i].append(s)
 
     def addPiece(self, pieceSymbol):
         print("Board.py line 51: Added Piece", pieceSymbol)
@@ -77,6 +78,10 @@ class Board:
                 if piece != None and type(piece) != PieceNone:
                     # if(type(piece) == PiecePlus):
                     piece.shape.clearCompletedShapeBasedOnPoint(slot, self)
+
+    def PrintPiecesList(self):
+        for piece in self.pieces:
+            print(piece)
 
     def __str__(self):
         line = ""

@@ -11,6 +11,7 @@ from Color import *
 from utils import *
 from board import *
 from point import *
+import random
 
 class Robot:
 
@@ -70,15 +71,15 @@ class Robot:
 
     def testColorRGB(self):
         while True:
-           rgbColor = self.colorSensor.rgb()
-           print(rgbColor)
-          # if(ColorsRGB.getInstance().colorLineInterception.isColorRgb(rgbColor)):
-           # self.ev3.speaker.beep()
+            rgbColor = self.colorSensor.rgb()
+            print(rgbColor)
+            # if(ColorsRGB.getInstance().colorLineInterception.isColorRgb(rgbColor)):
+            # self.ev3.speaker.beep()
 
 
     def testUltrasonicDistance(self):
         while(True):
-           print(self.ultrasonicSensor.distance(True))
+            print(self.ultrasonicSensor.distance(True))
 
     def move(self,slots):
         i=0
@@ -90,7 +91,7 @@ class Robot:
             result = self.colorsRGB.colorLineInterception.isColorRgb(rgbColor)
             if(result):
                 enterColor = True
-              
+
             elif(enterColor):
                 self.ev3.speaker.beep()
                 print("At interception: ", i)
@@ -141,7 +142,6 @@ class Robot:
         self.rotate(-93)
         self.robotDriveBase.straight(self.adjustAfterTurn)
 
-    
     def dropPiece(self):
         self.rotate(45)
         self.robotDriveBase.straight(120)
@@ -149,7 +149,7 @@ class Robot:
         self.robotDriveBase.straight(-120)
         self.rotate(125)
         self.robotDriveBase.straight(-130)
-       
+
     def grab(self):
         #Close The Grabber And The Arm Will Rise
         self.grabber.run(1000)
@@ -170,21 +170,21 @@ class Robot:
         self.robotDriveBase.reset()
         self.robotDriveBase.turn(angle)
 
-    def moveFromStartToPoint(self,point):
+    def moveFromStartToPoint(self,point:Point):
         self.move(point.x - self.startPoint.x)
         self.robotDriveBase.straight(self.adjustForTurn-10)
         self.rotate(self.TURN_RADIUS)
         self.robotDriveBase.straight(self.adjustAfterTurn)
         self.move(point.y - self.startPoint.y)
 
-    def moveFromPointToStart(self,point):
+    def moveFromPointToStart(self,point:Point):
         self.move(point.y - self.startPoint.y )
         self.robotDriveBase.straight(self.adjustForTurn-20)
         self.rotate(-self.TURN_RADIUS)
         self.robotDriveBase.straight(self.adjustAfterTurn)
         self.move(point.x - self.startPoint.x)
 
-    def placePiece(self,point):
+    def placePiece(self,point:Point):
         self.pickPiece()
         self.moveFromStartToPoint(point)
         self.dropPiece()
@@ -206,60 +206,81 @@ class Robot:
                 # if it was it pauses the program to not spam the symbol to the board pieces sequence
                 if (lastSymbol == 'O'):
                     wait(500)
-                    self.ev3.speaker.say("O")
-                else: 
-                    self.ev3.speaker.say("O")
-
+                    
+                self.ev3.speaker.say("O")
                 board.addPiece("O")
                 lastSymbol = "O"
-                print(currentColor)
-
 
             elif(self.colorsRGB.colorPieceX.isColorRgb(currentColor)):
                 # Check if the the color was the same that was last read
                 # if it was it pauses the program to not spam the symbol to the board pieces sequence
                 if (lastSymbol == 'X'):
                     wait(500)
-                    self.ev3.speaker.say("X")
-                else: 
-                    self.ev3.speaker.say("X")
                 
+                self.ev3.speaker.say("X")
                 board.addPiece("X")
                 lastSymbol = "X"
-                print(currentColor)
 
             elif(self.colorsRGB.colorPiecePlus.isColorRgb(currentColor)):
                 # Check if the the color was the same that was last read
                 # if it was it pauses the program to not spam the symbol to the board pieces sequence
                 if (lastSymbol == '+'):
                     wait(500)
-                    self.ev3.speaker.say("Plus")
-                    # lastSymbol = ' '
-                    # board.addPiece("+")
-                else: 
-                    self.ev3.speaker.say("Plus")
-                
+
+                self.ev3.speaker.say("Plus")
                 board.addPiece("+")
                 lastSymbol = "+"
-                print(currentColor)
 
             elif(self.colorsRGB.colorPieceMinus.isColorRgb(currentColor)):
                 # Check if the the color was the same that was last read
                 # if it was it pauses the program to not spam the symbol to the board pieces sequence
                 if (lastSymbol == '-'):
                     wait(500)
-                    self.ev3.speaker.say("Minus")
-                else: 
-                    self.ev3.speaker.say("Minus")
 
+                self.ev3.speaker.say("Minus")
                 board.addPiece("-")
                 lastSymbol = "-"
-                print(currentColor)
                     
             # If the color is equal to the Status color the robot stops reading colors and starts putting the pieces
             elif(self.colorsRGB.colorStatus.isColorRgb(currentColor) ):
                 self.ev3.speaker.beep()
-                self.ev3.speaker.beep()
                 print("Finished Reading Pieces")
-                print(currentColor)
                 break
+
+    def play(self):
+
+        board = Board.getInstance()
+
+        self.readPieces(board)
+        print("Readded Pieces:")
+        board.PrintPiecesList()
+
+        wait(2000)
+        self.ev3.speaker.say("Starting")
+        
+        while (len(board.pieces) > 0 ):
+            
+            print(board)
+            #choose freeSlot
+            freeSlots = board.getSlotsWithPiecesOfType(PieceNone)
+            chosenSlot = freeSlots[random.randint(0,len(freeSlots)-1)]
+            #addPiece and remove from List
+            piece = board.pieces.pop(0)
+
+            print("Waiting for next piece:" , str(piece) )
+            self.ev3.speaker.say("Waiting for next piece" + str(piece) )
+            wait(1)
+            chosenSlot.piece = piece
+            self.ev3.speaker.say("next Point" + str(chosenSlot.point))
+            print("chosenSlot:",str(chosenSlot.point))
+            #place
+            self.placePiece(chosenSlot.point)
+
+            board.clearShapes()
+        
+        print(board)
+
+            
+
+        
+
