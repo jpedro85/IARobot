@@ -25,7 +25,6 @@ class Robot:
 
     def __init__(self):
         self.config()
-        self.testTuplo = []
     
     def config(self):
         # Initialize the EV3 Brick.
@@ -41,15 +40,19 @@ class Robot:
         self.touch_sensor = TouchSensor(Port.S1)
         self.colorSensor = ColorSensor(Port.S3)
         self.ultrasonicSensor = UltrasonicSensor(Port.S4)
-       # self.colors = Colors()
+        self.colorsRGB = ColorsRGB.getInstance()
         # Initialize the drive base.
         self.robotDriveBase = DriveBase(self.leftMotor, self.rightMotor, wheel_diameter=25.5, axle_track=145)
+        self.robotDriveBase.reset()
         #vars
         self.startPoint = Point(0,0)
         self.minObjectDetectDistance = 40
         self.seePiecesInterval = 1000
         self.adjustForTurn = 50
         self.adjustAfterTurn = -70
+        self.TURN_RADIUS = 87.5
+        #move2
+        self.moveV2Margin = 2
 
     def test(self):
         while True:
@@ -84,30 +87,56 @@ class Robot:
         while(i<=slots):
 
             rgbColor = self.colorSensor.rgb()
-            result = ColorsRGB.getInstance().colorLineInterception.isColorRgb(rgbColor)
+            result = self.colorsRGB.colorLineInterception.isColorRgb(rgbColor)
             if(result):
                 enterColor = True
-                self.testTuplo.append(("Amarelo", result , ": ",rgbColor))
+              
             elif(enterColor):
                 self.ev3.speaker.beep()
-                self.testTuplo.append(("Fora", result , ": ",rgbColor))
                 print("At interception: ", i)
-                #self.testTuplo.append(self.colorSensor.rgb())
                 i=i+1
                 enterColor = False
             else:
-                self.testTuplo.append(("Else", result , ": ",rgbColor))
+                pass
 
-        
         self.robotDriveBase.stop()
 
+    def moveV2(self,slots):
+        i=0
+        enterColor = False
+        self.robotDriveBase.drive(100,0)
+
+        while(i<=slots):
+
+            rgbColor = self.colorSensor.rgb()
+            isInterception = self.colorsRGB.colorLineInterception.isColorRgb(rgbColor)
+            isInLine = self.colorsRGB.colorLine.isColorRgb(rgbColor)
+
+            if(not isInLine and not isInterception):
+                Distance, driveSpeed, Angle, turnRate = self.robotDriveBase.state()
+                if(Angle > 0 + self.moveV2Margin):
+                    self.robotDriveBase.drive(100,-0.5)
+                elif(Angle < 0 - self.moveV2Margin):
+                    self.robotDriveBase.drive(100,0.5)
+
+            if(isInterception):
+                enterColor = True
+            elif(enterColor):
+                self.ev3.speaker.beep()
+                print("At interception: ", i)
+                i=i+1
+                enterColor = False
+        
+        self.robotDriveBase.stop()
+        self.robotDriveBase.reset()
+
     def pickPiece(self):
-        self.robotDriveBase.straight(110)
+        self.robotDriveBase.straight(200)
         self.grab()
-        self.rotate(180)
+        self.rotate(187)
         self.move(0) #move(0) same as move until Interception
-        self.robotDriveBase.straight(self.adjustForTurn-10)
-        self.rotate(-90)
+        self.robotDriveBase.straight(13)
+        self.rotate(-93)
         self.robotDriveBase.straight(self.adjustAfterTurn)
 
     
@@ -136,19 +165,20 @@ class Robot:
         print("Released Piece!")
 
     def rotate(self,angle):
+        self.robotDriveBase.reset()
         self.robotDriveBase.turn(angle)
 
     def moveFromStartToPoint(self,point):
         self.move(point.x - self.startPoint.x)
         self.robotDriveBase.straight(self.adjustForTurn-10)
-        self.rotate(85)
+        self.rotate(self.TURN_RADIUS)
         self.robotDriveBase.straight(self.adjustAfterTurn)
         self.move(point.y - self.startPoint.y)
 
     def moveFromPointToStart(self,point):
         self.move(point.y - self.startPoint.y )
-        self.robotDriveBase.straight(self.adjustForTurn)
-        self.rotate(-85)
+        self.robotDriveBase.straight(self.adjustForTurn-20)
+        self.rotate(-self.TURN_RADIUS)
         self.robotDriveBase.straight(self.adjustAfterTurn)
         self.move(point.x - self.startPoint.x)
 
@@ -157,29 +187,41 @@ class Robot:
         self.moveFromStartToPoint(point)
         self.dropPiece()
         self.moveFromPointToStart(point)
-        self.robotDriveBase.straight(self.adjustForTurn)
-        self.rotate(90)
+        self.robotDriveBase.straight(self.adjustForTurn-15)
+        self.rotate(self.TURN_RADIUS)
         self.robotDriveBase.straight(self.adjustAfterTurn)
 
-    def seePieces(self):
+    def readPieces(self,board):
 
         print("Started reading Pieces!")
+        lastSymbol = ' '
+        
         while(True):
-            if(ColorsRGB.getInstance().colorPiece0.isColor(self.colorSensor.reflection())):
-                Board.getInstance().pieces.append(PieceO())
+            
+            currentColor = self.colorSensor.rgb()
+            if(self.colorsRGB.colorPiece0.isColorRgb(currentColor) and lastSymbol != 'O'):
+                self.ev3.speaker.say("O")
+                board.addPiece("O")
+                lastSymbol = "O"
 
-            elif(ColorsRGB.getInstance().colorPieceX.isColor(self.colorSensor.reflection())):
-                Board.getInstance().pieces.append(PieceX())
+            elif(self.colorsRGB.colorPieceX.isColorRgb(currentColor) and lastSymbol != 'X' ):
+                self.ev3.speaker.say("X")
+                board.addPiece("X")
+                lastSymbol = "X"
 
-            elif(ColorsRGB.getInstance().colorPiecePlus.isColor(self.colorSensor.reflection())):
-                Board.getInstance().pieces.append(PiecePlus())
+            elif(self.colorsRGB.colorPiecePlus.isColorRgb(currentColor) and lastSymbol != '+'):
+                self.ev3.speaker.say("+")
+                board.addPiece("+")
+                lastSymbol = "+"
 
-            elif(ColorsRGB.getInstance().colorPieceMinus.isColor(self.colorSensor.reflection())):
-                Board.getInstance().pieces.append(PieceMinus())
-                
-            elif(ColorsRGB.getInstance().colorStatus.isColor(self.colorSensor.reflection())):
-                print("Finished reading Pieces!")
+            elif(self.colorsRGB.colorPieceMinus.isColorRgb(currentColor) and lastSymbol != '-'):
+                self.ev3.speaker.say("-")
+                board.addPiece("-")
+                lastSymbol = "-"
+                    
+            elif(self.colorsRGB.colorStatus.isColorRgb(currentColor)):
+                print("Finished Reading Pieces")
                 break
 
-            print("Readed:",Board.getInstance().pieces[-1])
+            print("Readed:",board.pieces[-1])
             wait(self.seePiecesInterval)
