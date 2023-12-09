@@ -39,11 +39,11 @@ class Board:
                 if r == 0:
                     s.piece = PieceMinus()
                 elif r == 1:
-                    s.piece = PieceO()
-                elif r == 2:
-                    s.piece = PieceX()
-                elif r == 3:
                     s.piece = PiecePlus()
+                elif r == 2:
+                    s.piece = PieceO()
+                elif r == 3:
+                    s.piece =PieceX()
 
                 self.slots[i].append(s)
 
