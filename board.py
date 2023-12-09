@@ -48,6 +48,7 @@ class Board:
                 self.slots[i].append(s)
 
     def addPiece(self, pieceSymbol):
+        print("Board.py line 51: Added Piece", pieceSymbol)
         if "-" == pieceSymbol:
             self.pieces.append(PieceMinus())
         elif "X" == pieceSymbol:

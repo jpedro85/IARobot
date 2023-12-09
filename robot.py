@@ -101,34 +101,36 @@ class Robot:
 
         self.robotDriveBase.stop()
 
-    def moveV2(self,slots):
-        i=0
-        enterColor = False
-        self.robotDriveBase.drive(100,0)
+    # def moveV2(self,slots):
+    #     i=0
+    #     enterColor = False
+    #     self.robotDriveBase.drive(100,0)
 
-        while(i<=slots):
+    #     while(i<=slots):
 
-            rgbColor = self.colorSensor.rgb()
-            isInterception = self.colorsRGB.colorLineInterception.isColorRgb(rgbColor)
-            isInLine = self.colorsRGB.colorLine.isColorRgb(rgbColor)
+    #         rgbColor = self.colorSensor.rgb()
+    #         isInterception = self.colorsRGB.colorLineInterception.isColorRgb(rgbColor)
+    #         isInLine = self.colorsRGB.colorLine.isColorRgb(rgbColor)
 
-            if(not isInLine and not isInterception):
-                Distance, driveSpeed, Angle, turnRate = self.robotDriveBase.state()
-                if(Angle > 0 + self.moveV2Margin):
-                    self.robotDriveBase.drive(100,-0.5)
-                elif(Angle < 0 - self.moveV2Margin):
-                    self.robotDriveBase.drive(100,0.5)
-
-            if(isInterception):
-                enterColor = True
-            elif(enterColor):
-                self.ev3.speaker.beep()
-                print("At interception: ", i)
-                i=i+1
-                enterColor = False
+    #         if(not isInLine and not isInterception):
+    #             Distance, driveSpeed, Angle, turnRate = self.robotDriveBase.state()
+    #             print(self.robotDriveBase.state())
+    #             if(turnRate < 0 + self.moveV2Margin):
+    #                 self.robotDriveBase.drive(100,-turnRate*3)
+                    
+    #             elif(turnRate > 0 - self.moveV2Margin):
+    #                 self.robotDriveBase.drive(100,turnRate*3)
+                    
+    #         if(isInterception):
+    #             enterColor = True
+    #         elif(enterColor):
+    #             self.ev3.speaker.beep()
+    #             print("At interception: ", i)
+    #             i=i+1
+    #             enterColor = False
         
-        self.robotDriveBase.stop()
-        self.robotDriveBase.reset()
+    #     self.robotDriveBase.stop()
+    #     self.robotDriveBase.reset()
 
     def pickPiece(self):
         self.robotDriveBase.straight(200)
@@ -191,7 +193,7 @@ class Robot:
         self.rotate(self.TURN_RADIUS)
         self.robotDriveBase.straight(self.adjustAfterTurn)
 
-    def readPieces(self,board):
+    def readPieces(self,board:Board):
 
         print("Started reading Pieces!")
         lastSymbol = ' '
@@ -199,29 +201,65 @@ class Robot:
         while(True):
             
             currentColor = self.colorSensor.rgb()
-            if(self.colorsRGB.colorPiece0.isColorRgb(currentColor) and lastSymbol != 'O'):
-                self.ev3.speaker.say("O")
+            if(self.colorsRGB.colorPiece0.isColorRgb(currentColor)):
+                # Check if the the color was the same that was last read
+                # if it was it pauses the program to not spam the symbol to the board pieces sequence
+                if (lastSymbol == 'O'):
+                    wait(500)
+                    self.ev3.speaker.say("O")
+                else: 
+                    self.ev3.speaker.say("O")
+
                 board.addPiece("O")
                 lastSymbol = "O"
+                print(currentColor)
 
-            elif(self.colorsRGB.colorPieceX.isColorRgb(currentColor) and lastSymbol != 'X' ):
-                self.ev3.speaker.say("X")
+
+            elif(self.colorsRGB.colorPieceX.isColorRgb(currentColor)):
+                # Check if the the color was the same that was last read
+                # if it was it pauses the program to not spam the symbol to the board pieces sequence
+                if (lastSymbol == 'X'):
+                    wait(500)
+                    self.ev3.speaker.say("X")
+                else: 
+                    self.ev3.speaker.say("X")
+                
                 board.addPiece("X")
                 lastSymbol = "X"
+                print(currentColor)
 
-            elif(self.colorsRGB.colorPiecePlus.isColorRgb(currentColor) and lastSymbol != '+'):
-                self.ev3.speaker.say("+")
+            elif(self.colorsRGB.colorPiecePlus.isColorRgb(currentColor)):
+                # Check if the the color was the same that was last read
+                # if it was it pauses the program to not spam the symbol to the board pieces sequence
+                if (lastSymbol == '+'):
+                    wait(500)
+                    self.ev3.speaker.say("Plus")
+                    # lastSymbol = ' '
+                    # board.addPiece("+")
+                else: 
+                    self.ev3.speaker.say("Plus")
+                
                 board.addPiece("+")
                 lastSymbol = "+"
+                print(currentColor)
 
-            elif(self.colorsRGB.colorPieceMinus.isColorRgb(currentColor) and lastSymbol != '-'):
-                self.ev3.speaker.say("-")
+            elif(self.colorsRGB.colorPieceMinus.isColorRgb(currentColor)):
+                # Check if the the color was the same that was last read
+                # if it was it pauses the program to not spam the symbol to the board pieces sequence
+                if (lastSymbol == '-'):
+                    wait(500)
+                    self.ev3.speaker.say("Minus")
+                else: 
+                    self.ev3.speaker.say("Minus")
+
                 board.addPiece("-")
                 lastSymbol = "-"
+                print(currentColor)
                     
-            elif(self.colorsRGB.colorStatus.isColorRgb(currentColor)):
+            # If the color is equal to the Status color the robot stops reading colors and starts putting the pieces
+            elif(self.colorsRGB.colorStatus.isColorRgb(currentColor) ):
+                self.ev3.speaker.beep()
+                self.ev3.speaker.beep()
                 print("Finished Reading Pieces")
+                print(currentColor)
                 break
-
-            print("Readed:",board.pieces[-1])
-            wait(self.seePiecesInterval)
