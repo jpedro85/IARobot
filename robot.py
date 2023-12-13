@@ -282,7 +282,7 @@ class Robot:
             print(dic)
             if(dic):
                 for key in dic.keys():
-                    print("Removed:" + key + "count:" + dic[key] )
+                    print("Removed:" + key + "count:" + str(dic[key]) )
                     self.ev3.speaker.say("Removed:" + key + "count:" + str(dic[key]) )
         
         print(board)
