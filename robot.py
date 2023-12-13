@@ -279,10 +279,9 @@ class Robot:
             self.placePiece(chosenSlot.point)
 
             dic = board.clearShapes()
-            if(len(dic) > 0):
-                for key in dic.keys:
-                    print("Removed:" + key + "count:" + dic[key] )
-                    self.ev3.speaker.say("Removed:" + key + "count:" + dic[key])
+            for key in dic.keys():
+                print("Removed:" + key + "count:" + dic[key] )
+                self.ev3.speaker.say("Removed:" + key + "count:" + dic[key])
         
         print(board)
 
