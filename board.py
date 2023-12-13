@@ -71,13 +71,20 @@ class Board:
         return pieces
 
     def clearShapes(self):
+
+        arrayRemoved_dic = {}
         for x in range(5):
             for y in range(5):
                 slot = self.slots[x][y]
                 piece = slot.piece
                 if piece != None and type(piece) != PieceNone:
                     # if(type(piece) == PiecePlus):
-                    piece.shape.clearCompletedShapeBasedOnPoint(slot, self)
+                    count = piece.shape.clearCompletedShapeBasedOnPoint(slot, self)
+                    
+                    if(count > 0): 
+                        arrayRemoved_dic.update( { type(piece).__name__ : count } )
+
+        return arrayRemoved_dic
 
     def PrintPiecesList(self):
         for piece in self.pieces:

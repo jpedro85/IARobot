@@ -1,12 +1,16 @@
 #!/usr/bin/env pybricks-micropython
 from robot import Robot
-from board import Board
+from board import Board,Slot
 from point import *
-#from piece import *
+from piece import *
 #from Shape import *
 
 robot = Robot.getInstance()
 #robot.release()
+robot.board.slots[0][1]=Slot(0,1,PieceMinus())
+robot.board.slots[2][1]=Slot(2,1,PiecePlus())
+robot.board.slots[2][3]=Slot(2,3,PieceMinus())
+robot.board.slots[0][4]=Slot(0,4,PieceMinus())
 robot.play()
 #robot.testColorRGB()
 
