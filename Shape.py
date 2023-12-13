@@ -73,14 +73,15 @@ class ShapePlus(Shape):
 
         x = slot.point.x
         y = slot.point.y
+        N = board.size - x
+        if(1 >= y or y >=3 or x >=2):
+            N = 3
 
-        NX = board.size - x
-        NY = board.size - y
-        N = NY if NX > NY else NX
-
-        if( N >= 3):
+        if( N >= 3 and  1 <= y <=3  and x<=2):
 
             for size in range(N,2,-1):
+                # print(size)
+                # print("atual2" , x , ":" , y)
 
                 if(size%2 != 0):
 
@@ -90,14 +91,15 @@ class ShapePlus(Shape):
                     if(pointArray):
                         count = 0
                         for point in pointArray:
-
+                            #print(point)
                             if(type(board.slots[x + point.x][y + point.y].piece.shape) == ShapePlus):
                                 count += 1
 
                         if(count == numberOfPieces):
+                            #print("returned")
                             return pointArray
 
-
+            #print("fffff")
         return None
     
     def getPieceNumberFromSideLength(self,sideLength):
@@ -131,8 +133,10 @@ class ShapePlus(Shape):
 
             for i in range(sideLength):
                 if( i != sideLength//2):
-                    pointArray.append(Point(sideLength//2,i))   #middle colum except middle point
-                pointArray.append(Point(i,sideLength//2)) #middle line 
+                    pointArray.append(Point(i,0))   #middle colum except middle point
+
+            for i in  range(-sideLength//2+1,sideLength//2+1):
+                pointArray.append(Point(sideLength//2,i)) #middle line 
                 
             self.shapes.update({sideLength : pointArray})
             return pointArray
