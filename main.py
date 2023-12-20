@@ -18,8 +18,17 @@ robot = Robot.getInstance()
 #robot.board.slots[2][0]=Slot(2,0,PieceMinus())
 #robot.board.slots[1][4]=Slot(1,4,PieceMinus())
 #robot.board.slots[0][3]=Slot(0,3,PieceMinus())
-robot.play()
+#robot.play()
 #robot.testColorRGB()
+
+# robot.rotate(90)
+# robot.rotate(-45)
+# robot.rotate(180)
+# robot.rotate(45)
+# robot.rotate(90)
+# robot.rotate(-360)
+
+robot.placePiece(Point(3,3))
 
 # board = Board.getInstance()
 # robot.readPieces(board)

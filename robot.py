@@ -43,15 +43,16 @@ class Robot:
         self.ultrasonicSensor = UltrasonicSensor(Port.S4)
         self.colorsRGB = ColorsRGB.getInstance()
         # Initialize the drive base.
-        self.robotDriveBase = DriveBase(self.leftMotor, self.rightMotor, wheel_diameter=25.5, axle_track=145)
+        self.robotDriveBase = DriveBase(self.leftMotor, self.rightMotor, wheel_diameter=25.5, axle_track=140)#25.5 145
         self.robotDriveBase.reset()
         #vars
         self.startPoint = Point(0,0)
-        self.minObjectDetectDistance = 40
-        self.seePiecesInterval = 1000
-        self.adjustForTurn = 50
+
+    
+        self.adjustForTurn = 30
         self.adjustAfterTurn = -70
         self.TURN_RADIUS = 87.5
+
         #move2
         self.moveV2Margin = 2
 
@@ -84,6 +85,7 @@ class Robot:
             print(self.ultrasonicSensor.distance(True))
 
     def move(self,slots):
+        self.robotDriveBase.reset()
         i=0
         enterColor = False
         self.robotDriveBase.drive(100,0)
@@ -136,20 +138,20 @@ class Robot:
     #     self.robotDriveBase.reset()
 
     def pickPiece(self):
-        self.robotDriveBase.straight(200)
+        self.robotDriveBase.straight(180)
         self.grab()
-        self.rotate(187)
+        self.rotate(185)
         self.move(0) #move(0) same as move until Interception
-        self.robotDriveBase.straight(13)
-        self.rotate(-93)
+        self.robotDriveBase.straight(self.adjustForTurn)
+        self.rotate(-95)
         self.robotDriveBase.straight(self.adjustAfterTurn)
 
     def dropPiece(self):
         self.rotate(45)
         self.robotDriveBase.straight(120)
         self.release()
-        self.robotDriveBase.straight(-120)
-        self.rotate(125)
+        self.robotDriveBase.straight(-110)#120
+        self.rotate(133)#125
         self.robotDriveBase.straight(-130)
 
     def grab(self):
@@ -174,14 +176,14 @@ class Robot:
 
     def moveFromStartToPoint(self,point:Point):
         self.move(point.x - self.startPoint.x)
-        self.robotDriveBase.straight(self.adjustForTurn-10)
-        self.rotate(self.TURN_RADIUS)
+        self.robotDriveBase.straight(self.adjustForTurn)
+        self.rotate(90)
         self.robotDriveBase.straight(self.adjustAfterTurn)
         self.move(point.y - self.startPoint.y)
 
     def moveFromPointToStart(self,point:Point):
         self.move(point.y - self.startPoint.y )
-        self.robotDriveBase.straight(self.adjustForTurn-20)
+        self.robotDriveBase.straight(self.adjustForTurn)
         self.rotate(-self.TURN_RADIUS)
         self.robotDriveBase.straight(self.adjustAfterTurn)
         self.move(point.x - self.startPoint.x)
@@ -191,8 +193,8 @@ class Robot:
         self.moveFromStartToPoint(point)
         self.dropPiece()
         self.moveFromPointToStart(point)
-        self.robotDriveBase.straight(self.adjustForTurn-15)
-        self.rotate(self.TURN_RADIUS)
+        self.robotDriveBase.straight(self.adjustForTurn)
+        self.rotate(90)
         self.robotDriveBase.straight(self.adjustAfterTurn)
 
     def readPieces(self,board:Board):
