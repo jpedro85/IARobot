@@ -55,6 +55,8 @@ class Robot:
         #move2
         self.moveV2Margin = 2
 
+        self.board = Board.getInstance()
+
     def test(self):
         while True:
             print( self.touch_sensor.pressed())
@@ -249,7 +251,7 @@ class Robot:
 
     def play(self):
 
-        board = Board.getInstance()
+        board = self.board #Board.getInstance()
 
         self.readPieces(board)
         print("Readded Pieces:")
@@ -276,7 +278,12 @@ class Robot:
             #place
             self.placePiece(chosenSlot.point)
 
-            board.clearShapes()
+            dic = board.clearShapes()
+            print(dic)
+            if(dic):
+                for key in dic.keys():
+                    print("Removed:" + key + "count:" + str(dic[key]) )
+                    self.ev3.speaker.say("Removed:" + key + "count:" + str(dic[key]) )
         
         print(board)
 
