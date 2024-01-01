@@ -40,6 +40,7 @@ robot.board.pieces.append(PieceO())
 robot.board.pieces.append(PieceO())
 robot.board.pieces.append(PieceO())
 
+
 # robot.board.pieces.append(PieceMinus())
 # robot.board.pieces.append(PiecePlus())
 # robot.board.pieces.append(PieceMinus())
