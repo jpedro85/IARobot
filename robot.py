@@ -11,6 +11,7 @@ from Color import *
 from utils import *
 from board import *
 from point import *
+from piece import *
 import random
 
 class Robot:
@@ -199,6 +200,7 @@ class Robot:
 
     def readPieces(self,board:Board):
 
+        self.grab()
         print("Started reading Pieces!")
         lastSymbol = ' '
         
@@ -251,6 +253,8 @@ class Robot:
                 print("Finished Reading Pieces")
                 break
 
+        self.release()
+
     def play(self):
 
         board = self.board #Board.getInstance()
@@ -289,7 +293,223 @@ class Robot:
         
         print(board)
 
+    def choosePlace(self,board:Board,searchDepth = 1):
+
+        def compareNumbers(a,b):
+            return -(a-b) if a > b else ( (b-a) if a < b else 0)
+
+        def compareList(list1,list2,numberOfPieces):
+
+            valueInFullShapes = 0
+            valueInPossibleShapes = 0
+            valueInLostShapes = 0
+           # valueInNewForms = 0
+            progression = 0
+
+            for side in range(board.size,1,-1):#5--2
+
+                shapeDic1 = None
+                for dicShape in list1:
+                    if( dicShape["Side"] == side):
+                        shapeDic1 = dicShape
+
+                shapeDic2 = None
+                for dic_Shape in list2:
+                    if( dic_Shape["Side"] == side):
+                        shapeDic2 = dic_Shape
+
+
+                if(shapeDic1 != None and shapeDic2 != None):
+                # change or not number of pieces in shape
+
+                    if(shapeDic2["Missing"] == 0):
+                    #full shape
+                        valueInFullShapes += side
+                    elif(shapeDic2["Missing"] <= numberOfPieces-1):
+                    #enough pieces for completing 
+                        valueInPossibleShapes += side
+                        progression += compareNumbers(shapeDic2["Missing"],shapeDic1["Missing"])
+
+                       
+                elif(shapeDic1 != None and shapeDic2 == None): 
+                # list2 has less shapes 
+                    valueInLostShapes += side
+                    
+                elif(shapeDic1 == None and shapeDic2 != None): 
+                # list2 has more shapes or different shapes (if different then they are bigger)
+                    
+                    if(shapeDic2["Missing"] > numberOfPieces-1):
+                    #After placing this piece an impossible shape was created or turn into 
+                        valueInLostShapes += side
+                    else: 
+                        valueInPossibleShapes += side
+                        if(shapeDic2["ActualNumber"] > 1):
+                            progression += 1
+
+                        #valueInNewForms += side
             
+                #else None None -> Nothing to compare
+                #print("s",side,"d1",shapeDic1,"d2",shapeDic2,"FS:",valueInFullShapes ,"IPS:" , valueInPossibleShapes ,"LS:", valueInLostShapes ,"P:", progression)
+                
+            
+            return valueInFullShapes , valueInPossibleShapes , valueInLostShapes , progression
 
+        def compareDic(dic1,dic2,shapeSymbol,pieceCount):
+
+            #print("compareDic:",shapeSymbol,pieceCount)
+            lst1_Of_Dic_WithListOf_Dic = dic1[shapeSymbol]
+            lst2_Of_Dic_WithListOf_Dic = dic2[shapeSymbol]
+           # print(lst1_Of_Dic_WithListOf_Dic)
+            #print(lst2_Of_Dic_WithListOf_Dic)
+            i = 0
+            l = len(lst1_Of_Dic_WithListOf_Dic)
+            valueInFullShapes = 0
+            valueInPossibleShapes = 0
+            valueInLostShapes = 0
+            progression = 0
+            while( i < l ):
+
+                valueInFullShapesA , valueInPossibleShapesA , valueInLossShapesA , progressionA = compareList( lst1_Of_Dic_WithListOf_Dic[i]["shapeList"] , lst2_Of_Dic_WithListOf_Dic[i]["shapeList"] , pieceCount[shapeSymbol] )
+                
+                valueInFullShapes += valueInFullShapesA
+                valueInPossibleShapes += valueInPossibleShapesA
+                valueInLostShapes +=  valueInLossShapesA
+                progression += progressionA
+
+                #print("->",lst1_Of_Dic_WithListOf_Dic[i]["slot"].point,"SY",shapeSymbol,"FS:",valueInFullShapes ,"IPS:" , valueInPossibleShapes ,"LS:", valueInLostShapes ,"P:", progression)
+                i += 1
+
+            return valueInFullShapes , valueInPossibleShapes , valueInLostShapes , progression
+
+
+
+        if(len(board.pieces) == 0):
+            return None
         
+        freeSlots = board.getSlotsWithPiecesOfType(PieceNone)
+        if(len(freeSlots) == 0):
+            return None
 
+        dicPieceCount = board.countPieces()
+        print(dicPieceCount)
+
+        dicCountShapesBefore = board.countShapes(1)
+        #print(dicCountShapesBefore)
+        #printf(dicCountShapesBefore)
+
+        BestValueInFullShapes = None
+        BestValueInPossibleShapes = None
+        BestValueInLostShapes = None
+        BestProgression = None
+        BestSlot = None
+
+        for freeSlot in freeSlots:
+            #totalChange = 0
+            #print("begin:",str(freeSlot))
+            board.slots[freeSlot.point.x][freeSlot.point.y].piece = board.pieces[0] #ChangeTheBoard
+            #print(board)
+            dicCountShapeAfter = board.countShapes(1)
+            #print(dicCountShapeAfter)
+
+            valueInFullShapes , valueInPossibleShapes , valueInLostShapes  , progression = compareDic(dicCountShapesBefore,dicCountShapeAfter,"-",dicPieceCount)
+
+            valueInFullShapesA , valueInPossibleShapesA , valueInLostShapesA , progressionA = compareDic(dicCountShapesBefore,dicCountShapeAfter,"+",dicPieceCount)
+            valueInFullShapes += valueInFullShapesA
+            valueInPossibleShapes += valueInPossibleShapesA
+            valueInLostShapes += valueInLostShapesA
+            progression += progressionA
+
+            valueInFullShapesA , valueInPossibleShapesA , valueInLostShapesA , progressionA = compareDic(dicCountShapesBefore,dicCountShapeAfter,"X",dicPieceCount)
+            valueInFullShapes += valueInFullShapesA
+            valueInPossibleShapes += valueInPossibleShapesA
+            valueInLostShapes += valueInLostShapesA
+            progression += progressionA
+
+            valueInFullShapesA , valueInPossibleShapesA , valueInLostShapesA , progressionA = compareDic(dicCountShapesBefore,dicCountShapeAfter,"O",dicPieceCount)
+            valueInFullShapes += valueInFullShapesA
+            valueInPossibleShapes += valueInPossibleShapesA
+            valueInLostShapes += valueInLostShapesA
+            progression += progressionA
+
+
+            board.slots[freeSlot.point.x][freeSlot.point.y].piece = PieceNone() #reverse change in board
+            # 
+            # valueInPossibleShapes += valueInPossibleShapesA
+            # valueInLostShapes += valueInLossShapesA
+            # valueInNewForms += valueInNewFormsA
+            # progression += progressionA   
+            OPT = -1
+            
+            print("actual:",freeSlot,":",valueInFullShapes ,"IPS:" , valueInPossibleShapes ,"LS:", valueInLostShapes ,"P:", progression)
+            print("A->",OPT,"best:",BestSlot,":",BestValueInFullShapes ,"IPS:" , BestValueInPossibleShapes ,"LS:", BestValueInLostShapes ,"P:", BestProgression)
+
+            if(BestSlot == None):
+                BestValueInFullShapes = valueInFullShapes
+                BestValueInPossibleShapes = valueInPossibleShapes
+                BestValueInLostShapes = valueInLostShapes
+                BestProgression = progression
+                BestSlot = freeSlot
+                OPT =0
+
+            elif(BestValueInFullShapes < valueInFullShapes):
+                BestValueInFullShapes = valueInFullShapes
+                BestValueInPossibleShapes = valueInPossibleShapes
+                BestValueInLostShapes = valueInLostShapes
+                BestProgression = progression
+                BestSlot = freeSlot
+                OPT = 1
+
+            elif(BestValueInFullShapes == valueInFullShapes):
+                
+                if(BestValueInPossibleShapes < valueInPossibleShapes and BestProgression == progression and BestValueInLostShapes >= valueInLostShapes):    
+                    BestValueInFullShapes = valueInFullShapes
+                    BestValueInPossibleShapes = valueInPossibleShapes
+                    BestValueInLostShapes = valueInLostShapes
+                    BestProgression = progression
+                    BestSlot = freeSlot
+                    OPT = 2
+
+                elif(BestValueInPossibleShapes == valueInPossibleShapes):
+                    
+                    if(BestProgression < progression):
+                            BestValueInFullShapes = valueInFullShapes
+                            BestValueInPossibleShapes = valueInPossibleShapes
+                            BestValueInLostShapes = valueInLostShapes
+                            BestProgression = progression
+                            BestSlot = freeSlot
+                            OPT = 3
+
+                    elif(BestProgression == progression): #No difference
+
+                        if(BestValueInLostShapes > valueInLostShapes):
+                            BestValueInFullShapes = valueInFullShapes
+                            BestValueInPossibleShapes = valueInPossibleShapes
+                            BestValueInLostShapes = valueInLostShapes
+                            BestProgression = progression
+                            BestSlot = freeSlot
+                            OPT = 4
+
+                        elif(BestValueInLostShapes == valueInLostShapes and random.randint(0,1) == 0):
+                            BestValueInFullShapes = valueInFullShapes
+                            BestValueInPossibleShapes = valueInPossibleShapes
+                            BestValueInLostShapes = valueInLostShapes
+                            BestProgression = progression
+                            BestSlot = freeSlot
+                            OPT = 5
+
+                elif( BestValueInPossibleShapes < valueInPossibleShapes and  BestProgression < progression):
+                    BestValueInFullShapes = valueInFullShapes
+                    BestValueInPossibleShapes = valueInPossibleShapes
+                    BestValueInLostShapes = valueInLostShapes
+                    BestProgression = progression
+                    BestSlot = freeSlot
+                    OPT = 6
+
+
+
+
+
+            
+            print("B->",OPT,"best:",BestSlot,":",BestValueInFullShapes ,"IPS:" , BestValueInPossibleShapes ,"LS:", BestValueInLostShapes ,"P:", BestProgression)
+
+        return BestSlot
