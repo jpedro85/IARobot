@@ -255,7 +255,7 @@ class Robot:
 
         self.release()
 
-    def play(self):
+    def playRandom(self):
 
         board = self.board #Board.getInstance()
 
@@ -293,7 +293,61 @@ class Robot:
         
         print(board)
 
-    def choosePlace(self,board:Board,searchDepth = 1):
+    def play(self,PercentageOfVariations =0):
+
+        board = self.board
+
+        self.readPieces(board)
+        print("Readded Pieces:")
+        board.PrintPiecesList()
+
+        wait(2000)
+        self.ev3.speaker.say("Starting")
+        playedDic = {'-': {'lst':[] , "l":0},'+':{'lst':[] , "l":0},'O':{'lst':[] , "l":0},'X':{'lst':[] , "l":0} }
+        played = 0
+        
+        while (len(board.pieces) > 0 ):
+            
+            print(board)
+            chosenSlot = self.choosePlace(self.board,PercentageOfVariations)
+            piece = board.pieces.pop(0)
+
+            print("Waiting for next piece:" , str(piece) )
+            self.ev3.speaker.say("Waiting for next piece" + str(piece) )
+            wait(1)
+            chosenSlot.piece = piece
+            self.ev3.speaker.say("next Point" + str(chosenSlot.point))
+            print("chosenSlot:",str(chosenSlot.point))
+            #place
+            self.placePiece(chosenSlot.point)
+
+            dic = board.clearShapes()
+            print(dic)
+            if(dic):
+                for key in dic.keys():
+                    print("Removed:" + key + "count:" + str(dic[key]) )
+                    self.ev3.speaker.say("Removed:" + key + "count:" + str(dic[key]) )
+
+            playedDic[piece.symbol]["lst"].append(chosenSlot)
+            playedDic[piece.symbol]["l"] += 1
+            played += 1
+        
+        print(board)
+
+    def playTest(self,PercentageOfVariations =0):
+        print(self.board)
+        while( len(self.board.pieces)  >0 ):
+            slot = self.choosePlace(self.board,PercentageOfVariations)
+            piece = self.board.pieces.pop(0)
+            slot.piece = piece
+            print(slot)
+            self.board.slots[slot.point.x][slot.point.y]=slot
+            print(self.board)
+            self.board.clearShapes()
+            print("afterCleared",self.board)
+            print("----------------------End Play----------------------")
+
+    def choosePlace(self,board:Board,PercentageOfVariations = 0):
 
         def compareNumbers(a,b):
             return -(a-b) if a > b else ( (b-a) if a < b else 0)
@@ -324,25 +378,25 @@ class Robot:
 
                     if(shapeDic2["Missing"] == 0):
                     #full shape
-                        valueInFullShapes += side
+                        valueInFullShapes += (shapeDic2["ActualNumber"] + shapeDic2["Missing"])
                     elif(shapeDic2["Missing"] <= numberOfPieces-1):
                     #enough pieces for completing 
-                        valueInPossibleShapes += side
+                        valueInPossibleShapes += (shapeDic2["ActualNumber"] + shapeDic2["Missing"])
                         progression += compareNumbers(shapeDic2["Missing"],shapeDic1["Missing"])
 
                        
                 elif(shapeDic1 != None and shapeDic2 == None): 
                 # list2 has less shapes 
-                    valueInLostShapes += side
+                    valueInLostShapes += (shapeDic1["ActualNumber"] + shapeDic1["Missing"])
                     
                 elif(shapeDic1 == None and shapeDic2 != None): 
                 # list2 has more shapes or different shapes (if different then they are bigger)
                     
                     if(shapeDic2["Missing"] > numberOfPieces-1):
                     #After placing this piece an impossible shape was created or turn into 
-                        valueInLostShapes += side
+                        valueInLostShapes += (shapeDic2["ActualNumber"] + shapeDic2["Missing"])
                     else: 
-                        valueInPossibleShapes += side
+                        valueInPossibleShapes += (shapeDic2["ActualNumber"] + shapeDic2["Missing"])
                         if(shapeDic2["ActualNumber"] > 1):
                             progression += 1
 
@@ -489,7 +543,7 @@ class Robot:
                             BestSlot = freeSlot
                             OPT = 4
 
-                        elif(BestValueInLostShapes == valueInLostShapes and random.randint(0,1) == 0):
+                        elif(BestValueInLostShapes == valueInLostShapes and random.randrange(0,100,1) < PercentageOfVariations):
                             BestValueInFullShapes = valueInFullShapes
                             BestValueInPossibleShapes = valueInPossibleShapes
                             BestValueInLostShapes = valueInLostShapes
@@ -504,6 +558,14 @@ class Robot:
                     BestProgression = progression
                     BestSlot = freeSlot
                     OPT = 6
+
+                elif(BestProgression < progression):
+                    BestValueInFullShapes = valueInFullShapes
+                    BestValueInPossibleShapes = valueInPossibleShapes
+                    BestValueInLostShapes = valueInLostShapes
+                    BestProgression = progression
+                    BestSlot = freeSlot
+                    OPT = 7
 
 
 
