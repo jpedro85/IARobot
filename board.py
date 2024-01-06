@@ -72,6 +72,9 @@ class Board:
         return pieces
 
     def clearShapes(self):
+        """
+        return { type(piece).__name__ : count , ... }
+        """
 
         arrayRemoved_dic = {}
         for x in range(5):
