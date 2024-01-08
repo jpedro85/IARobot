@@ -70,6 +70,16 @@ class Board:
                     pieces.append(self.slots[x][y])
 
         return pieces
+    
+    def getAllPieces(self):
+        pieces = []
+        for x in range(self.size):
+            for y in range(self.size):
+                if type(self.slots[x][y].piece) != PieceNone:
+                    pieces.append(self.slots[x][y])
+
+        return pieces
+
 
     def clearShapes(self):
         """

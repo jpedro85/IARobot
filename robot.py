@@ -303,9 +303,10 @@ class Robot:
 
         wait(2000)
         self.ev3.speaker.say("Starting")
-        playedDic = {'-': {'lst':[] , "l":0},'+':{'lst':[] , "l":0},'O':{'lst':[] , "l":0},'X':{'lst':[] , "l":0} }
-        played = 0
-        
+        result= 0
+        # playedDic = {'-': {'lst':[] , "l":0},'+':{'lst':[] , "l":0},'O':{'lst':[] , "l":0},'X':{'lst':[] , "l":0} }
+        #played = 0
+         
         while (len(board.pieces) > 0 ):
             
             print(board)
@@ -327,14 +328,20 @@ class Robot:
                 for key in dic.keys():
                     print("Removed:" + key + "count:" + str(dic[key]) )
                     self.ev3.speaker.say("Removed:" + key + "count:" + str(dic[key]) )
+                    result += 2**(dic[key])
 
-            playedDic[piece.symbol]["lst"].append(chosenSlot)
-            playedDic[piece.symbol]["l"] += 1
-            played += 1
+            # playedDic[piece.symbol]["lst"].append(chosenSlot)
+            # playedDic[piece.symbol]["l"] += 1
+            # played += 1
         
+        left = 2**len(self.board.getAllPieces())
         print(board)
+        self.ev3.speaker.say("Result:" + str(result-left))
+        print("Result:",result-left)
+
 
     def playTest(self,PercentageOfVariations =0):
+        result = 0
         print(self.board)
         while( len(self.board.pieces)  >0 ):
             slot = self.choosePlace(self.board,PercentageOfVariations)
@@ -343,9 +350,19 @@ class Robot:
             print(slot)
             self.board.slots[slot.point.x][slot.point.y]=slot
             print(self.board)
-            self.board.clearShapes()
+            d = self.board.clearShapes()
+            for key in d.keys():
+                print("Removed:" + key + "count:" + str(d[key]) )
+                self.ev3.speaker.say("Removed:" + key + "count:" + str(d[key]) )
+                result += 2**(d[key])
+
             print("afterCleared",self.board)
             print("----------------------End Play----------------------")
+
+        left = 2**len(self.board.getAllPieces())
+        print(self.board)
+        self.ev3.speaker.say("Result:" + str(result-left))
+        print("Result:",result-left)
 
     def choosePlace(self,board:Board,PercentageOfVariations = 0):
 
@@ -360,17 +377,23 @@ class Robot:
            # valueInNewForms = 0
             progression = 0
 
+            dict1 = {d['Side']: d for d in list1}
+            dict2 = {d['Side']: d for d in list2}
+
             for side in range(board.size,1,-1):#5--2
 
-                shapeDic1 = None
-                for dicShape in list1:
-                    if( dicShape["Side"] == side):
-                        shapeDic1 = dicShape
+                # shapeDic1 = None
+                # for dicShape in list1:
+                #     if( dicShape["Side"] == side):
+                #         shapeDic1 = dicShape
 
-                shapeDic2 = None
-                for dic_Shape in list2:
-                    if( dic_Shape["Side"] == side):
-                        shapeDic2 = dic_Shape
+                # shapeDic2 = None
+                # for dic_Shape in list2:
+                #     if( dic_Shape["Side"] == side):
+                #         shapeDic2 = dic_Shape
+
+                shapeDic1 = dict1.get(side)
+                shapeDic2 = dict2.get(side)
 
 
                 if(shapeDic1 != None and shapeDic2 != None):
@@ -543,7 +566,7 @@ class Robot:
                             BestSlot = freeSlot
                             OPT = 4
 
-                        elif(BestValueInLostShapes == valueInLostShapes and random.randrange(0,100,1) < PercentageOfVariations):
+                        elif(BestValueInLostShapes == valueInLostShapes and random.randint(0,100) < PercentageOfVariations):
                             BestValueInFullShapes = valueInFullShapes
                             BestValueInPossibleShapes = valueInPossibleShapes
                             BestValueInLostShapes = valueInLostShapes
