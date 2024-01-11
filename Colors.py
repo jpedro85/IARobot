@@ -1,5 +1,4 @@
 from Color import *
-from utils import *
 
 class ColorsReflection:
 

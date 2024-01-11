@@ -8,7 +8,6 @@ from math import pi
 
 from Colors import *
 from Color import *
-from utils import *
 from board import *
 from point import *
 from piece import *
@@ -31,7 +30,7 @@ class Robot:
     def config(self):
         # Initialize the EV3 Brick.
         self.ev3 = EV3Brick()
-        self.ev3.speaker.set_volume(100)
+        self.ev3.speaker.set_volume(1000)
 
         # Initialize the motors.
         self.leftMotor = Motor(Port.B)
@@ -420,8 +419,7 @@ class Robot:
                         valueInLostShapes += (shapeDic2["ActualNumber"] + shapeDic2["Missing"])
                     else: 
                         valueInPossibleShapes += (shapeDic2["ActualNumber"] + shapeDic2["Missing"])
-                        if(shapeDic2["ActualNumber"] > 1):
-                            progression += 1
+                       # progression += 1
 
                         #valueInNewForms += side
             
