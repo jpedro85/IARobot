@@ -7,7 +7,27 @@ class Shape:
         self.shapes = {}
 
     def getPieceNumberFromSideLength(self,sideLength):
-        print("This Piece has no shape.")
+        print("Called Shape getPieceNumberFromSideLength")
+        return None
+
+    def getAllPossibleShapes(self,numberOfPieces,max=5):
+        """
+        return { sideLength : numberOfShapes }
+
+        """
+        dic = {}
+        for side in range(max,1,-1):
+            
+            n = self.getPieceNumberFromSideLength(side)
+            if( n == None ):  
+                continue
+            else:
+                NShapes = numberOfPieces // n 
+                Left =  numberOfPieces - (NShapes * n)
+                Points = (2**n)*NShapes
+                dic.update( { side : { "NShapes" : numberOfPieces // n , "Left" : Left , "Points": Points , "TotalPoints" : Points- (2**Left) } } )
+
+        return dic
 
     def getShape(self,sideLength):
         if(sideLength in self.shapes.keys() ):
@@ -109,9 +129,9 @@ class ShapePlus(Shape):
         if(sideLength >= 3 and sideLength % 2 != 0):
             return sideLength*2 -1 
         else:
-            print("Does not exist shape Plus with side {}.".format(sideLength))
+           # print("Does not exist shape Plus with side {}.".format(sideLength))
             return None
-
+        
     def getShape(self,sideLength):
         """
         The function `getShape` returns a list of points that form a shape called "Plus" with a given
@@ -148,6 +168,10 @@ class ShapePlus(Shape):
         The function `getAllIncompleteShapeBasedOnPoint` returns a list of incomplete shapes on a board
         based on a given point and minimum number of pieces.
         """
+        bestCount = 0
+        total = 0
+        bestMissing = 0
+        
         x = slot.point.x
         y = slot.point.y
         N = board.size - x
@@ -176,10 +200,18 @@ class ShapePlus(Shape):
                         if(count >= minPieces and countOthers == 0):
                             missing = numberOfPieces - count
                             lst.append( { "Side" : size, "ActualNumber" : count , "Missing" : missing } )
+                            if( bestCount < count):
+                                bestCount = count
+                                total = numberOfPieces
+                                bestMissing = missing
+
                             if((missing )== 0):
+                                bestCount = count
+                                total = numberOfPieces
+                                bestMissing = missing
                                 break
 
-        return lst
+        return lst , bestCount , total , bestMissing
 
 
 
@@ -206,8 +238,8 @@ class ShapeMinus(Shape):
         elif( sideLength == 3):
             return 3
         else:
-            print("Does not exist shape Minus with side {}.".format(sideLength))
-            return -1
+           # print("Does not exist shape Minus with side {}.".format(sideLength))
+            return None
 
     def existCompletedShapeBasedOnPoint(self,slot,board):
         """
@@ -288,6 +320,9 @@ class ShapeMinus(Shape):
         The function `getAllIncompleteShapeBasedOnPoint` returns a list of incomplete shapes on a board
         based on a given point and minimum number of pieces.
         """
+        bestCount = 0
+        total = 0
+        bestMissing = 0
 
         x = slot.point.x
         y = slot.point.y
@@ -317,10 +352,19 @@ class ShapeMinus(Shape):
                     if(count >= minPieces and countOthers == 0):
                         missing = numberOfPieces - count
                         lst.append( { "Side" : size, "ActualNumber" : count , "Missing" : missing } )
+                        
+                        if(bestCount < count ):
+                            bestCount = count
+                            total = numberOfPieces
+                            bestMissing = missing
+
                         if((missing )== 0):
+                            bestCount = count
+                            total = numberOfPieces
+                            bestMissing = missing
                             break
 
-        return lst
+        return lst , bestCount , total , bestMissing
 
 
 class ShapeX(Shape):
@@ -343,7 +387,7 @@ class ShapeX(Shape):
         if( sideLength >= 3 and sideLength%2 != 0):
             return sideLength*2 -1 
         else:
-            print("Does not exist shape X with side {}.".format(sideLength))
+            #print("Does not exist shape X with side {}.".format(sideLength))
             return None
 
     def existCompletedShapeBasedOnPoint(self,slot,board):
@@ -428,6 +472,10 @@ class ShapeX(Shape):
         The function `getAllIncompleteShapeBasedOnPoint` returns a list of incomplete shapes on a board
         based on a given point and minimum number of pieces.
         """
+        bestCount = 0
+        total = 0
+        bestMissing = 0
+
         x = slot.point.x
         y = slot.point.y
 
@@ -437,7 +485,6 @@ class ShapeX(Shape):
 
         lst = []
         if(N >= 3):
-
             for size in range(N,2,-1):
                 if(size%2 != 0):
 
@@ -457,10 +504,19 @@ class ShapeX(Shape):
                         if(count >= minPieces and countOthers == 0):
                             missing = numberOfPieces - count
                             lst.append( { "Side" : size, "ActualNumber" : count , "Missing" : missing } )
+
+                            if( bestCount < count):
+                                bestCount = count
+                                total = numberOfPieces
+                                bestMissing = missing
+
                             if(missing == 0):
+                                bestCount = count
+                                total = numberOfPieces
+                                bestMissing = missing
                                 break
 
-        return lst
+        return lst , bestCount , total , bestMissing
 
 
 
@@ -485,7 +541,7 @@ class ShapeO(Shape):
         if( sideLength >= 2 ):
             return (sideLength**2) - ((sideLength-2)**2)
         else:
-            print("Does not exist shape O with side {}.".format(sideLength))
+            #print("Does not exist shape O with side {}.".format(sideLength))
             return -1
 
     def existCompletedShapeBasedOnPoint(self,slot,board):
@@ -570,6 +626,10 @@ class ShapeO(Shape):
         The function `getAllIncompleteShapeBasedOnPoint` returns a list of incomplete shapes on a board
         based on a given point and minimum number of pieces.
         """
+        bestCount = 0
+        total = 0
+        bestMissing = 0
+        
         x = slot.point.x
         y = slot.point.y
 
@@ -579,7 +639,6 @@ class ShapeO(Shape):
 
         lst = []
         if( N >= 2):
-
             for size in range(N,1,-1):
 
                 pointArray = self.getShape(size)
@@ -596,7 +655,15 @@ class ShapeO(Shape):
                 if(count >= minPieces and countOthers == 0):
                     missing = numberOfPieces - count
                     lst.append( { "Side" : size, "ActualNumber" : count , "Missing" : missing } )
+                    if( bestCount < count):
+                        bestCount = count
+                        total = numberOfPieces
+                        bestMissing = missing
+
                     if((missing )== 0):
+                        bestCount = count
+                        total = numberOfPieces
+                        bestMissing = missing
                         break
 
-        return lst
+        return lst , bestCount , total , bestMissing

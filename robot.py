@@ -11,6 +11,7 @@ from Color import *
 from board import *
 from point import *
 from piece import *
+from sma import SMA,State
 import random
 
 class Robot:
@@ -56,7 +57,7 @@ class Robot:
         #move2
         self.moveV2Margin = 2
 
-        self.board = Board.getInstance()
+        self.board = Board()
 
     def test(self):
         while True:
@@ -309,7 +310,7 @@ class Robot:
         while (len(board.pieces) > 0 ):
             
             print(board)
-            chosenSlot = self.choosePlace(self.board,PercentageOfVariations)
+            chosenSlot = self.choosePlace_1_Neuronio(self.board,PercentageOfVariations)
             piece = board.pieces.pop(0)
 
             print("Waiting for next piece:" , str(piece) )
@@ -343,7 +344,7 @@ class Robot:
         result = 0
         print(self.board)
         while( len(self.board.pieces)  >0 ):
-            slot = self.choosePlace(self.board,PercentageOfVariations)
+            slot = self.choosePlace_1_Neuronio(self.board,PercentageOfVariations)
             piece = self.board.pieces.pop(0)
             slot.piece = piece
             print(slot)
@@ -363,7 +364,7 @@ class Robot:
         self.ev3.speaker.say("Result:" + str(result-left))
         print("Result:",result-left)
 
-    def choosePlace(self,board:Board,PercentageOfVariations = 0):
+    def choosePlace_1_Neuronio(self,board:Board,PercentageOfVariations = 0):
 
         def compareNumbers(a,b):
             return -(a-b) if a > b else ( (b-a) if a < b else 0)
@@ -589,10 +590,16 @@ class Robot:
                     OPT = 7
 
 
-
-
-
-            
             print("B->",OPT,"best:",BestSlot,":",BestValueInFullShapes ,"IPS:" , BestValueInPossibleShapes ,"LS:", BestValueInLostShapes ,"P:", BestProgression)
 
         return BestSlot
+    
+
+    def choosePlace_test(self):
+        path = SMA.start(State(self.board,Slot(0,0,PieceNone)),100)
+
+        print(path)
+        for state in path:
+            print(state.slot)
+
+        #print(path)

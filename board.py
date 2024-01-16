@@ -17,17 +17,9 @@ class Slot:
 
 
 class Board:
-    __instance = None
-
-    @classmethod
-    def getInstance(cls):
-        if cls.__instance == None:
-            cls.__instance = Board()
-
-        return cls.__instance
-
-    def __init__(self):
-        self.size = 5
+    
+    def __init__(self,size=5):
+        self.size = size
         self.pieces = []
         self.slots = []
         for i in range(5):
@@ -80,6 +72,18 @@ class Board:
 
         return pieces
 
+    def Copy(self):
+        newBoard = Board()
+
+        for x in range(self.size):
+            for y in range(self.size):
+                if type(self.slots[x][y].piece) != PieceNone:
+                    newBoard.slots[x][y] = self.slots[x][y]
+
+        for i in range(len(self.pieces)):
+            newBoard.pieces.append(self.pieces[i])
+
+        return newBoard
 
     def clearShapes(self):
         """
@@ -108,7 +112,7 @@ class Board:
         """
         dic = { "-" : 0 , "X" : 0 , "O" : 0 , "+" : 0 }
         for piece in self.pieces:
-            dic[piece.symbol] = dic[ piece .symbol] + 1
+            dic[piece.symbol] += 1
 
         return dic
     
@@ -149,6 +153,42 @@ class Board:
                     } )
 
         return dic
+
+    def countShapes2(self,minPieces:int = 2):
+        """
+        returns: { "-" : { "Count" : v , "total": v , "m" : v } , "X" : { "Count" : v , "total": v , "m" : v} , "O" : { "Count" : v , "total": v , "m" : v} , "+" : { "Count" : v , "total": v , "m" : v} }
+        """
+         
+        dic2 = { "-" : { "Count" : 0 , "total": 0 , "m" : 0} , "X" : { "Count" : 0 , "total": 0 , "m" : 0} , "O" : { "Count" : 0 , "total": 0 , "m" : 0} , "+" : { "Count" : 0 , "total": 0 , "m" : 0} }
+        for x in range(self.size):
+            for y in range(self.size):
+                slot = self.slots[x][y]
+
+                lst , bestCount , totalPiecesNeeded , bestMissing = ShapeMinus.getInstance().getAllIncompleteShapeBasedOnPoint(self,slot,minPieces=minPieces) 
+                if(bestCount > dic2["-"]["Count"]):
+                    dic2["-"]["Count"] = bestCount
+                    dic2["-"]["total"] = 2**totalPiecesNeeded
+                    dic2["O"]["m"] = bestMissing
+
+                lst , bestCount , totalPiecesNeeded , bestMissing = ShapePlus.getInstance().getAllIncompleteShapeBasedOnPoint(self,slot,minPieces=minPieces) 
+                if(bestCount > dic2["+"]["Count"]):
+                    dic2["+"]["Count"] = bestCount
+                    dic2["+"]["total"] = 2**totalPiecesNeeded
+                    dic2["O"]["m"] = bestMissing
+
+                lst , bestCount , totalPiecesNeeded , bestMissing = ShapeX.getInstance().getAllIncompleteShapeBasedOnPoint(self,slot,minPieces=minPieces)
+                if(bestCount > dic2["X"]["Count"]):
+                    dic2["X"]["Count"] = bestCount
+                    dic2["X"]["total"] = 2**totalPiecesNeeded
+                    dic2["O"]["m"] = bestMissing
+
+                lst , bestCount , totalPiecesNeeded , bestMissing = ShapeO.getInstance().getAllIncompleteShapeBasedOnPoint(self,slot,minPieces=minPieces)
+                if(bestCount > dic2["O"]["Count"]):
+                    dic2["O"]["Count"] = bestCount
+                    dic2["O"]["total"] = 2**totalPiecesNeeded 
+                    dic2["O"]["m"] = bestMissing
+
+        return dic2
 
 
     def PrintPiecesList(self):
