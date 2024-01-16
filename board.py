@@ -1,5 +1,6 @@
 from point import *
 from piece import *
+from Shape import ShapePlus,ShapeMinus,ShapeO,ShapeX
 import random
 
 
@@ -12,7 +13,7 @@ class Slot:
             self.piece = piece
 
     def __str__(self):
-        return " ( {0} P:{1} )".format(str(self.point), str(self.piece))
+        return "( {0} P{1} )".format(str(self.point), str(self.piece))
 
 
 class Board:
@@ -69,8 +70,21 @@ class Board:
                     pieces.append(self.slots[x][y])
 
         return pieces
+    
+    def getAllPieces(self):
+        pieces = []
+        for x in range(self.size):
+            for y in range(self.size):
+                if type(self.slots[x][y].piece) != PieceNone:
+                    pieces.append(self.slots[x][y])
+
+        return pieces
+
 
     def clearShapes(self):
+        """
+        return { type(piece).__name__ : count , ... }
+        """
 
         arrayRemoved_dic = {}
         for x in range(5):
@@ -85,6 +99,57 @@ class Board:
                         arrayRemoved_dic.update( { type(piece).__name__ : count } )
 
         return arrayRemoved_dic
+    
+    def countPieces(self):
+        """
+        :return: a dictionary `dic` which contains the count of each symbol in the `self.pieces` list.
+        The keys of the dictionary are "-", "X", "O", and "+", and the values are the count of each
+        symbol in the list.
+        """
+        dic = { "-" : 0 , "X" : 0 , "O" : 0 , "+" : 0 }
+        for piece in self.pieces:
+            dic[piece.symbol] = dic[ piece .symbol] + 1
+
+        return dic
+    
+    def countShapes(self,minPieces:int = 2):
+        """
+        return: {"+":
+                    [ 
+                        { "slot" : slot , 
+                            "shapeList" : [ 
+                                { "Side" : int, "ActualNumber" : int, "Missing" : int}
+                            ] },
+                    ] }
+        """
+        
+        dic = { "-" : [] , "X" : [] , "O" : [] , "+" : [] }
+        for x in range(5):
+            for y in range(5):
+                slot = self.slots[x][y]
+
+                dic["+"].append( 
+                    { "slot" : slot , "str" : str(slot),
+                    "shapeList" : ShapePlus.getInstance().getAllIncompleteShapeBasedOnPoint(self,slot,minPieces=minPieces) 
+                    } )
+                
+                dic["X"].append( 
+                    { "slot" : slot , "str" : str(slot),
+                    "shapeList" : ShapeX.getInstance().getAllIncompleteShapeBasedOnPoint(self,slot,minPieces=minPieces) 
+                    } )
+                
+                dic["O"].append( 
+                    { "slot" : slot , "str" : str(slot),
+                    "shapeList" : ShapeO.getInstance().getAllIncompleteShapeBasedOnPoint(self,slot,minPieces=minPieces) 
+                    } )
+                
+                dic["-"].append( 
+                    { "slot" : slot , "str" : str(slot),
+                    "shapeList" : ShapeMinus.getInstance().getAllIncompleteShapeBasedOnPoint(self,slot,minPieces=minPieces) 
+                    } )
+
+        return dic
+
 
     def PrintPiecesList(self):
         for piece in self.pieces:

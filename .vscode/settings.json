@@ -7,6 +7,7 @@
 	"python.terminal.activateEnvironment": true,
 	"cSpell.words": [
 		"micropython",
+		"OPTN",
 		"pybricks"
 	],
 	// "python.languageServer": "None",

@@ -6,4 +6,4 @@ class Point:
     
     # ToString function to parse the object to a string
     def __str__(self):
-        return "(X:{0} Y:{1})".format(self.x,self.y)
+        return "(X{0} Y{1})".format(self.x,self.y)
