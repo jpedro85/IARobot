@@ -77,11 +77,32 @@ class Board:
 
         for x in range(self.size):
             for y in range(self.size):
-                if type(self.slots[x][y].piece) != PieceNone:
-                    newBoard.slots[x][y] = self.slots[x][y]
+                if isinstance(self.slots[x][y].piece,PieceMinus):
+                    piece = PieceMinus()
+                elif isinstance(self.slots[x][y].piece,PieceX):
+                    piece = PieceX()
+                elif isinstance(self.slots[x][y].piece,PieceO):
+                    piece = PieceO()
+                elif isinstance(self.slots[x][y].piece,PiecePlus):
+                    piece = PiecePlus()
+                else:
+                    piece = PieceNone()
+
+                newBoard.slots[x][y].piece = piece
 
         for i in range(len(self.pieces)):
-            newBoard.pieces.append(self.pieces[i])
+            if isinstance(self.pieces[i],PieceMinus):
+                piece = PieceMinus()
+            elif isinstance(self.pieces[i],PieceX):
+                piece = PieceX()
+            elif isinstance(self.pieces[i],PieceO):
+                piece = PieceO()
+            elif isinstance(self.pieces[i],PiecePlus):
+                piece = PiecePlus()
+            else: 
+                piece = PieceNone()
+
+            newBoard.pieces.append( piece )
 
         return newBoard
 
@@ -168,19 +189,19 @@ class Board:
                 if(bestCount > dic2["-"]["Count"]):
                     dic2["-"]["Count"] = bestCount
                     dic2["-"]["total"] = 2**totalPiecesNeeded
-                    dic2["O"]["m"] = bestMissing
+                    dic2["-"]["m"] = bestMissing
 
                 lst , bestCount , totalPiecesNeeded , bestMissing = ShapePlus.getInstance().getAllIncompleteShapeBasedOnPoint(self,slot,minPieces=minPieces) 
                 if(bestCount > dic2["+"]["Count"]):
                     dic2["+"]["Count"] = bestCount
                     dic2["+"]["total"] = 2**totalPiecesNeeded
-                    dic2["O"]["m"] = bestMissing
+                    dic2["+"]["m"] = bestMissing
 
                 lst , bestCount , totalPiecesNeeded , bestMissing = ShapeX.getInstance().getAllIncompleteShapeBasedOnPoint(self,slot,minPieces=minPieces)
                 if(bestCount > dic2["X"]["Count"]):
                     dic2["X"]["Count"] = bestCount
                     dic2["X"]["total"] = 2**totalPiecesNeeded
-                    dic2["O"]["m"] = bestMissing
+                    dic2["X"]["m"] = bestMissing
 
                 lst , bestCount , totalPiecesNeeded , bestMissing = ShapeO.getInstance().getAllIncompleteShapeBasedOnPoint(self,slot,minPieces=minPieces)
                 if(bestCount > dic2["O"]["Count"]):

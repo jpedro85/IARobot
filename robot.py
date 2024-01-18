@@ -596,10 +596,12 @@ class Robot:
     
 
     def choosePlace_test(self):
-        path = SMA.start(State(self.board,Slot(0,0,PieceNone)),100)
+        path = SMA.start(State(self.board,None),25)
+        if(path):
+            count = 0
+            for state in path:
+                print("count:",count,"play:",state.slot)
+                count+=1
+        else:
+            print("Does't have solution")
 
-        print(path)
-        for state in path:
-            print(state.slot)
-
-        #print(path)

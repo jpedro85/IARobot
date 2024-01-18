@@ -4,7 +4,6 @@ class Piece:
     def __init__(self,symbol,shape):
         self.symbol = symbol
         self.shape = shape
-        self.InShape = False
 
     def __str__(self):
         return self.symbol
