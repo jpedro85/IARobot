@@ -1,3 +1,4 @@
+from util import Utils
 class TreeNode:
 
     def __init__(self,value , parent = None):
@@ -65,7 +66,11 @@ class Tree:
                         if(node.right):
                             node.right.parent = node.parent
                     else:
-                        self.head = node.right if(node.right) else TreeNode(None)
+                        if(node.right):
+                            node.right.parent = None
+                            self.head = node.right
+                        else:
+                            self.head = TreeNode(None)
                     self.length -= 1
                     return node.value
                 
@@ -84,7 +89,12 @@ class Tree:
                         if(node.left):
                             node.left.parent = node.parent
                     else:
-                        self.head = node.left if(node.left) else TreeNode(None)
+                        if(node.left):
+                            node.left.parent = None
+                            self.head = node.left
+                        else:
+                            self.head = TreeNode(None)
+
                     self.length -= 1
                     return node.value
                 
@@ -192,8 +202,8 @@ class Tree:
         def print_tree_recursive(node, depth=0):
             if node:
                 print_tree_recursive(node.left, depth + 1)
-                print("     " * depth + str(node.value))
+                Utils.print(196,"tree"," " * depth + str(node.value) + "\n")
                 print_tree_recursive(node.right, depth + 1)
 
         print_tree_recursive(self.head)
-        print()
+        Utils.print(200,"tree","\n")

@@ -170,10 +170,13 @@ class SMA:
         while frontier:
 
             Utils.print(172,"sma","begin iteration:"+str(iteration)+"\n")
-            Utils.print(173,"sma",frontier.printOrder())
+           # Utils.print(173,"sma",frontier.printOrder())
+           # frontier.print_tree()
+          #  Utils.print(175,"sma","---------------------------------------------------------------------------------------------\n")
             node:Node = frontier.popHigherValue()
+          #  frontier.print_tree()
             Utils.print(173,"sma","Start Expanding: "+ str(node)+"\n")
-            Utils.print(173,"sma",frontier.printOrder())
+           # Utils.print(173,"sma",frontier.printOrder())
 
             if node.state.isGoalState():
                 return cls.reconstructPath(node)
