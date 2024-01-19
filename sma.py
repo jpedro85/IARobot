@@ -124,14 +124,14 @@ class State:
     
 class Node:
 
-    def __init__(self, state:State , total_Points:int , heuristicPoints:int , TestIteration:int , parent=None):
+    def __init__(self, state:State , total_Points:int , heuristicPoints:int , depth:int , parent=None):
         self.state = state
         self.parent = parent
         self.total_Points =  total_Points   # Cost to reach this node
         self.heuristicPoint = heuristicPoints  # Estimated Points
         self.expectedPoints = self.total_Points + self.heuristicPoint  # Estimated total Points
         self.removedChildBestExpectedPoints = None
-        self.iteration = TestIteration
+        self.depth = depth
 
     def __lt__(self, other):
         return self.expectedPoints < other.expectedPoints 
@@ -146,7 +146,7 @@ class Node:
         return self.expectedPoints >= other.expectedPoints
     
     def __le__(self, other):
-        return self.expectedPoints < other.expectedPoints or (self.expectedPoints == other.expectedPoints and self.iteration <= other.iteration)
+        return self.expectedPoints < other.expectedPoints or (self.expectedPoints == other.expectedPoints and self.depth <= other.depth)
     
     def compare(self, other):
         """
@@ -155,44 +155,49 @@ class Node:
         return 1 if(self.expectedPoints > other.expectedPoints) else -1 if(self.expectedPoints < other.expectedPoints) else 0
     
     def __str__(self):
-        return "[ I:" + str(self.iteration) + ":" + str(self.state.slot) + " Expected:" + str(self.expectedPoints) + " total:" + str(self.total_Points) + "]"
+        return "[ D:" + str(self.depth) + ":" + str(self.state.slot) + " Expected:" + str(self.expectedPoints) + " total:" + str(self.total_Points) + "]"
 
 class SMA:
 
     @classmethod    
-    def start(cls,initial_state:State, memory_limit:int):
-        iteration = 0
-
-        initial_node = Node(initial_state, 0, initial_state.getHeuristicValue(),iteration)
+    def start(cls,initial_state:State, rollBackLimit:int , memory_limit:int):
+        
+        maxDepth = 0
+        iter =0 
+        initial_node = Node(initial_state, 0, initial_state.getHeuristicValue(),maxDepth)
         frontier = Tree()
         frontier.addValue(initial_node)
 
         while frontier:
 
-            Utils.print(172,"sma","begin iteration:"+str(iteration)+"\n")
+            Utils.print(172,"sma","begin iteration:"+str(iter)+"\n")
            # Utils.print(173,"sma",frontier.printOrder())
            # frontier.print_tree()
           #  Utils.print(175,"sma","---------------------------------------------------------------------------------------------\n")
             node:Node = frontier.popHigherValue()
+            if(maxDepth - node.depth > rollBackLimit): continue
           #  frontier.print_tree()
             Utils.print(173,"sma","Start Expanding: "+ str(node)+"\n")
            # Utils.print(173,"sma",frontier.printOrder())
 
             if node.state.isGoalState():
                 return cls.reconstructPath(node)
+            
+            actualDepth = node.depth + 1
+            maxDepth = actualDepth if (actualDepth > maxDepth) else maxDepth
 
             for successorState, total_Points in node.state.getSuccessorsStates():
-                successor_node = Node(successorState, node.total_Points + total_Points, successorState.getHeuristicValue(),iteration,node)
+
+                successor_node = Node(successorState, node.total_Points + total_Points, successorState.getHeuristicValue(),actualDepth,node)
                 frontier.addValue(successor_node)
                 
                 Utils.print(182,"sma","ActualSuccessorSlot: " + str(successor_node.state.slot)+" HPoints: "+str(successor_node.heuristicPoint)+" TPoints: "+ str(successor_node.total_Points)+" :EPoints: "+str(successor_node.expectedPoints)+" PSlot "+str(successor_node.parent.state.slot)+"\n")
 
-                if frontier.length > memory_limit:
-                    #TODO: cls.prune(frontier) Uncomment
-                    pass
+                # if frontier.length > memory_limit:
+                #     #TODO: cls.prune(frontier) Uncomment
+                #     pass
 
-            iteration+=1
-
+            iter += 1
             Utils.print(190,"sma","End\n")
 
         return None  

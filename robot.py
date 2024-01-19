@@ -595,9 +595,9 @@ class Robot:
 
         return BestSlot
     
-    def playSimulated(self):
+    def playSimulated(self,maxRollback = 3):
 
-        play:list = self.choosePlace_test()
+        play:list = self.choosePlace_test(maxRollback)
         result = 0
         playCounter = 0
         while len(self.board.pieces) > 0:
@@ -619,9 +619,9 @@ class Robot:
         Utils.print(612,"robot", "final board:" + str(self.board) + "\n" )
         Utils.print(615,"robot","Final Result:" + str(result - left))
 
-    def choosePlace_test(self):
+    def choosePlace_test(self,maxRollback):
 
-        path = SMA.start(State(self.board.Copy(),None),10000)
+        path = SMA.start(State(self.board.Copy(),None),maxRollback,10000)
         if(path):
             count = 0
             for state in path:
