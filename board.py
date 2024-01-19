@@ -75,34 +75,23 @@ class Board:
     def Copy(self):
         newBoard = Board()
 
+        # Dictionary mapping piece types to their constructors
+        piece_type_to_constructor = {
+            PieceMinus: PieceMinus,
+            PieceX: PieceX,
+            PieceO: PieceO,
+            PiecePlus: PiecePlus,
+            PieceNone: PieceNone
+        }
+
         for x in range(self.size):
             for y in range(self.size):
-                if isinstance(self.slots[x][y].piece,PieceMinus):
-                    piece = PieceMinus()
-                elif isinstance(self.slots[x][y].piece,PieceX):
-                    piece = PieceX()
-                elif isinstance(self.slots[x][y].piece,PieceO):
-                    piece = PieceO()
-                elif isinstance(self.slots[x][y].piece,PiecePlus):
-                    piece = PiecePlus()
-                else:
-                    piece = PieceNone()
+                piece_type = type(self.slots[x][y].piece)
+                # Use the dictionary to create a new piece or reuse the same piece if they are immutable
+                newBoard.slots[x][y].piece = piece_type_to_constructor.get(piece_type, PieceNone)()
 
-                newBoard.slots[x][y].piece = piece
-
-        for i in range(len(self.pieces)):
-            if isinstance(self.pieces[i],PieceMinus):
-                piece = PieceMinus()
-            elif isinstance(self.pieces[i],PieceX):
-                piece = PieceX()
-            elif isinstance(self.pieces[i],PieceO):
-                piece = PieceO()
-            elif isinstance(self.pieces[i],PiecePlus):
-                piece = PiecePlus()
-            else: 
-                piece = PieceNone()
-
-            newBoard.pieces.append( piece )
+        # Copying pieces list using list comprehension
+        newBoard.pieces = [piece_type_to_constructor.get(type(p), PieceNone)() for p in self.pieces]
 
         return newBoard
 
@@ -110,21 +99,23 @@ class Board:
         """
         return { type(piece).__name__ : count , ... }
         """
-
-        arrayRemoved_dic = {}
+        count_dict = {}
         for x in range(5):
             for y in range(5):
-                slot = self.slots[x][y]
-                piece = slot.piece
-                if piece != None and type(piece) != PieceNone:
-                    # if(type(piece) == PiecePlus):
-                    count = piece.shape.clearCompletedShapeBasedOnPoint(slot, self)
-                    
-                    if(count > 0): 
-                        arrayRemoved_dic.update( { type(piece).__name__ : count } )
+                piece = self.slots[x][y].piece
+                # Skip if the slot is empty or has a PieceNone
+                if piece is None or isinstance(piece, PieceNone):
+                    continue
+                
+                piece_type = type(piece).__name__
+                count = piece.shape.clearCompletedShapeBasedOnPoint(self.slots[x][y], self)
 
-        return arrayRemoved_dic
-    
+                # Aggregate count for each piece type
+                if count > 0:
+                    count_dict[piece_type] = count_dict.get(piece_type, 0) + count
+
+        return count_dict
+
     def countPieces(self):
         """
         :return: a dictionary `dic` which contains the count of each symbol in the `self.pieces` list.
@@ -137,7 +128,7 @@ class Board:
 
         return dic
     
-    def countShapes(self,minPieces:int = 2):
+    def countShapes(self, minPieces: int = 2):
         """
         return: {"+":
                     [ 
@@ -147,33 +138,45 @@ class Board:
                             ] },
                     ] }
         """
-        
-        dic = { "-" : [] , "X" : [] , "O" : [] , "+" : [] }
+
+        # Reuse shape instances
+        shape_plus = ShapePlus.getInstance()
+        shape_x = ShapeX.getInstance()
+        shape_o = ShapeO.getInstance()
+        shape_minus = ShapeMinus.getInstance()
+
+        dic = {"-": [], "X": [], "O": [], "+": []}
         for x in range(5):
             for y in range(5):
                 slot = self.slots[x][y]
+                slot_str = str(slot)  # Convert to string once per slot
 
-                dic["+"].append( 
-                    { "slot" : slot , "str" : str(slot),
-                    "shapeList" : ShapePlus.getInstance().getAllIncompleteShapeBasedOnPoint(self,slot,minPieces=minPieces) 
-                    } )
-                
-                dic["X"].append( 
-                    { "slot" : slot , "str" : str(slot),
-                    "shapeList" : ShapeX.getInstance().getAllIncompleteShapeBasedOnPoint(self,slot,minPieces=minPieces) 
-                    } )
-                
-                dic["O"].append( 
-                    { "slot" : slot , "str" : str(slot),
-                    "shapeList" : ShapeO.getInstance().getAllIncompleteShapeBasedOnPoint(self,slot,minPieces=minPieces) 
-                    } )
-                
-                dic["-"].append( 
-                    { "slot" : slot , "str" : str(slot),
-                    "shapeList" : ShapeMinus.getInstance().getAllIncompleteShapeBasedOnPoint(self,slot,minPieces=minPieces) 
-                    } )
+                dic["+"].append({
+                    "slot": slot,
+                    "str": slot_str,
+                    "shapeList": shape_plus.getAllIncompleteShapeBasedOnPoint(self, slot, minPieces=minPieces)
+                })
+
+                dic["X"].append({
+                    "slot": slot,
+                    "str": slot_str,
+                    "shapeList": shape_x.getAllIncompleteShapeBasedOnPoint(self, slot, minPieces=minPieces)
+                })
+
+                dic["O"].append({
+                    "slot": slot,
+                    "str": slot_str,
+                    "shapeList": shape_o.getAllIncompleteShapeBasedOnPoint(self, slot, minPieces=minPieces)
+                })
+
+                dic["-"].append({
+                    "slot": slot,
+                    "str": slot_str,
+                    "shapeList": shape_minus.getAllIncompleteShapeBasedOnPoint(self, slot, minPieces=minPieces)
+                })
 
         return dic
+
 
     def getBestShapeForEachShape(self,totalPieces):
         """
