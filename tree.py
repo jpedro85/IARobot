@@ -126,50 +126,31 @@ class Tree:
             raise IndexError
         else:
             
-            node = self.head
-            backing = False
-            i = -1
-            last = "l"
-            depth = 0
-            bifurcationDepth = -1
+            current = self.head
+            i=0
 
-            while(node):
+            while current is not None:
 
-                print("H",node.value)
-
-                if(node.left and not backing):
-                    node = node.left
-                    last = "l"
-                    depth += 1
+                if(i == index):
+                    return current.value
+                
+                if current.left is None:
+                    i+=1
+                    current = current.right
                 else:
+                    # Find the in-order predecessor (rightmost node in the left subtree)
+                    predecessor = current.left
+                    while predecessor.right is not None and predecessor.right != current:
+                        predecessor = predecessor.right
 
-                    if(depth == bifurcationDepth):
-                        backing=False
+                    if predecessor.right is None:
+                        predecessor.right = current  # Link to the current node
+                        current = current.left
                     else:
+                        predecessor.right = None  # Revert the link
                         i+=1
-                        print("H2",node.value,i)
-                        if i==index:
-                            return node.value
+                        current = current.right
                     
-                    if node.right and not(backing and last == "r"):
-                        node = node.right
-                        backing = False
-                        last = "r"
-                        bifurcationDepth = depth
-                        depth += 1
-                    else:
-                        if(node.parent):
-                            node = node.parent
-                            backing = True
-                            depth -= 1
-                        else:
-                            break
-                    
-
-
-        
-
-
 
     def printOrderRecur(self):
         def traversal(node):
@@ -181,11 +162,13 @@ class Tree:
         traversal(self.head)
         print()
 
-    def printOrder(self):
+    def printOrder(self) -> str:
         current = self.head
+        string = ""
         while current is not None:
+
             if current.left is None:
-                print(current.value, end=" ")
+                string += str(current.value) + " "
                 current = current.right
             else:
                 # Find the in-order predecessor (rightmost node in the left subtree)
@@ -198,10 +181,12 @@ class Tree:
                     current = current.left
                 else:
                     predecessor.right = None  # Revert the link
-                    print(current.value, end=" ")
+                    string += str(current.value) + " "
                     current = current.right
 
-        print()
+        string += "\n"
+
+        return string
 
     def print_tree(self):
         def print_tree_recursive(node, depth=0):

@@ -596,7 +596,8 @@ class Robot:
     
 
     def choosePlace_test(self):
-        path = SMA.start(State(self.board,None),25)
+
+        path = SMA.start(State(self.board.Copy(),None),10000)
         if(path):
             count = 0
             for state in path:

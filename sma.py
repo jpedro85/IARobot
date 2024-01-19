@@ -41,33 +41,29 @@ class State:
         #     print(state[0].slot)
 
         return successorsStates
-
+    
     def getHeuristicValue(self):
 
         value = 0
-        dicCountPieces = self.board.countPieces()
+        Left = 0
+        dicCountPieces:dict = self.board.countPieces()
+        dicBestShape = self.board.getBestShapeForEachShape(dicCountPieces)
 
-        #print(dicCountPieces)
-        dic2 = self.board.countShapes2(1)
-
-        if(dic2["-"]["Count"] > 0):
-            dicCountPieces["-"] -= dic2["-"]["m"]
-            value += dic2["-"]["total"] if (dicCountPieces["-"] >= 0 ) else 0
+        if(dicBestShape.get("-").get("side") != 0):
+            dicCountPieces["-"] = dicBestShape["-"]["left"]
+            value += dicBestShape["-"]["points"]
         
-        if(dic2["+"]["Count"] > 0):
-         #   print("ADDED",dic2["-"]["total"])
-            dicCountPieces["+"] -= dic2["+"]["m"]
-            value += dic2["+"]["total"] if (dicCountPieces["+"] >= 0 ) else 0
+        if(dicBestShape.get("+").get("side") != 0):
+            dicCountPieces["+"] = dicBestShape["+"]["left"]
+            value += dicBestShape["+"]["points"]
 
-        if(dic2["X"]["Count"] > 0):
-            dicCountPieces["X"] -= dic2["X"]["m"]
-            value += dic2["X"]["total"] if (dicCountPieces["X"] >= 0 ) else 0
+        if(dicBestShape.get("X").get("side") != 0):
+            dicCountPieces["X"] = dicBestShape["X"]["left"]
+            value += dicBestShape["X"]["points"]
 
-        if(dic2["O"]["Count"] > 0):
-            dicCountPieces["O"] -= dic2["O"]["m"]
-            value += dic2["O"]["total"] if (dicCountPieces["O"] >= 0 ) else 0
-
-        #print(dicCountPieces,value)
+        if(dicBestShape.get("O").get("side") != 0):
+            dicCountPieces["O"] = dicBestShape["O"]["left"]
+            value += dicBestShape["O"]["points"]
 
         dicPossibleShapes = { "-" : None , "+" : None , "X" : None , "O" : None }
         dicPossibleShapes["-"] = ShapeMinus.getInstance().getAllPossibleShapes(dicCountPieces["-"])
@@ -75,45 +71,67 @@ class State:
         dicPossibleShapes["X"] = ShapeX.getInstance().getAllPossibleShapes(dicCountPieces["X"])
         dicPossibleShapes["O"] = ShapeO.getInstance().getAllPossibleShapes(dicCountPieces["O"])
 
-        #print(dicPossibleShapes["-"])
-
-        added_Minus = False
-        added_Plus = False
-        added_X = False
-        added_O = False
+        added_BestShapeMinus = False
+        added_BestShapePlus = False
+        added_BestShapeX = False
+        added_BestShapeO = False
+        
         for side in range(self.board.size,1,-1):
 
-            if( dicPossibleShapes["-"] and dicPossibleShapes["-"].get(side) and dicPossibleShapes["-"].get(side).get("NShapes") > 0 and not added_Minus ):
-                value += 2**(dicPossibleShapes["-"][side]["Points"])
-                added_Minus = True
+            if(not added_BestShapeMinus and dicPossibleShapes["-"] and dicPossibleShapes["-"].get(side) and dicPossibleShapes["-"].get(side).get("NShapes") > 0  ):
+                value += dicPossibleShapes["-"][side]["Points"]
+                Left += dicPossibleShapes["-"][side]["Left"]
+                added_BestShapeMinus = True
             
-            if( dicPossibleShapes["+"] and dicPossibleShapes["+"].get(side) and dicPossibleShapes["+"].get(side).get("NShapes") > 0 and not added_Plus ):
-                value += 2**(dicPossibleShapes["+"][side]["Points"])
-                added_Plus = True
+            if( not added_BestShapePlus and  dicPossibleShapes["+"] and dicPossibleShapes["+"].get(side) and dicPossibleShapes["+"].get(side).get("NShapes") > 0 ):
+                value += dicPossibleShapes["+"][side]["Points"]
+                Left += dicPossibleShapes["+"][side]["Left"]
+                added_BestShapePlus = True
             
-            if( dicPossibleShapes["X"] and dicPossibleShapes["X"].get(side) and dicPossibleShapes["X"].get(side).get("NShapes") > 0 and not added_X ):
-                value += 2**(dicPossibleShapes["X"][side]["Points"])
-                added_X = True
+            if( not added_BestShapeX and dicPossibleShapes["X"] and dicPossibleShapes["X"].get(side) and dicPossibleShapes["X"].get(side).get("NShapes") > 0 ):
+                value += dicPossibleShapes["X"][side]["Points"]
+                Left += dicPossibleShapes["X"][side]["Left"]
+                added_BestShapeX = True
             
-            if( dicPossibleShapes["O"] and dicPossibleShapes["O"].get(side) and dicPossibleShapes["O"].get(side).get("NShapes") > 0 and not added_O ):
-                value += 2**(dicPossibleShapes["O"][side]["Points"])
-                added_O = True
+            if( not added_BestShapeO and dicPossibleShapes["O"] and dicPossibleShapes["O"].get(side) and dicPossibleShapes["O"].get(side).get("NShapes") > 0 ):
+                value += dicPossibleShapes["O"][side]["Points"]
+                Left += dicPossibleShapes["O"][side]["Left"]
+                added_BestShapeO = True
 
-            if( added_Minus and added_Plus and added_X and added_O ):
+            if( added_BestShapeMinus and added_BestShapePlus and added_BestShapeX and added_BestShapeO ):
                 break
                     
-        return value
-        
+        if(not added_BestShapeMinus):
+            Left += dicCountPieces["-"]
+
+        if(not added_BestShapePlus):
+            Left += dicCountPieces["+"]
+
+        if(not added_BestShapeX):
+            Left += dicCountPieces["X"]
+
+        if(not added_BestShapeO):
+            Left += dicCountPieces["O"]
+
+        teste = value #TODO:delite
+        if Left > 0:
+            value -= (2**Left)
+
+        Utils.print( 2 , "sma","heuristic of point " + str(self.slot) + " value:" + str(value) + ":" + str(teste) + " Left:" + str(Left) +"\n")
+
+        return value 
+
     
 class Node:
 
-    def __init__(self, state:State , total_Points:int , heuristicPoints:int , parent=None):
+    def __init__(self, state:State , total_Points:int , heuristicPoints:int , TestIteration:int , parent=None):
         self.state = state
         self.parent = parent
         self.total_Points =  total_Points   # Cost to reach this node
         self.heuristicPoint = heuristicPoints  # Estimated Points
         self.expectedPoints = self.total_Points + self.heuristicPoint  # Estimated total Points
         self.removedChildBestExpectedPoints = None
+        self.iteration = TestIteration
 
     def __lt__(self, other):
         return self.expectedPoints < other.expectedPoints 
@@ -137,45 +155,42 @@ class Node:
         return 1 if(self.expectedPoints > other.expectedPoints) else -1 if(self.expectedPoints < other.expectedPoints) else 0
     
     def __str__(self):
-        return self.state.slot.__str__()
+        return "[ I:" + str(self.iteration) + ":" + str(self.state.slot) + " Expected:" + str(self.expectedPoints) + " total:" + str(self.total_Points) + "]"
 
 class SMA:
 
     @classmethod    
     def start(cls,initial_state:State, memory_limit:int):
+        iteration = 0
 
-        initial_node = Node(initial_state, 0, initial_state.getHeuristicValue())
+        initial_node = Node(initial_state, 0, initial_state.getHeuristicValue(),iteration)
         frontier = Tree()
         frontier.addValue(initial_node)
 
         while frontier:
-            print("begin iteration")
-            Utils.getFile().write("begin iteration\n")
-            #frontier.print()   
-            frontier.print_tree()
-            node = frontier.popHigherValue()
-            print("Start Expanding:", node.state.slot)
-            Utils.getFile().write("Start Expanding: "+ str(node.state.slot)+"\n")
 
-           # print(node.state.board)
-           # print("end Before:", node.state.slot)
+            Utils.print(172,"sma","begin iteration:"+str(iteration)+"\n")
+            Utils.print(173,"sma",frontier.printOrder())
+            node:Node = frontier.popHigherValue()
+            Utils.print(173,"sma","Start Expanding: "+ str(node)+"\n")
+            Utils.print(173,"sma",frontier.printOrder())
 
             if node.state.isGoalState():
                 return cls.reconstructPath(node)
 
             for successorState, total_Points in node.state.getSuccessorsStates():
-                successor_node = Node(successorState, node.total_Points + total_Points, successorState.getHeuristicValue(),node)
+                successor_node = Node(successorState, node.total_Points + total_Points, successorState.getHeuristicValue(),iteration,node)
                 frontier.addValue(successor_node)
                 
-                print("AtualSuccesssorSlot:",successor_node.state.slot,"Hpoints:",successor_node.heuristicPoint,"TPoins:",successor_node.total_Points,":EPoints:",successor_node.expectedPoints,"PSlot",successor_node.parent.state.slot)
-                Utils.getFile().write("AtualSuccesssorSlot: " + str(successor_node.state.slot)+" Hpoints: "+str(successor_node.heuristicPoint)+" TPoins: "+ str(successor_node.total_Points)+" :EPoints: "+str(successor_node.expectedPoints)+" PSlot "+str(successor_node.parent.state.slot)+"\n")
+                Utils.print(182,"sma","ActualSuccessorSlot: " + str(successor_node.state.slot)+" HPoints: "+str(successor_node.heuristicPoint)+" TPoints: "+ str(successor_node.total_Points)+" :EPoints: "+str(successor_node.expectedPoints)+" PSlot "+str(successor_node.parent.state.slot)+"\n")
 
                 if frontier.length > memory_limit:
-                    #cls.prune(frontier) //TODO:Uncoment
+                    #TODO: cls.prune(frontier) Uncomment
                     pass
 
-            print("End")
-            Utils.getFile().write("End\n")
+            iteration+=1
+
+            Utils.print(190,"sma","End\n")
 
         return None  
     

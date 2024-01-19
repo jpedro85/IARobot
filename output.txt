@@ -1,0 +1,219 @@
+L:2 f:sma: heuristic of point None value:8:8 Left:0
+L:172 f:sma: begin iteration:0
+L:173 f:sma: [ I:0:None Expected:8 total:0] 
+L:173 f:sma: Start Expanding: [ I:0:None Expected:8 total:0]
+L:173 f:sma: None 
+L:2 f:sma: heuristic of point ( (X0 Y0) P- ) value:8:8 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X0 Y0) P- ) HPoints: 8 TPoints: 0 :EPoints: 8 PSlot None
+L:2 f:sma: heuristic of point ( (X0 Y1) P- ) value:8:8 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X0 Y1) P- ) HPoints: 8 TPoints: 0 :EPoints: 8 PSlot None
+L:2 f:sma: heuristic of point ( (X0 Y2) P- ) value:8:8 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X0 Y2) P- ) HPoints: 8 TPoints: 0 :EPoints: 8 PSlot None
+L:2 f:sma: heuristic of point ( (X0 Y3) P- ) value:8:8 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X0 Y3) P- ) HPoints: 8 TPoints: 0 :EPoints: 8 PSlot None
+L:2 f:sma: heuristic of point ( (X0 Y4) P- ) value:8:8 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X0 Y4) P- ) HPoints: 8 TPoints: 0 :EPoints: 8 PSlot None
+L:2 f:sma: heuristic of point ( (X1 Y0) P- ) value:8:8 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X1 Y0) P- ) HPoints: 8 TPoints: 0 :EPoints: 8 PSlot None
+L:2 f:sma: heuristic of point ( (X1 Y1) P- ) value:8:8 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X1 Y1) P- ) HPoints: 8 TPoints: 0 :EPoints: 8 PSlot None
+L:2 f:sma: heuristic of point ( (X1 Y2) P- ) value:8:8 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X1 Y2) P- ) HPoints: 8 TPoints: 0 :EPoints: 8 PSlot None
+L:2 f:sma: heuristic of point ( (X1 Y3) P- ) value:8:8 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X1 Y3) P- ) HPoints: 8 TPoints: 0 :EPoints: 8 PSlot None
+L:2 f:sma: heuristic of point ( (X1 Y4) P- ) value:8:8 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X1 Y4) P- ) HPoints: 8 TPoints: 0 :EPoints: 8 PSlot None
+L:2 f:sma: heuristic of point ( (X2 Y0) P- ) value:8:8 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X2 Y0) P- ) HPoints: 8 TPoints: 0 :EPoints: 8 PSlot None
+L:2 f:sma: heuristic of point ( (X2 Y1) P- ) value:8:8 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X2 Y1) P- ) HPoints: 8 TPoints: 0 :EPoints: 8 PSlot None
+L:2 f:sma: heuristic of point ( (X2 Y2) P- ) value:8:8 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X2 Y2) P- ) HPoints: 8 TPoints: 0 :EPoints: 8 PSlot None
+L:2 f:sma: heuristic of point ( (X2 Y3) P- ) value:8:8 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X2 Y3) P- ) HPoints: 8 TPoints: 0 :EPoints: 8 PSlot None
+L:2 f:sma: heuristic of point ( (X2 Y4) P- ) value:8:8 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X2 Y4) P- ) HPoints: 8 TPoints: 0 :EPoints: 8 PSlot None
+L:2 f:sma: heuristic of point ( (X3 Y0) P- ) value:8:8 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X3 Y0) P- ) HPoints: 8 TPoints: 0 :EPoints: 8 PSlot None
+L:2 f:sma: heuristic of point ( (X3 Y1) P- ) value:8:8 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X3 Y1) P- ) HPoints: 8 TPoints: 0 :EPoints: 8 PSlot None
+L:2 f:sma: heuristic of point ( (X3 Y2) P- ) value:8:8 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X3 Y2) P- ) HPoints: 8 TPoints: 0 :EPoints: 8 PSlot None
+L:2 f:sma: heuristic of point ( (X3 Y3) P- ) value:8:8 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X3 Y3) P- ) HPoints: 8 TPoints: 0 :EPoints: 8 PSlot None
+L:2 f:sma: heuristic of point ( (X3 Y4) P- ) value:8:8 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X3 Y4) P- ) HPoints: 8 TPoints: 0 :EPoints: 8 PSlot None
+L:2 f:sma: heuristic of point ( (X4 Y0) P- ) value:8:8 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X4 Y0) P- ) HPoints: 8 TPoints: 0 :EPoints: 8 PSlot None
+L:2 f:sma: heuristic of point ( (X4 Y1) P- ) value:8:8 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X4 Y1) P- ) HPoints: 8 TPoints: 0 :EPoints: 8 PSlot None
+L:2 f:sma: heuristic of point ( (X4 Y2) P- ) value:8:8 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X4 Y2) P- ) HPoints: 8 TPoints: 0 :EPoints: 8 PSlot None
+L:2 f:sma: heuristic of point ( (X4 Y3) P- ) value:8:8 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X4 Y3) P- ) HPoints: 8 TPoints: 0 :EPoints: 8 PSlot None
+L:2 f:sma: heuristic of point ( (X4 Y4) P- ) value:8:8 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X4 Y4) P- ) HPoints: 8 TPoints: 0 :EPoints: 8 PSlot None
+L:190 f:sma: End
+L:172 f:sma: begin iteration:1
+L:173 f:sma: [ I:0:( (X4 Y4) P- ) Expected:8 total:0] [ I:0:( (X4 Y3) P- ) Expected:8 total:0] [ I:0:( (X4 Y2) P- ) Expected:8 total:0] [ I:0:( (X4 Y1) P- ) Expected:8 total:0] [ I:0:( (X4 Y0) P- ) Expected:8 total:0] [ I:0:( (X3 Y4) P- ) Expected:8 total:0] [ I:0:( (X3 Y3) P- ) Expected:8 total:0] [ I:0:( (X3 Y2) P- ) Expected:8 total:0] [ I:0:( (X3 Y1) P- ) Expected:8 total:0] [ I:0:( (X3 Y0) P- ) Expected:8 total:0] [ I:0:( (X2 Y4) P- ) Expected:8 total:0] [ I:0:( (X2 Y3) P- ) Expected:8 total:0] [ I:0:( (X2 Y2) P- ) Expected:8 total:0] [ I:0:( (X2 Y1) P- ) Expected:8 total:0] [ I:0:( (X2 Y0) P- ) Expected:8 total:0] [ I:0:( (X1 Y4) P- ) Expected:8 total:0] [ I:0:( (X1 Y3) P- ) Expected:8 total:0] [ I:0:( (X1 Y2) P- ) Expected:8 total:0] [ I:0:( (X1 Y1) P- ) Expected:8 total:0] [ I:0:( (X1 Y0) P- ) Expected:8 total:0] [ I:0:( (X0 Y4) P- ) Expected:8 total:0] [ I:0:( (X0 Y3) P- ) Expected:8 total:0] [ I:0:( (X0 Y2) P- ) Expected:8 total:0] [ I:0:( (X0 Y1) P- ) Expected:8 total:0] [ I:0:( (X0 Y0) P- ) Expected:8 total:0] 
+L:173 f:sma: Start Expanding: [ I:0:( (X0 Y0) P- ) Expected:8 total:0]
+L:173 f:sma: [ I:0:( (X4 Y4) P- ) Expected:8 total:0] [ I:0:( (X4 Y3) P- ) Expected:8 total:0] [ I:0:( (X4 Y2) P- ) Expected:8 total:0] [ I:0:( (X4 Y1) P- ) Expected:8 total:0] [ I:0:( (X4 Y0) P- ) Expected:8 total:0] [ I:0:( (X3 Y4) P- ) Expected:8 total:0] [ I:0:( (X3 Y3) P- ) Expected:8 total:0] [ I:0:( (X3 Y2) P- ) Expected:8 total:0] [ I:0:( (X3 Y1) P- ) Expected:8 total:0] [ I:0:( (X3 Y0) P- ) Expected:8 total:0] [ I:0:( (X2 Y4) P- ) Expected:8 total:0] [ I:0:( (X2 Y3) P- ) Expected:8 total:0] [ I:0:( (X2 Y2) P- ) Expected:8 total:0] [ I:0:( (X2 Y1) P- ) Expected:8 total:0] [ I:0:( (X2 Y0) P- ) Expected:8 total:0] [ I:0:( (X1 Y4) P- ) Expected:8 total:0] [ I:0:( (X1 Y3) P- ) Expected:8 total:0] [ I:0:( (X1 Y2) P- ) Expected:8 total:0] [ I:0:( (X1 Y1) P- ) Expected:8 total:0] [ I:0:( (X1 Y0) P- ) Expected:8 total:0] [ I:0:( (X0 Y4) P- ) Expected:8 total:0] [ I:0:( (X0 Y3) P- ) Expected:8 total:0] [ I:0:( (X0 Y2) P- ) Expected:8 total:0] [ I:0:( (X0 Y1) P- ) Expected:8 total:0] 
+L:2 f:sma: heuristic of point ( (X0 Y1) P  ) value:-2:0 Left:1
+L:182 f:sma: ActualSuccessorSlot: ( (X0 Y1) P  ) HPoints: -2 TPoints: 4 :EPoints: 2 PSlot ( (X0 Y0) P- )
+L:2 f:sma: heuristic of point ( (X0 Y2) P- ) value:8:8 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X0 Y2) P- ) HPoints: 8 TPoints: 0 :EPoints: 8 PSlot ( (X0 Y0) P- )
+L:2 f:sma: heuristic of point ( (X0 Y3) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X0 Y3) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y0) P- )
+L:2 f:sma: heuristic of point ( (X0 Y4) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X0 Y4) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y0) P- )
+L:2 f:sma: heuristic of point ( (X1 Y0) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X1 Y0) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y0) P- )
+L:2 f:sma: heuristic of point ( (X1 Y1) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X1 Y1) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y0) P- )
+L:2 f:sma: heuristic of point ( (X1 Y2) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X1 Y2) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y0) P- )
+L:2 f:sma: heuristic of point ( (X1 Y3) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X1 Y3) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y0) P- )
+L:2 f:sma: heuristic of point ( (X1 Y4) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X1 Y4) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y0) P- )
+L:2 f:sma: heuristic of point ( (X2 Y0) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X2 Y0) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y0) P- )
+L:2 f:sma: heuristic of point ( (X2 Y1) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X2 Y1) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y0) P- )
+L:2 f:sma: heuristic of point ( (X2 Y2) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X2 Y2) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y0) P- )
+L:2 f:sma: heuristic of point ( (X2 Y3) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X2 Y3) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y0) P- )
+L:2 f:sma: heuristic of point ( (X2 Y4) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X2 Y4) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y0) P- )
+L:2 f:sma: heuristic of point ( (X3 Y0) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X3 Y0) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y0) P- )
+L:2 f:sma: heuristic of point ( (X3 Y1) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X3 Y1) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y0) P- )
+L:2 f:sma: heuristic of point ( (X3 Y2) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X3 Y2) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y0) P- )
+L:2 f:sma: heuristic of point ( (X3 Y3) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X3 Y3) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y0) P- )
+L:2 f:sma: heuristic of point ( (X3 Y4) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X3 Y4) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y0) P- )
+L:2 f:sma: heuristic of point ( (X4 Y0) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X4 Y0) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y0) P- )
+L:2 f:sma: heuristic of point ( (X4 Y1) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X4 Y1) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y0) P- )
+L:2 f:sma: heuristic of point ( (X4 Y2) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X4 Y2) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y0) P- )
+L:2 f:sma: heuristic of point ( (X4 Y3) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X4 Y3) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y0) P- )
+L:2 f:sma: heuristic of point ( (X4 Y4) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X4 Y4) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y0) P- )
+L:190 f:sma: End
+L:172 f:sma: begin iteration:2
+L:173 f:sma: [ I:1:( (X0 Y1) P  ) Expected:2 total:4] [ I:1:( (X4 Y4) P- ) Expected:4 total:0] [ I:1:( (X4 Y3) P- ) Expected:4 total:0] [ I:1:( (X4 Y2) P- ) Expected:4 total:0] [ I:1:( (X4 Y1) P- ) Expected:4 total:0] [ I:1:( (X4 Y0) P- ) Expected:4 total:0] [ I:1:( (X3 Y4) P- ) Expected:4 total:0] [ I:1:( (X3 Y3) P- ) Expected:4 total:0] [ I:1:( (X3 Y2) P- ) Expected:4 total:0] [ I:1:( (X3 Y1) P- ) Expected:4 total:0] [ I:1:( (X3 Y0) P- ) Expected:4 total:0] [ I:1:( (X2 Y4) P- ) Expected:4 total:0] [ I:1:( (X2 Y3) P- ) Expected:4 total:0] [ I:1:( (X2 Y2) P- ) Expected:4 total:0] [ I:1:( (X2 Y1) P- ) Expected:4 total:0] [ I:1:( (X2 Y0) P- ) Expected:4 total:0] [ I:1:( (X1 Y4) P- ) Expected:4 total:0] [ I:1:( (X1 Y3) P- ) Expected:4 total:0] [ I:1:( (X1 Y2) P- ) Expected:4 total:0] [ I:1:( (X1 Y1) P- ) Expected:4 total:0] [ I:1:( (X1 Y0) P- ) Expected:4 total:0] [ I:1:( (X0 Y4) P- ) Expected:4 total:0] [ I:1:( (X0 Y3) P- ) Expected:4 total:0] [ I:1:( (X0 Y2) P- ) Expected:8 total:0] [ I:0:( (X4 Y4) P- ) Expected:8 total:0] [ I:0:( (X4 Y3) P- ) Expected:8 total:0] [ I:0:( (X4 Y2) P- ) Expected:8 total:0] [ I:0:( (X4 Y1) P- ) Expected:8 total:0] [ I:0:( (X4 Y0) P- ) Expected:8 total:0] [ I:0:( (X3 Y4) P- ) Expected:8 total:0] [ I:0:( (X3 Y3) P- ) Expected:8 total:0] [ I:0:( (X3 Y2) P- ) Expected:8 total:0] [ I:0:( (X3 Y1) P- ) Expected:8 total:0] [ I:0:( (X3 Y0) P- ) Expected:8 total:0] [ I:0:( (X2 Y4) P- ) Expected:8 total:0] [ I:0:( (X2 Y3) P- ) Expected:8 total:0] [ I:0:( (X2 Y2) P- ) Expected:8 total:0] [ I:0:( (X2 Y1) P- ) Expected:8 total:0] [ I:0:( (X2 Y0) P- ) Expected:8 total:0] [ I:0:( (X1 Y4) P- ) Expected:8 total:0] [ I:0:( (X1 Y3) P- ) Expected:8 total:0] [ I:0:( (X1 Y2) P- ) Expected:8 total:0] [ I:0:( (X1 Y1) P- ) Expected:8 total:0] [ I:0:( (X1 Y0) P- ) Expected:8 total:0] [ I:0:( (X0 Y4) P- ) Expected:8 total:0] [ I:0:( (X0 Y3) P- ) Expected:8 total:0] [ I:0:( (X0 Y2) P- ) Expected:8 total:0] [ I:0:( (X0 Y1) P- ) Expected:8 total:0] 
+L:173 f:sma: Start Expanding: [ I:0:( (X0 Y1) P- ) Expected:8 total:0]
+L:173 f:sma: [ I:1:( (X0 Y1) P  ) Expected:2 total:4] [ I:1:( (X4 Y4) P- ) Expected:4 total:0] [ I:1:( (X4 Y3) P- ) Expected:4 total:0] [ I:1:( (X4 Y2) P- ) Expected:4 total:0] [ I:1:( (X4 Y1) P- ) Expected:4 total:0] [ I:1:( (X4 Y0) P- ) Expected:4 total:0] [ I:1:( (X3 Y4) P- ) Expected:4 total:0] [ I:1:( (X3 Y3) P- ) Expected:4 total:0] [ I:1:( (X3 Y2) P- ) Expected:4 total:0] [ I:1:( (X3 Y1) P- ) Expected:4 total:0] [ I:1:( (X3 Y0) P- ) Expected:4 total:0] [ I:1:( (X2 Y4) P- ) Expected:4 total:0] [ I:1:( (X2 Y3) P- ) Expected:4 total:0] [ I:1:( (X2 Y2) P- ) Expected:4 total:0] [ I:1:( (X2 Y1) P- ) Expected:4 total:0] [ I:1:( (X2 Y0) P- ) Expected:4 total:0] [ I:1:( (X1 Y4) P- ) Expected:4 total:0] [ I:1:( (X1 Y3) P- ) Expected:4 total:0] [ I:1:( (X1 Y2) P- ) Expected:4 total:0] [ I:1:( (X1 Y1) P- ) Expected:4 total:0] [ I:1:( (X1 Y0) P- ) Expected:4 total:0] [ I:1:( (X0 Y4) P- ) Expected:4 total:0] [ I:1:( (X0 Y3) P- ) Expected:4 total:0] [ I:1:( (X0 Y2) P- ) Expected:8 total:0] [ I:0:( (X4 Y4) P- ) Expected:8 total:0] [ I:0:( (X4 Y3) P- ) Expected:8 total:0] [ I:0:( (X4 Y2) P- ) Expected:8 total:0] [ I:0:( (X4 Y1) P- ) Expected:8 total:0] [ I:0:( (X4 Y0) P- ) Expected:8 total:0] [ I:0:( (X3 Y4) P- ) Expected:8 total:0] [ I:0:( (X3 Y3) P- ) Expected:8 total:0] [ I:0:( (X3 Y2) P- ) Expected:8 total:0] [ I:0:( (X3 Y1) P- ) Expected:8 total:0] [ I:0:( (X3 Y0) P- ) Expected:8 total:0] [ I:0:( (X2 Y4) P- ) Expected:8 total:0] [ I:0:( (X2 Y3) P- ) Expected:8 total:0] [ I:0:( (X2 Y2) P- ) Expected:8 total:0] [ I:0:( (X2 Y1) P- ) Expected:8 total:0] [ I:0:( (X2 Y0) P- ) Expected:8 total:0] [ I:0:( (X1 Y4) P- ) Expected:8 total:0] [ I:0:( (X1 Y3) P- ) Expected:8 total:0] [ I:0:( (X1 Y2) P- ) Expected:8 total:0] [ I:0:( (X1 Y1) P- ) Expected:8 total:0] [ I:0:( (X1 Y0) P- ) Expected:8 total:0] [ I:0:( (X0 Y4) P- ) Expected:8 total:0] [ I:0:( (X0 Y3) P- ) Expected:8 total:0] [ I:0:( (X0 Y2) P- ) Expected:8 total:0] [ I:0:( (X0 Y1) P- ) Expected:8 total:0] 
+L:2 f:sma: heuristic of point ( (X0 Y0) P  ) value:-2:0 Left:1
+L:182 f:sma: ActualSuccessorSlot: ( (X0 Y0) P  ) HPoints: -2 TPoints: 4 :EPoints: 2 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X0 Y2) P  ) value:-2:0 Left:1
+L:182 f:sma: ActualSuccessorSlot: ( (X0 Y2) P  ) HPoints: -2 TPoints: 4 :EPoints: 2 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X0 Y3) P- ) value:8:8 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X0 Y3) P- ) HPoints: 8 TPoints: 0 :EPoints: 8 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X0 Y4) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X0 Y4) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X1 Y0) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X1 Y0) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X1 Y1) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X1 Y1) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X1 Y2) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X1 Y2) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X1 Y3) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X1 Y3) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X1 Y4) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X1 Y4) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X2 Y0) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X2 Y0) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X2 Y1) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X2 Y1) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X2 Y2) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X2 Y2) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X2 Y3) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X2 Y3) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X2 Y4) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X2 Y4) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X3 Y0) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X3 Y0) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X3 Y1) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X3 Y1) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X3 Y2) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X3 Y2) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X3 Y3) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X3 Y3) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X3 Y4) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X3 Y4) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X4 Y0) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X4 Y0) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X4 Y1) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X4 Y1) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X4 Y2) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X4 Y2) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X4 Y3) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X4 Y3) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X4 Y4) P- ) value:4:4 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X4 Y4) P- ) HPoints: 4 TPoints: 0 :EPoints: 4 PSlot ( (X0 Y1) P- )
+L:190 f:sma: End
+L:172 f:sma: begin iteration:3
+L:173 f:sma: [ I:2:( (X0 Y2) P  ) Expected:2 total:4] [ I:2:( (X0 Y0) P  ) Expected:2 total:4] [ I:1:( (X0 Y1) P  ) Expected:2 total:4] [ I:2:( (X4 Y4) P- ) Expected:4 total:0] [ I:2:( (X4 Y3) P- ) Expected:4 total:0] [ I:2:( (X4 Y2) P- ) Expected:4 total:0] [ I:2:( (X4 Y1) P- ) Expected:4 total:0] [ I:2:( (X4 Y0) P- ) Expected:4 total:0] [ I:2:( (X3 Y4) P- ) Expected:4 total:0] [ I:2:( (X3 Y3) P- ) Expected:4 total:0] [ I:2:( (X3 Y2) P- ) Expected:4 total:0] [ I:2:( (X3 Y1) P- ) Expected:4 total:0] [ I:2:( (X3 Y0) P- ) Expected:4 total:0] [ I:2:( (X2 Y4) P- ) Expected:4 total:0] [ I:2:( (X2 Y3) P- ) Expected:4 total:0] [ I:2:( (X2 Y2) P- ) Expected:4 total:0] [ I:2:( (X2 Y1) P- ) Expected:4 total:0] [ I:2:( (X2 Y0) P- ) Expected:4 total:0] [ I:2:( (X1 Y4) P- ) Expected:4 total:0] [ I:2:( (X1 Y3) P- ) Expected:4 total:0] [ I:2:( (X1 Y2) P- ) Expected:4 total:0] [ I:2:( (X1 Y1) P- ) Expected:4 total:0] [ I:2:( (X1 Y0) P- ) Expected:4 total:0] [ I:2:( (X0 Y4) P- ) Expected:4 total:0] [ I:1:( (X4 Y4) P- ) Expected:4 total:0] [ I:1:( (X4 Y3) P- ) Expected:4 total:0] [ I:1:( (X4 Y2) P- ) Expected:4 total:0] [ I:1:( (X4 Y1) P- ) Expected:4 total:0] [ I:1:( (X4 Y0) P- ) Expected:4 total:0] [ I:1:( (X3 Y4) P- ) Expected:4 total:0] [ I:1:( (X3 Y3) P- ) Expected:4 total:0] [ I:1:( (X3 Y2) P- ) Expected:4 total:0] [ I:1:( (X3 Y1) P- ) Expected:4 total:0] [ I:1:( (X3 Y0) P- ) Expected:4 total:0] [ I:1:( (X2 Y4) P- ) Expected:4 total:0] [ I:1:( (X2 Y3) P- ) Expected:4 total:0] [ I:1:( (X2 Y2) P- ) Expected:4 total:0] [ I:1:( (X2 Y1) P- ) Expected:4 total:0] [ I:1:( (X2 Y0) P- ) Expected:4 total:0] [ I:1:( (X1 Y4) P- ) Expected:4 total:0] [ I:1:( (X1 Y3) P- ) Expected:4 total:0] [ I:1:( (X1 Y2) P- ) Expected:4 total:0] [ I:1:( (X1 Y1) P- ) Expected:4 total:0] [ I:1:( (X1 Y0) P- ) Expected:4 total:0] [ I:1:( (X0 Y4) P- ) Expected:4 total:0] [ I:1:( (X0 Y3) P- ) Expected:4 total:0] [ I:2:( (X0 Y3) P- ) Expected:8 total:0] [ I:1:( (X0 Y2) P- ) Expected:8 total:0] [ I:0:( (X4 Y4) P- ) Expected:8 total:0] [ I:0:( (X4 Y3) P- ) Expected:8 total:0] [ I:0:( (X4 Y2) P- ) Expected:8 total:0] [ I:0:( (X4 Y1) P- ) Expected:8 total:0] [ I:0:( (X4 Y0) P- ) Expected:8 total:0] [ I:0:( (X3 Y4) P- ) Expected:8 total:0] [ I:0:( (X3 Y3) P- ) Expected:8 total:0] [ I:0:( (X3 Y2) P- ) Expected:8 total:0] [ I:0:( (X3 Y1) P- ) Expected:8 total:0] [ I:0:( (X3 Y0) P- ) Expected:8 total:0] [ I:0:( (X2 Y4) P- ) Expected:8 total:0] [ I:0:( (X2 Y3) P- ) Expected:8 total:0] [ I:0:( (X2 Y2) P- ) Expected:8 total:0] [ I:0:( (X2 Y1) P- ) Expected:8 total:0] [ I:0:( (X2 Y0) P- ) Expected:8 total:0] [ I:0:( (X1 Y4) P- ) Expected:8 total:0] [ I:0:( (X1 Y3) P- ) Expected:8 total:0] [ I:0:( (X1 Y2) P- ) Expected:8 total:0] [ I:0:( (X1 Y1) P- ) Expected:8 total:0] [ I:0:( (X1 Y0) P- ) Expected:8 total:0] [ I:0:( (X0 Y4) P- ) Expected:8 total:0] [ I:0:( (X0 Y3) P- ) Expected:8 total:0] [ I:0:( (X0 Y2) P- ) Expected:8 total:0] [ I:0:( (X0 Y1) P- ) Expected:8 total:0] 
+L:173 f:sma: Start Expanding: [ I:0:( (X0 Y1) P- ) Expected:8 total:0]
+L:173 f:sma: [ I:2:( (X0 Y2) P  ) Expected:2 total:4] [ I:2:( (X0 Y0) P  ) Expected:2 total:4] [ I:1:( (X0 Y1) P  ) Expected:2 total:4] [ I:2:( (X4 Y4) P- ) Expected:4 total:0] [ I:2:( (X4 Y3) P- ) Expected:4 total:0] [ I:2:( (X4 Y2) P- ) Expected:4 total:0] [ I:2:( (X4 Y1) P- ) Expected:4 total:0] [ I:2:( (X4 Y0) P- ) Expected:4 total:0] [ I:2:( (X3 Y4) P- ) Expected:4 total:0] [ I:2:( (X3 Y3) P- ) Expected:4 total:0] [ I:2:( (X3 Y2) P- ) Expected:4 total:0] [ I:2:( (X3 Y1) P- ) Expected:4 total:0] [ I:2:( (X3 Y0) P- ) Expected:4 total:0] [ I:2:( (X2 Y4) P- ) Expected:4 total:0] [ I:2:( (X2 Y3) P- ) Expected:4 total:0] [ I:2:( (X2 Y2) P- ) Expected:4 total:0] [ I:2:( (X2 Y1) P- ) Expected:4 total:0] [ I:2:( (X2 Y0) P- ) Expected:4 total:0] [ I:2:( (X1 Y4) P- ) Expected:4 total:0] [ I:2:( (X1 Y3) P- ) Expected:4 total:0] [ I:2:( (X1 Y2) P- ) Expected:4 total:0] [ I:2:( (X1 Y1) P- ) Expected:4 total:0] [ I:2:( (X1 Y0) P- ) Expected:4 total:0] [ I:2:( (X0 Y4) P- ) Expected:4 total:0] [ I:1:( (X4 Y4) P- ) Expected:4 total:0] [ I:1:( (X4 Y3) P- ) Expected:4 total:0] [ I:1:( (X4 Y2) P- ) Expected:4 total:0] [ I:1:( (X4 Y1) P- ) Expected:4 total:0] [ I:1:( (X4 Y0) P- ) Expected:4 total:0] [ I:1:( (X3 Y4) P- ) Expected:4 total:0] [ I:1:( (X3 Y3) P- ) Expected:4 total:0] [ I:1:( (X3 Y2) P- ) Expected:4 total:0] [ I:1:( (X3 Y1) P- ) Expected:4 total:0] [ I:1:( (X3 Y0) P- ) Expected:4 total:0] [ I:1:( (X2 Y4) P- ) Expected:4 total:0] [ I:1:( (X2 Y3) P- ) Expected:4 total:0] [ I:1:( (X2 Y2) P- ) Expected:4 total:0] [ I:1:( (X2 Y1) P- ) Expected:4 total:0] [ I:1:( (X2 Y0) P- ) Expected:4 total:0] [ I:1:( (X1 Y4) P- ) Expected:4 total:0] [ I:1:( (X1 Y3) P- ) Expected:4 total:0] [ I:1:( (X1 Y2) P- ) Expected:4 total:0] [ I:1:( (X1 Y1) P- ) Expected:4 total:0] [ I:1:( (X1 Y0) P- ) Expected:4 total:0] [ I:1:( (X0 Y4) P- ) Expected:4 total:0] [ I:1:( (X0 Y3) P- ) Expected:4 total:0] [ I:2:( (X0 Y3) P- ) Expected:8 total:0] [ I:1:( (X0 Y2) P- ) Expected:8 total:0] [ I:0:( (X4 Y4) P- ) Expected:8 total:0] [ I:0:( (X4 Y3) P- ) Expected:8 total:0] [ I:0:( (X4 Y2) P- ) Expected:8 total:0] [ I:0:( (X4 Y1) P- ) Expected:8 total:0] [ I:0:( (X4 Y0) P- ) Expected:8 total:0] [ I:0:( (X3 Y4) P- ) Expected:8 total:0] [ I:0:( (X3 Y3) P- ) Expected:8 total:0] [ I:0:( (X3 Y2) P- ) Expected:8 total:0] [ I:0:( (X3 Y1) P- ) Expected:8 total:0] [ I:0:( (X3 Y0) P- ) Expected:8 total:0] [ I:0:( (X2 Y4) P- ) Expected:8 total:0] [ I:0:( (X2 Y3) P- ) Expected:8 total:0] [ I:0:( (X2 Y2) P- ) Expected:8 total:0] [ I:0:( (X2 Y1) P- ) Expected:8 total:0] [ I:0:( (X2 Y0) P- ) Expected:8 total:0] [ I:0:( (X1 Y4) P- ) Expected:8 total:0] [ I:0:( (X1 Y3) P- ) Expected:8 total:0] [ I:0:( (X1 Y2) P- ) Expected:8 total:0] [ I:0:( (X1 Y1) P- ) Expected:8 total:0] [ I:0:( (X1 Y0) P- ) Expected:8 total:0] [ I:0:( (X0 Y4) P- ) Expected:8 total:0] [ I:0:( (X0 Y3) P- ) Expected:8 total:0] [ I:0:( (X0 Y2) P- ) Expected:8 total:0] [ I:0:( (X0 Y1) P- ) Expected:8 total:0] 
+L:2 f:sma: heuristic of point ( (X0 Y0) P  ) value:0:0 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X0 Y0) P  ) HPoints: 0 TPoints: 4 :EPoints: 4 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X0 Y2) P  ) value:0:0 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X0 Y2) P  ) HPoints: 0 TPoints: 4 :EPoints: 4 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X0 Y3) P- ) value:0:0 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X0 Y3) P- ) HPoints: 0 TPoints: 0 :EPoints: 0 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X0 Y4) P- ) value:0:0 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X0 Y4) P- ) HPoints: 0 TPoints: 0 :EPoints: 0 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X1 Y0) P- ) value:0:0 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X1 Y0) P- ) HPoints: 0 TPoints: 0 :EPoints: 0 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X1 Y1) P- ) value:0:0 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X1 Y1) P- ) HPoints: 0 TPoints: 0 :EPoints: 0 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X1 Y2) P- ) value:0:0 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X1 Y2) P- ) HPoints: 0 TPoints: 0 :EPoints: 0 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X1 Y3) P- ) value:0:0 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X1 Y3) P- ) HPoints: 0 TPoints: 0 :EPoints: 0 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X1 Y4) P- ) value:0:0 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X1 Y4) P- ) HPoints: 0 TPoints: 0 :EPoints: 0 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X2 Y0) P- ) value:0:0 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X2 Y0) P- ) HPoints: 0 TPoints: 0 :EPoints: 0 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X2 Y1) P- ) value:0:0 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X2 Y1) P- ) HPoints: 0 TPoints: 0 :EPoints: 0 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X2 Y2) P- ) value:0:0 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X2 Y2) P- ) HPoints: 0 TPoints: 0 :EPoints: 0 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X2 Y3) P- ) value:0:0 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X2 Y3) P- ) HPoints: 0 TPoints: 0 :EPoints: 0 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X2 Y4) P- ) value:0:0 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X2 Y4) P- ) HPoints: 0 TPoints: 0 :EPoints: 0 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X3 Y0) P- ) value:0:0 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X3 Y0) P- ) HPoints: 0 TPoints: 0 :EPoints: 0 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X3 Y1) P- ) value:0:0 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X3 Y1) P- ) HPoints: 0 TPoints: 0 :EPoints: 0 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X3 Y2) P- ) value:0:0 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X3 Y2) P- ) HPoints: 0 TPoints: 0 :EPoints: 0 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X3 Y3) P- ) value:0:0 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X3 Y3) P- ) HPoints: 0 TPoints: 0 :EPoints: 0 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X3 Y4) P- ) value:0:0 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X3 Y4) P- ) HPoints: 0 TPoints: 0 :EPoints: 0 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X4 Y0) P- ) value:0:0 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X4 Y0) P- ) HPoints: 0 TPoints: 0 :EPoints: 0 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X4 Y1) P- ) value:0:0 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X4 Y1) P- ) HPoints: 0 TPoints: 0 :EPoints: 0 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X4 Y2) P- ) value:0:0 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X4 Y2) P- ) HPoints: 0 TPoints: 0 :EPoints: 0 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X4 Y3) P- ) value:0:0 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X4 Y3) P- ) HPoints: 0 TPoints: 0 :EPoints: 0 PSlot ( (X0 Y1) P- )
+L:2 f:sma: heuristic of point ( (X4 Y4) P- ) value:0:0 Left:0
+L:182 f:sma: ActualSuccessorSlot: ( (X4 Y4) P- ) HPoints: 0 TPoints: 0 :EPoints: 0 PSlot ( (X0 Y1) P- )
+L:190 f:sma: End
+L:172 f:sma: begin iteration:4
+L:173 f:sma: [ I:3:( (X4 Y4) P- ) Expected:0 total:0] [ I:3:( (X4 Y3) P- ) Expected:0 total:0] [ I:3:( (X4 Y2) P- ) Expected:0 total:0] [ I:3:( (X4 Y1) P- ) Expected:0 total:0] [ I:3:( (X4 Y0) P- ) Expected:0 total:0] [ I:3:( (X3 Y4) P- ) Expected:0 total:0] [ I:3:( (X3 Y3) P- ) Expected:0 total:0] [ I:3:( (X3 Y2) P- ) Expected:0 total:0] [ I:3:( (X3 Y1) P- ) Expected:0 total:0] [ I:3:( (X3 Y0) P- ) Expected:0 total:0] [ I:3:( (X2 Y4) P- ) Expected:0 total:0] [ I:3:( (X2 Y3) P- ) Expected:0 total:0] [ I:3:( (X2 Y2) P- ) Expected:0 total:0] [ I:3:( (X2 Y1) P- ) Expected:0 total:0] [ I:3:( (X2 Y0) P- ) Expected:0 total:0] [ I:3:( (X1 Y4) P- ) Expected:0 total:0] [ I:3:( (X1 Y3) P- ) Expected:0 total:0] [ I:3:( (X1 Y2) P- ) Expected:0 total:0] [ I:3:( (X1 Y1) P- ) Expected:0 total:0] [ I:3:( (X1 Y0) P- ) Expected:0 total:0] [ I:3:( (X0 Y4) P- ) Expected:0 total:0] [ I:3:( (X0 Y3) P- ) Expected:0 total:0] [ I:2:( (X0 Y2) P  ) Expected:2 total:4] [ I:2:( (X0 Y0) P  ) Expected:2 total:4] [ I:1:( (X0 Y1) P  ) Expected:2 total:4] [ I:3:( (X0 Y2) P  ) Expected:4 total:4] [ I:3:( (X0 Y0) P  ) Expected:4 total:4] [ I:2:( (X4 Y4) P- ) Expected:4 total:0] [ I:2:( (X4 Y3) P- ) Expected:4 total:0] [ I:2:( (X4 Y2) P- ) Expected:4 total:0] [ I:2:( (X4 Y1) P- ) Expected:4 total:0] [ I:2:( (X4 Y0) P- ) Expected:4 total:0] [ I:2:( (X3 Y4) P- ) Expected:4 total:0] [ I:2:( (X3 Y3) P- ) Expected:4 total:0] [ I:2:( (X3 Y2) P- ) Expected:4 total:0] [ I:2:( (X3 Y1) P- ) Expected:4 total:0] [ I:2:( (X3 Y0) P- ) Expected:4 total:0] [ I:2:( (X2 Y4) P- ) Expected:4 total:0] [ I:2:( (X2 Y3) P- ) Expected:4 total:0] [ I:2:( (X2 Y2) P- ) Expected:4 total:0] [ I:2:( (X2 Y1) P- ) Expected:4 total:0] [ I:2:( (X2 Y0) P- ) Expected:4 total:0] [ I:2:( (X1 Y4) P- ) Expected:4 total:0] [ I:2:( (X1 Y3) P- ) Expected:4 total:0] [ I:2:( (X1 Y2) P- ) Expected:4 total:0] [ I:2:( (X1 Y1) P- ) Expected:4 total:0] [ I:2:( (X1 Y0) P- ) Expected:4 total:0] [ I:2:( (X0 Y4) P- ) Expected:4 total:0] [ I:1:( (X4 Y4) P- ) Expected:4 total:0] [ I:1:( (X4 Y3) P- ) Expected:4 total:0] [ I:1:( (X4 Y2) P- ) Expected:4 total:0] [ I:1:( (X4 Y1) P- ) Expected:4 total:0] [ I:1:( (X4 Y0) P- ) Expected:4 total:0] [ I:1:( (X3 Y4) P- ) Expected:4 total:0] [ I:1:( (X3 Y3) P- ) Expected:4 total:0] [ I:1:( (X3 Y2) P- ) Expected:4 total:0] [ I:1:( (X3 Y1) P- ) Expected:4 total:0] [ I:1:( (X3 Y0) P- ) Expected:4 total:0] [ I:1:( (X2 Y4) P- ) Expected:4 total:0] [ I:1:( (X2 Y3) P- ) Expected:4 total:0] [ I:1:( (X2 Y2) P- ) Expected:4 total:0] [ I:1:( (X2 Y1) P- ) Expected:4 total:0] [ I:1:( (X2 Y0) P- ) Expected:4 total:0] [ I:1:( (X1 Y4) P- ) Expected:4 total:0] [ I:1:( (X1 Y3) P- ) Expected:4 total:0] [ I:1:( (X1 Y2) P- ) Expected:4 total:0] [ I:1:( (X1 Y1) P- ) Expected:4 total:0] [ I:1:( (X1 Y0) P- ) Expected:4 total:0] [ I:1:( (X0 Y4) P- ) Expected:4 total:0] [ I:1:( (X0 Y3) P- ) Expected:4 total:0] [ I:2:( (X0 Y3) P- ) Expected:8 total:0] [ I:1:( (X0 Y2) P- ) Expected:8 total:0] [ I:0:( (X4 Y4) P- ) Expected:8 total:0] [ I:0:( (X4 Y3) P- ) Expected:8 total:0] [ I:0:( (X4 Y2) P- ) Expected:8 total:0] [ I:0:( (X4 Y1) P- ) Expected:8 total:0] [ I:0:( (X4 Y0) P- ) Expected:8 total:0] [ I:0:( (X3 Y4) P- ) Expected:8 total:0] [ I:0:( (X3 Y3) P- ) Expected:8 total:0] [ I:0:( (X3 Y2) P- ) Expected:8 total:0] [ I:0:( (X3 Y1) P- ) Expected:8 total:0] [ I:0:( (X3 Y0) P- ) Expected:8 total:0] [ I:0:( (X2 Y4) P- ) Expected:8 total:0] [ I:0:( (X2 Y3) P- ) Expected:8 total:0] [ I:0:( (X2 Y2) P- ) Expected:8 total:0] [ I:0:( (X2 Y1) P- ) Expected:8 total:0] [ I:0:( (X2 Y0) P- ) Expected:8 total:0] [ I:0:( (X1 Y4) P- ) Expected:8 total:0] [ I:0:( (X1 Y3) P- ) Expected:8 total:0] [ I:0:( (X1 Y2) P- ) Expected:8 total:0] [ I:0:( (X1 Y1) P- ) Expected:8 total:0] [ I:0:( (X1 Y0) P- ) Expected:8 total:0] [ I:0:( (X0 Y4) P- ) Expected:8 total:0] [ I:0:( (X0 Y3) P- ) Expected:8 total:0] [ I:0:( (X0 Y2) P- ) Expected:8 total:0] [ I:0:( (X0 Y1) P- ) Expected:8 total:0] 
+L:173 f:sma: Start Expanding: [ I:0:( (X0 Y1) P- ) Expected:8 total:0]
+L:173 f:sma: [ I:3:( (X4 Y4) P- ) Expected:0 total:0] [ I:3:( (X4 Y3) P- ) Expected:0 total:0] [ I:3:( (X4 Y2) P- ) Expected:0 total:0] [ I:3:( (X4 Y1) P- ) Expected:0 total:0] [ I:3:( (X4 Y0) P- ) Expected:0 total:0] [ I:3:( (X3 Y4) P- ) Expected:0 total:0] [ I:3:( (X3 Y3) P- ) Expected:0 total:0] [ I:3:( (X3 Y2) P- ) Expected:0 total:0] [ I:3:( (X3 Y1) P- ) Expected:0 total:0] [ I:3:( (X3 Y0) P- ) Expected:0 total:0] [ I:3:( (X2 Y4) P- ) Expected:0 total:0] [ I:3:( (X2 Y3) P- ) Expected:0 total:0] [ I:3:( (X2 Y2) P- ) Expected:0 total:0] [ I:3:( (X2 Y1) P- ) Expected:0 total:0] [ I:3:( (X2 Y0) P- ) Expected:0 total:0] [ I:3:( (X1 Y4) P- ) Expected:0 total:0] [ I:3:( (X1 Y3) P- ) Expected:0 total:0] [ I:3:( (X1 Y2) P- ) Expected:0 total:0] [ I:3:( (X1 Y1) P- ) Expected:0 total:0] [ I:3:( (X1 Y0) P- ) Expected:0 total:0] [ I:3:( (X0 Y4) P- ) Expected:0 total:0] [ I:3:( (X0 Y3) P- ) Expected:0 total:0] [ I:2:( (X0 Y2) P  ) Expected:2 total:4] [ I:2:( (X0 Y0) P  ) Expected:2 total:4] [ I:1:( (X0 Y1) P  ) Expected:2 total:4] [ I:3:( (X0 Y2) P  ) Expected:4 total:4] [ I:3:( (X0 Y0) P  ) Expected:4 total:4] [ I:2:( (X4 Y4) P- ) Expected:4 total:0] [ I:2:( (X4 Y3) P- ) Expected:4 total:0] [ I:2:( (X4 Y2) P- ) Expected:4 total:0] [ I:2:( (X4 Y1) P- ) Expected:4 total:0] [ I:2:( (X4 Y0) P- ) Expected:4 total:0] [ I:2:( (X3 Y4) P- ) Expected:4 total:0] [ I:2:( (X3 Y3) P- ) Expected:4 total:0] [ I:2:( (X3 Y2) P- ) Expected:4 total:0] [ I:2:( (X3 Y1) P- ) Expected:4 total:0] [ I:2:( (X3 Y0) P- ) Expected:4 total:0] [ I:2:( (X2 Y4) P- ) Expected:4 total:0] [ I:2:( (X2 Y3) P- ) Expected:4 total:0] [ I:2:( (X2 Y2) P- ) Expected:4 total:0] [ I:2:( (X2 Y1) P- ) Expected:4 total:0] [ I:2:( (X2 Y0) P- ) Expected:4 total:0] [ I:2:( (X1 Y4) P- ) Expected:4 total:0] [ I:2:( (X1 Y3) P- ) Expected:4 total:0] [ I:2:( (X1 Y2) P- ) Expected:4 total:0] [ I:2:( (X1 Y1) P- ) Expected:4 total:0] [ I:2:( (X1 Y0) P- ) Expected:4 total:0] [ I:2:( (X0 Y4) P- ) Expected:4 total:0] [ I:1:( (X4 Y4) P- ) Expected:4 total:0] [ I:1:( (X4 Y3) P- ) Expected:4 total:0] [ I:1:( (X4 Y2) P- ) Expected:4 total:0] [ I:1:( (X4 Y1) P- ) Expected:4 total:0] [ I:1:( (X4 Y0) P- ) Expected:4 total:0] [ I:1:( (X3 Y4) P- ) Expected:4 total:0] [ I:1:( (X3 Y3) P- ) Expected:4 total:0] [ I:1:( (X3 Y2) P- ) Expected:4 total:0] [ I:1:( (X3 Y1) P- ) Expected:4 total:0] [ I:1:( (X3 Y0) P- ) Expected:4 total:0] [ I:1:( (X2 Y4) P- ) Expected:4 total:0] [ I:1:( (X2 Y3) P- ) Expected:4 total:0] [ I:1:( (X2 Y2) P- ) Expected:4 total:0] [ I:1:( (X2 Y1) P- ) Expected:4 total:0] [ I:1:( (X2 Y0) P- ) Expected:4 total:0] [ I:1:( (X1 Y4) P- ) Expected:4 total:0] [ I:1:( (X1 Y3) P- ) Expected:4 total:0] [ I:1:( (X1 Y2) P- ) Expected:4 total:0] [ I:1:( (X1 Y1) P- ) Expected:4 total:0] [ I:1:( (X1 Y0) P- ) Expected:4 total:0] [ I:1:( (X0 Y4) P- ) Expected:4 total:0] [ I:1:( (X0 Y3) P- ) Expected:4 total:0] [ I:2:( (X0 Y3) P- ) Expected:8 total:0] [ I:1:( (X0 Y2) P- ) Expected:8 total:0] [ I:0:( (X4 Y4) P- ) Expected:8 total:0] [ I:0:( (X4 Y3) P- ) Expected:8 total:0] [ I:0:( (X4 Y2) P- ) Expected:8 total:0] [ I:0:( (X4 Y1) P- ) Expected:8 total:0] [ I:0:( (X4 Y0) P- ) Expected:8 total:0] [ I:0:( (X3 Y4) P- ) Expected:8 total:0] [ I:0:( (X3 Y3) P- ) Expected:8 total:0] [ I:0:( (X3 Y2) P- ) Expected:8 total:0] [ I:0:( (X3 Y1) P- ) Expected:8 total:0] [ I:0:( (X3 Y0) P- ) Expected:8 total:0] [ I:0:( (X2 Y4) P- ) Expected:8 total:0] [ I:0:( (X2 Y3) P- ) Expected:8 total:0] [ I:0:( (X2 Y2) P- ) Expected:8 total:0] [ I:0:( (X2 Y1) P- ) Expected:8 total:0] [ I:0:( (X2 Y0) P- ) Expected:8 total:0] [ I:0:( (X1 Y4) P- ) Expected:8 total:0] [ I:0:( (X1 Y3) P- ) Expected:8 total:0] [ I:0:( (X1 Y2) P- ) Expected:8 total:0] [ I:0:( (X1 Y1) P- ) Expected:8 total:0] [ I:0:( (X1 Y0) P- ) Expected:8 total:0] [ I:0:( (X0 Y4) P- ) Expected:8 total:0] [ I:0:( (X0 Y3) P- ) Expected:8 total:0] [ I:0:( (X0 Y2) P- ) Expected:8 total:0] [ I:0:( (X0 Y1) P- ) Expected:8 total:0] 

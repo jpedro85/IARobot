@@ -175,41 +175,70 @@ class Board:
 
         return dic
 
-    def countShapes2(self,minPieces:int = 2):
+    def getBestShapeForEachShape(self,totalPieces):
         """
-        returns: { "-" : { "Count" : v , "total": v , "m" : v } , "X" : { "Count" : v , "total": v , "m" : v} , "O" : { "Count" : v , "total": v , "m" : v} , "+" : { "Count" : v , "total": v , "m" : v} }
-        """
-         
-        dic2 = { "-" : { "Count" : 0 , "total": 0 , "m" : 0} , "X" : { "Count" : 0 , "total": 0 , "m" : 0} , "O" : { "Count" : 0 , "total": 0 , "m" : 0} , "+" : { "Count" : 0 , "total": 0 , "m" : 0} }
+        returns: { "-" : {"side":v, "points":v, "left":v ,"count":v , "total":v }} , ... }
+        left is the number of pieces that are left outside
+        """         
+        dicReturn = { 
+                "-" : {"side":0, "points":0, "left":0 ,"count":0 , "total":0 } , 
+                "X" : {"side":0, "points":0, "left":0 ,"count":0 , "total":0 } , 
+                "O" : {"side":0, "points":0, "left":0 ,"count":0 , "total":0 } ,
+                "+" : {"side":0, "points":0, "left":0 ,"count":0 , "total":0 } 
+                }
+        
+        #focar mais para o meio ?
+        
         for x in range(self.size):
             for y in range(self.size):
                 slot = self.slots[x][y]
 
-                lst , bestCount , totalPiecesNeeded , bestMissing = ShapeMinus.getInstance().getAllIncompleteShapeBasedOnPoint(self,slot,minPieces=minPieces) 
-                if(bestCount > dic2["-"]["Count"]):
-                    dic2["-"]["Count"] = bestCount
-                    dic2["-"]["total"] = 2**totalPiecesNeeded
-                    dic2["-"]["m"] = bestMissing
+                dic = ShapeMinus.getInstance().getBestPossibleShapeBasedOnPoint(self,slot,totalPieces["-"])
+                if(
+                   (dic.get("points") > dicReturn.get("-").get("points")) or 
+                   (dic.get("points") == dicReturn.get("-").get("points") and dic.get("piecesLeft") < dicReturn.get("-").get("left"))
+                  ):
+                    dicReturn.get("-")["side"] = dic.get("side")
+                    dicReturn.get("-")["points"] = dic.get("points")
+                    dicReturn.get("-")["left"] = dic.get("piecesLeft")
+                    dicReturn.get("-")["count"] = dic.get("count")
+                    dicReturn.get("-")["total"] = dic.get("total")
 
-                lst , bestCount , totalPiecesNeeded , bestMissing = ShapePlus.getInstance().getAllIncompleteShapeBasedOnPoint(self,slot,minPieces=minPieces) 
-                if(bestCount > dic2["+"]["Count"]):
-                    dic2["+"]["Count"] = bestCount
-                    dic2["+"]["total"] = 2**totalPiecesNeeded
-                    dic2["+"]["m"] = bestMissing
+                dic:dict = ShapePlus.getInstance().getBestPossibleShapeBasedOnPoint(self,slot,totalPieces["+"]) 
+                if(
+                   (dic.get("points") > dicReturn.get("+").get("points")) or 
+                   (dic.get("points") == dicReturn.get("+").get("points") and dic.get("piecesLeft") < dicReturn.get("+").get("left"))
+                  ):
+                    dicReturn.get("+")["side"] = dic.get("side")
+                    dicReturn.get("+")["points"] = dic.get("points")
+                    dicReturn.get("+")["left"] = dic.get("piecesLeft")
+                    dicReturn.get("+")["count"] = dic.get("count")
+                    dicReturn.get("+")["total"] = dic.get("total")
+                
 
-                lst , bestCount , totalPiecesNeeded , bestMissing = ShapeX.getInstance().getAllIncompleteShapeBasedOnPoint(self,slot,minPieces=minPieces)
-                if(bestCount > dic2["X"]["Count"]):
-                    dic2["X"]["Count"] = bestCount
-                    dic2["X"]["total"] = 2**totalPiecesNeeded
-                    dic2["X"]["m"] = bestMissing
+                dic = ShapeX.getInstance().getBestPossibleShapeBasedOnPoint(self,slot,totalPieces["X"])
+                if(
+                   (dic.get("points") > dicReturn.get("X").get("points")) or 
+                   (dic.get("points") == dicReturn.get("X").get("points") and dic.get("piecesLeft") < dicReturn.get("X").get("left"))
+                  ):
+                    dicReturn.get("X")["side"] = dic.get("side")
+                    dicReturn.get("X")["points"] = dic.get("points")
+                    dicReturn.get("X")["left"] = dic.get("piecesLeft")
+                    dicReturn.get("X")["count"] = dic.get("count")
+                    dicReturn.get("X")["total"] = dic.get("total")
 
-                lst , bestCount , totalPiecesNeeded , bestMissing = ShapeO.getInstance().getAllIncompleteShapeBasedOnPoint(self,slot,minPieces=minPieces)
-                if(bestCount > dic2["O"]["Count"]):
-                    dic2["O"]["Count"] = bestCount
-                    dic2["O"]["total"] = 2**totalPiecesNeeded 
-                    dic2["O"]["m"] = bestMissing
+                dic = ShapeO.getInstance().getBestPossibleShapeBasedOnPoint(self,slot,totalPieces["O"])
+                if(
+                   (dic.get("points") > dicReturn.get("O").get("points")) or 
+                   (dic.get("points") == dicReturn.get("O").get("points") and dic.get("piecesLeft") < dicReturn.get("O").get("left"))
+                  ):
+                    dicReturn.get("O")["side"] = dic.get("side")
+                    dicReturn.get("O")["points"] = dic.get("points")
+                    dicReturn.get("O")["left"] = dic.get("piecesLeft")
+                    dicReturn.get("O")["count"] = dic.get("count")
+                    dicReturn.get("O")["total"] = dic.get("total")
 
-        return dic2
+        return dicReturn
 
 
     def PrintPiecesList(self):
