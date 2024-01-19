@@ -146,7 +146,7 @@ class Node:
         return self.expectedPoints >= other.expectedPoints
     
     def __le__(self, other):
-        return self.expectedPoints <= other.expectedPoints
+        return self.expectedPoints < other.expectedPoints or (self.expectedPoints == other.expectedPoints and self.iteration <= other.iteration)
     
     def compare(self, other):
         """

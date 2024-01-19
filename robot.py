@@ -12,6 +12,7 @@ from board import *
 from point import *
 from piece import *
 from sma import SMA,State
+from util import Utils
 import random
 
 class Robot:
@@ -594,6 +595,29 @@ class Robot:
 
         return BestSlot
     
+    def playSimulated(self):
+
+        play:list = self.choosePlace_test()
+        result = 0
+        playCounter = 0
+        while len(self.board.pieces) > 0:
+            piece:Piece = self.board.pieces.pop(0)
+            placeSlot:Slot = play.pop(0).slot
+
+            self.board.slots[placeSlot.point.x][placeSlot.point.y].piece = piece
+            dicRemoveShapes = self.board.clearShapes()
+            for key in dicRemoveShapes.keys():
+                Utils.print(608,"robot", "Removed " +str(key) + "count:" + str(dicRemoveShapes[key]) + "\n" )
+                result += 2**(dicRemoveShapes[key])
+            Utils.print(610,"robot","After play " + str(playCounter) + ":" + str(self.board) + "\n\n")
+
+            playCounter+=1
+
+        length = len(self.board.getAllPieces())
+        left = (2**length) if length != 0 else 0
+        
+        Utils.print(612,"robot", "final board:" + str(self.board) + "\n" )
+        Utils.print(615,"robot","Final Result:" + str(result - left))
 
     def choosePlace_test(self):
 
@@ -603,6 +627,7 @@ class Robot:
             for state in path:
                 print("count:",count,"play:",state.slot)
                 count+=1
+            return path
         else:
             print("Does't have solution")
-
+            raise LookupError("SMA can not find a solution")
