@@ -341,7 +341,7 @@ class Robot:
         print("Result:",result-left)
 
 
-    def playTest(self,PercentageOfVariations =0):
+    def playSimulatedOld(self,PercentageOfVariations =0):
         result = 0
         print(self.board)
         while( len(self.board.pieces)  >0 ):
@@ -360,7 +360,9 @@ class Robot:
             print("afterCleared",self.board)
             print("----------------------End Play----------------------")
 
-        left = 2**len(self.board.getAllPieces())
+        left = len(self.board.getAllPieces())
+        if(left > 0):
+            left = 2**left
         print(self.board)
         self.ev3.speaker.say("Result:" + str(result-left))
         print("Result:",result-left)
@@ -595,19 +597,19 @@ class Robot:
 
         return BestSlot
     
-    def playSimulated(self,maxRollback = 3):
+    def playSimulated(self,maxRollback:int = 3,memory_limit:int = 626):
 
-        play:list = self.choosePlace_test(maxRollback)
+        play:list = self.choosePlace_test(maxRollback,memory_limit)
         result = 0
         playCounter = 0
-        while len(self.board.pieces) > 0:
+        while len(play) > 0:
             piece:Piece = self.board.pieces.pop(0)
             placeSlot:Slot = play.pop(0).slot
 
             self.board.slots[placeSlot.point.x][placeSlot.point.y].piece = piece
             dicRemoveShapes = self.board.clearShapes()
             for key in dicRemoveShapes.keys():
-                Utils.print(608,"robot", "Removed " +str(key) + "count:" + str(dicRemoveShapes[key]) + "\n" )
+                Utils.print(608,"robot", "Removed: " +str(key) + "count:" + str(dicRemoveShapes[key]) + "\n" )
                 result += 2**(dicRemoveShapes[key])
             Utils.print(610,"robot","After play " + str(playCounter) + ":" + str(self.board) + "\n\n")
 
@@ -619,9 +621,9 @@ class Robot:
         Utils.print(612,"robot", "final board:" + str(self.board) + "\n" )
         Utils.print(615,"robot","Final Result:" + str(result - left))
 
-    def choosePlace_test(self,maxRollback):
+    def choosePlace_test(self,maxRollback:int = 3,memory_limit:int = 626):
 
-        path = SMA.start(State(self.board.Copy(),None),maxRollback,10000)
+        path = SMA.start(State(self.board.Copy(),None),maxRollback,memory_limit)
         if(path):
             count = 0
             for state in path:

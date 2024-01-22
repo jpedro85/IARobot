@@ -90,8 +90,9 @@ class Board:
                 # Use the dictionary to create a new piece or reuse the same piece if they are immutable
                 newBoard.slots[x][y].piece = piece_type_to_constructor.get(piece_type, PieceNone)()
 
-        # Copying pieces list using list comprehension
-        newBoard.pieces = [piece_type_to_constructor.get(type(p), PieceNone)() for p in self.pieces]
+        # Copying pieces list
+        for piece in self.pieces:
+            newBoard.pieces.append(piece)
 
         return newBoard
 
@@ -100,8 +101,8 @@ class Board:
         return { type(piece).__name__ : count , ... }
         """
         count_dict = {}
-        for x in range(5):
-            for y in range(5):
+        for x in range(self.size):
+            for y in range(self.size):
                 piece = self.slots[x][y].piece
                 # Skip if the slot is empty or has a PieceNone
                 if piece is None or isinstance(piece, PieceNone):
@@ -189,9 +190,7 @@ class Board:
                 "O" : {"side":0, "points":0, "left":0 ,"count":0 , "total":0 } ,
                 "+" : {"side":0, "points":0, "left":0 ,"count":0 , "total":0 } 
                 }
-        
-        #focar mais para o meio ?
-        
+                
         for x in range(self.size):
             for y in range(self.size):
                 slot = self.slots[x][y]
