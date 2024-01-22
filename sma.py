@@ -68,12 +68,13 @@ class State:
 
         added_BestShape = {"-": False, "+": False, "X": False, "O": False}
 
+        #!To change from Heuristic2 to Heuristic1 uncomment the commented line in this block
         for side in range(self.board.size, 1, -1):
             for shape_type in ["-", "+", "X", "O"]:
                 if not added_BestShape[shape_type]:
                     shape_data = dicPossibleShapes[shape_type].get(side)
                     if shape_data and shape_data.get("NShapes") > 0:
-                      #  value += shape_data["Points"] #! comment or not comment
+                      #  value += shape_data["Points"] #! comment h2 or not comment h1
                         Left += shape_data["Left"]
                         added_BestShape[shape_type] = True
             
@@ -131,7 +132,8 @@ class Node:
         return 1 if(self.expectedPoints > other.expectedPoints) else -1 if(self.expectedPoints < other.expectedPoints) else 0
     
     def __str__(self):
-        return "[ D:" + str(self.depth) + ":" + str(self.state.slot) + " Expected:" + str(self.expectedPoints) + " total:" + str(self.total_Points) + "]"
+        #return "[ D:" + str(self.depth) + ":" + str(self.state.slot) + " Expected:" + str(self.expectedPoints) + " total:" + str(self.total_Points) + "]"
+        return "[ D:" + str(self.depth) + ":" + str(self.state.slot) + "]"
 
 class SMA:
 
@@ -147,18 +149,17 @@ class SMA:
 
         while frontier:
 
-            Utils.print(172,"sma","begin iteration:"+str(iter)+" MD:"+str(maxDepth)+" l:"+str(frontier.length)+"\n")
+            #Utils.print(172,"sma","begin iteration:"+str(iter)+" MD:"+str(maxDepth)+" l:"+str(frontier.length)+"\n")
            # Utils.print(153,"sma",frontier.printOrder()+"\n")
             node:Node = frontier.popHigherValue() 
 
             dif = maxDepth - node.depth
             if(dif > rollBackLimit):  continue
 
-
-            if node.depth >= 1:
-                Utils.print(154,"sma","Start Expanding: "+ str(node)+ " parent:" + str(node.parent) +"\n")
-            else:
-                Utils.print(154,"sma","Start Expanding: "+ str(node)+"\n")
+            # if node.depth >= 1:
+            #     Utils.print(154,"sma","Start Expanding: "+ str(node)+ " parent:" + str(node.parent) +"\n")
+            # else:
+            Utils.print(154,"sma","Start Expanding: "+ str(node)+"\n")
 
             if node.state.isGoalState():
                 return cls.reconstructPath(node)
@@ -170,13 +171,13 @@ class SMA:
 
                 successor_node = Node(successorState, node.total_Points + total_Points, successorState.getHeuristicValue(),actualDepth,node)
                 frontier.addValue(successor_node)
-                Utils.print(182,"sma","ActualSuccessorSlot: " + str(successor_node.state.slot)+" HPoints: "+str(successor_node.heuristicPoint)+" TPoints: "+ str(successor_node.total_Points)+" :EPoints: "+str(successor_node.expectedPoints)+" PSlot "+str(successor_node.parent.state.slot)+"\n")
+                #Utils.print(182,"sma","ActualSuccessorSlot: " + str(successor_node.state.slot)+" HPoints: "+str(successor_node.heuristicPoint)+" TPoints: "+ str(successor_node.total_Points)+" :EPoints: "+str(successor_node.expectedPoints)+" PSlot "+str(successor_node.parent.state.slot)+"\n")
 
                 if frontier.length > memory_limit:
                     cls.prune(frontier)
 
             iter += 1
-            Utils.print(190,"sma","End\n\n\n")
+            Utils.print(190,"sma","End\n")
 
         return None  
     

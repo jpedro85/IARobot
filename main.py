@@ -163,4 +163,4 @@ robot.playSimulated(3,626)
 end_time = time.time()
 
 execution_time = end_time - start_time
-print("time",execution_time)
+print(" time:",execution_time)
