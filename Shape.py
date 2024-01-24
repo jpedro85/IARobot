@@ -7,7 +7,33 @@ class Shape:
         self.shapes = {}
 
     def getPieceNumberFromSideLength(self,sideLength):
-        print("This Piece has no shape.")
+        raise TypeError("Only Shape subClasses have getPieceNumberFromSideLength method")
+    
+    def getBestPossibleShapeBasedOnPoint(self,board,slot,totalOfPieces):
+        """
+        return: {"side":v, "points":v, "left":v ,"count":v , "total":v }
+        if no shape possible {"side":None, "points":0, "piecesLeft":numberOfPieces ,"count":0 , "total":0 }
+        """
+        raise TypeError("Only Shape subClasses have getBestPossibleShapeBasedOnPoint method")
+
+    def getAllPossibleShapes(self,numberOfPieces,max=5):
+        """
+        return { "NShapes" :  , "Left" :  , "Points":  }
+
+        """
+        dic = {}
+        for side in range(max,1,-1):
+            
+            n = self.getPieceNumberFromSideLength(side)
+            if( n == None ):  
+                continue
+            else:
+                NShapes = numberOfPieces // n 
+                Left =  numberOfPieces % n
+                Points = (2**n)*NShapes
+                dic.update( { side : { "NShapes" : numberOfPieces // n , "Left" : Left , "Points": Points } } )
+
+        return dic
 
     def getShape(self,sideLength):
         if(sideLength in self.shapes.keys() ):
@@ -109,9 +135,9 @@ class ShapePlus(Shape):
         if(sideLength >= 3 and sideLength % 2 != 0):
             return sideLength*2 -1 
         else:
-            print("Does not exist shape Plus with side {}.".format(sideLength))
+           # print("Does not exist shape Plus with side {}.".format(sideLength))
             return None
-
+        
     def getShape(self,sideLength):
         """
         The function `getShape` returns a list of points that form a shape called "Plus" with a given
@@ -142,12 +168,55 @@ class ShapePlus(Shape):
                 
             self.shapes.update({sideLength : pointArray})
             return pointArray
+
+    def getBestPossibleShapeBasedOnPoint(self,board,slot,totalOfPieces):
+        """
+        return: {"side":v, "points":v, "left":v ,"count":v , "total":v }
+        if no shape possible {"side":None, "points":0, "piecesLeft":numberOfPieces ,"count":0 , "total":0 }
+        """
+        returnDic = {"side":0, "points":0, "piecesLeft":totalOfPieces ,"count":0 , "total":0 }
+        x = slot.point.x
+        y = slot.point.y
+        N = board.size - x
+        if(1 >= y or y >=3 or x >=2):
+            N = 3
+
+        if( N >= 3 and  1 <= y <=3  and x<=2):
+
+            for size in range(N,2,-1):
+
+                if(size%2 != 0):
+
+                    pointArray = self.getShape(size)
+                    numberOfPieces = self.getPieceNumberFromSideLength(size)
+
+                    if(pointArray):
+                        count = 0
+                        countOthers = 0
+                        for point in pointArray:
+                            if(type(board.slots[x + point.x][y + point.y].piece) == PiecePlus):
+                                count += 1
+                            elif(type(board.slots[x + point.x][y + point.y].piece) != PieceNone):
+                                countOthers += 1
+
+                        totalPieces = count+totalOfPieces
+                        if(count >= 1 and countOthers == 0 and totalPieces >= numberOfPieces):
+                            returnDic["side"] = size
+                            returnDic["points"] = 2**numberOfPieces
+                            returnDic["count"] = count
+                            returnDic["total"] = numberOfPieces
+                            returnDic["piecesLeft"] = totalPieces - numberOfPieces
+                            break
+
+        return returnDic
+    
     
     def getAllIncompleteShapeBasedOnPoint(self,board,slot,minPieces:int = 2):
         """
         The function `getAllIncompleteShapeBasedOnPoint` returns a list of incomplete shapes on a board
         based on a given point and minimum number of pieces.
         """
+        
         x = slot.point.x
         y = slot.point.y
         N = board.size - x
@@ -176,6 +245,7 @@ class ShapePlus(Shape):
                         if(count >= minPieces and countOthers == 0):
                             missing = numberOfPieces - count
                             lst.append( { "Side" : size, "ActualNumber" : count , "Missing" : missing } )
+
                             if((missing )== 0):
                                 break
 
@@ -206,8 +276,8 @@ class ShapeMinus(Shape):
         elif( sideLength == 3):
             return 3
         else:
-            print("Does not exist shape Minus with side {}.".format(sideLength))
-            return -1
+           # print("Does not exist shape Minus with side {}.".format(sideLength))
+            return None
 
     def existCompletedShapeBasedOnPoint(self,slot,board):
         """
@@ -283,12 +353,54 @@ class ShapeMinus(Shape):
             self.shapes.update({sideLength : pointArray})
             return pointArray
         
+    def getBestPossibleShapeBasedOnPoint(self,board,slot,totalOfPieces):
+        """
+        return: {"side":v, "points":v, "left":v ,"count":v , "total":v }
+        if no shape possible {"side":None, "points":0, "piecesLeft":numberOfPieces ,"count":0 , "total":0 }
+        """
+        returnDic = {"side":0, "points":0, "piecesLeft":totalOfPieces ,"count":0 , "total":0 }
+
+        x = slot.point.x
+        y = slot.point.y
+
+        N = board.size - y
+        if(N == 2):
+            max = 2
+        else:
+            max = 3
+
+        if( N >= 2):
+            for size in range(max,1,-1):
+
+                pointArray = self.getShape(size)
+                numberOfPieces = self.getPieceNumberFromSideLength(size)
+                
+                if(pointArray):
+                    count = 0
+                    countOthers = 0
+                    for point in pointArray:
+                        if(type(board.slots[x + point.x][y + point.y].piece) == PieceMinus):
+                            count += 1
+                        elif(type(board.slots[x + point.x][y + point.y].piece) != PieceNone):
+                            countOthers += 1
+
+                    totalPieces = count+totalOfPieces
+                    if(count >= 1 and countOthers == 0 and totalPieces >= numberOfPieces):
+                        returnDic["side"] = size
+                        returnDic["points"] = 2**numberOfPieces
+                        returnDic["count"] = count
+                        returnDic["total"] = numberOfPieces
+                        returnDic["piecesLeft"] = totalPieces - numberOfPieces
+                        break
+
+
+        return returnDic
+        
     def getAllIncompleteShapeBasedOnPoint(self,board,slot,minPieces:int = 2):
         """
         The function `getAllIncompleteShapeBasedOnPoint` returns a list of incomplete shapes on a board
         based on a given point and minimum number of pieces.
         """
-
         x = slot.point.x
         y = slot.point.y
 
@@ -317,6 +429,7 @@ class ShapeMinus(Shape):
                     if(count >= minPieces and countOthers == 0):
                         missing = numberOfPieces - count
                         lst.append( { "Side" : size, "ActualNumber" : count , "Missing" : missing } )
+                        
                         if((missing )== 0):
                             break
 
@@ -343,7 +456,7 @@ class ShapeX(Shape):
         if( sideLength >= 3 and sideLength%2 != 0):
             return sideLength*2 -1 
         else:
-            print("Does not exist shape X with side {}.".format(sideLength))
+            #print("Does not exist shape X with side {}.".format(sideLength))
             return None
 
     def existCompletedShapeBasedOnPoint(self,slot,board):
@@ -422,6 +535,48 @@ class ShapeX(Shape):
             self.shapes.update({sideLength : pointArray})
             return pointArray
 
+    def getBestPossibleShapeBasedOnPoint(self,board,slot,totalOfPieces):
+        """
+        return: {"side":v, "points":v, "left":v ,"count":v , "total":v }
+        if no shape possible {"side":None, "points":0, "piecesLeft":numberOfPieces ,"count":0 , "total":0 }
+        """
+        returnDic = {"side":0, "points":0, "piecesLeft":totalOfPieces ,"count":0 , "total":0 }
+        
+        x = slot.point.x
+        y = slot.point.y
+
+        NX = board.size - x
+        NY = board.size - y
+        N = NY if NX > NY else NX
+
+        if(N >= 3):
+            for size in range(N,2,-1):
+                if(size%2 != 0):
+
+                    pointArray = self.getShape(size)
+                    numberOfPieces = self.getPieceNumberFromSideLength(size)
+
+                    if(pointArray):
+
+                        count = 0
+                        countOthers = 0
+                        for point in pointArray:
+                            if(type(board.slots[x + point.x][y + point.y].piece) == PieceX):
+                                count += 1
+                            elif(type(board.slots[x + point.x][y + point.y].piece) != PieceNone):
+                                countOthers += 1
+
+                        totalPieces = count+totalOfPieces
+                        if(count >= 1 and countOthers == 0 and totalPieces >= numberOfPieces):
+                            returnDic["side"] = size
+                            returnDic["points"] = 2**numberOfPieces
+                            returnDic["count"] = count
+                            returnDic["total"] = numberOfPieces
+                            returnDic["piecesLeft"] = totalPieces - numberOfPieces
+                            break
+
+
+        return returnDic
 
     def getAllIncompleteShapeBasedOnPoint(self,board,slot,minPieces:int = 2):
         """
@@ -437,7 +592,6 @@ class ShapeX(Shape):
 
         lst = []
         if(N >= 3):
-
             for size in range(N,2,-1):
                 if(size%2 != 0):
 
@@ -457,6 +611,7 @@ class ShapeX(Shape):
                         if(count >= minPieces and countOthers == 0):
                             missing = numberOfPieces - count
                             lst.append( { "Side" : size, "ActualNumber" : count , "Missing" : missing } )
+
                             if(missing == 0):
                                 break
 
@@ -485,7 +640,7 @@ class ShapeO(Shape):
         if( sideLength >= 2 ):
             return (sideLength**2) - ((sideLength-2)**2)
         else:
-            print("Does not exist shape O with side {}.".format(sideLength))
+            #print("Does not exist shape O with side {}.".format(sideLength))
             return -1
 
     def existCompletedShapeBasedOnPoint(self,slot,board):
@@ -565,11 +720,50 @@ class ShapeO(Shape):
             self.shapes.update({sideLength : pointArray})
             return pointArray
         
+    def getBestPossibleShapeBasedOnPoint(self,board,slot,totalOfPieces):
+        """
+        return: {"side":v, "points":v, "left":v ,"count":v , "total":v }
+        if no shape possible {"side":None, "points":0, "piecesLeft":numberOfPieces ,"count":0 , "total":0 }
+        """
+        returnDic = {"side":0, "points":0, "piecesLeft":totalOfPieces ,"count":0 , "total":0 }
+
+        x = slot.point.x
+        y = slot.point.y
+
+        NX = board.size - x
+        NY = board.size - y
+        N = NY if NX > NY else NX
+
+        if( N >= 2):
+            for size in range(N,1,-1):
+
+                pointArray = self.getShape(size)
+                numberOfPieces = self.getPieceNumberFromSideLength(size)
+
+                count = 0
+                countOthers = 0
+                for point in pointArray:
+                    if(type(board.slots[x + point.x][y + point.y].piece) == PieceO):
+                        count += 1
+                    elif(type(board.slots[x + point.x][y + point.y].piece) != PieceNone):
+                        countOthers += 1
+
+                totalPieces = count+totalOfPieces
+                if(count >= 1 and countOthers == 0 and totalPieces >= numberOfPieces):
+                    returnDic["side"] = size
+                    returnDic["points"] = 2**numberOfPieces
+                    returnDic["count"] = count
+                    returnDic["total"] = numberOfPieces
+                    returnDic["piecesLeft"] = totalPieces - numberOfPieces
+                    break
+
+        return returnDic
+        
     def getAllIncompleteShapeBasedOnPoint(self,board,slot,minPieces:int = 2):
         """
         The function `getAllIncompleteShapeBasedOnPoint` returns a list of incomplete shapes on a board
         based on a given point and minimum number of pieces.
-        """
+        """        
         x = slot.point.x
         y = slot.point.y
 
@@ -579,7 +773,6 @@ class ShapeO(Shape):
 
         lst = []
         if( N >= 2):
-
             for size in range(N,1,-1):
 
                 pointArray = self.getShape(size)
@@ -596,6 +789,8 @@ class ShapeO(Shape):
                 if(count >= minPieces and countOthers == 0):
                     missing = numberOfPieces - count
                     lst.append( { "Side" : size, "ActualNumber" : count , "Missing" : missing } )
+
+
                     if((missing )== 0):
                         break
 

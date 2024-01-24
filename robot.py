@@ -11,6 +11,8 @@ from Color import *
 from board import *
 from point import *
 from piece import *
+from sma import SMA,State
+from util import Utils
 import random
 
 class Robot:
@@ -56,7 +58,7 @@ class Robot:
         #move2
         self.moveV2Margin = 2
 
-        self.board = Board.getInstance()
+        self.board = Board()
 
     def test(self):
         while True:
@@ -309,7 +311,7 @@ class Robot:
         while (len(board.pieces) > 0 ):
             
             print(board)
-            chosenSlot = self.choosePlace(self.board,PercentageOfVariations)
+            chosenSlot = self.choosePlace_1_Neuronio(self.board,PercentageOfVariations)
             piece = board.pieces.pop(0)
 
             print("Waiting for next piece:" , str(piece) )
@@ -339,11 +341,11 @@ class Robot:
         print("Result:",result-left)
 
 
-    def playTest(self,PercentageOfVariations =0):
+    def playSimulatedOld(self,PercentageOfVariations =0):
         result = 0
         print(self.board)
         while( len(self.board.pieces)  >0 ):
-            slot = self.choosePlace(self.board,PercentageOfVariations)
+            slot = self.choosePlace_1_Neuronio(self.board,PercentageOfVariations)
             piece = self.board.pieces.pop(0)
             slot.piece = piece
             print(slot)
@@ -358,12 +360,14 @@ class Robot:
             print("afterCleared",self.board)
             print("----------------------End Play----------------------")
 
-        left = 2**len(self.board.getAllPieces())
+        left = len(self.board.getAllPieces())
+        if(left > 0):
+            left = 2**left
         print(self.board)
         self.ev3.speaker.say("Result:" + str(result-left))
         print("Result:",result-left)
 
-    def choosePlace(self,board:Board,PercentageOfVariations = 0):
+    def choosePlace_1_Neuronio(self,board:Board,PercentageOfVariations = 0):
 
         def compareNumbers(a,b):
             return -(a-b) if a > b else ( (b-a) if a < b else 0)
@@ -589,10 +593,43 @@ class Robot:
                     OPT = 7
 
 
-
-
-
-            
             print("B->",OPT,"best:",BestSlot,":",BestValueInFullShapes ,"IPS:" , BestValueInPossibleShapes ,"LS:", BestValueInLostShapes ,"P:", BestProgression)
 
         return BestSlot
+    
+    def playSimulated(self,maxRollback:int = 3,memory_limit:int = 626):
+
+        play:list = self.choosePlace_test(maxRollback,memory_limit)
+        result = 0
+        playCounter = 0
+        while len(play) > 0:
+            piece:Piece = self.board.pieces.pop(0)
+            placeSlot:Slot = play.pop(0).slot
+
+            self.board.slots[placeSlot.point.x][placeSlot.point.y].piece = piece
+            dicRemoveShapes = self.board.clearShapes()
+            for key in dicRemoveShapes.keys():
+                Utils.print(608,"robot", "Removed: " +str(key) + "count:" + str(dicRemoveShapes[key]) + "\n" )
+                result += 2**(dicRemoveShapes[key])
+            Utils.print(610,"robot","After play " + str(playCounter) + ":" + str(self.board) + "\n\n")
+
+            playCounter+=1
+
+        length = len(self.board.getAllPieces())
+        left = (2**length) if length != 0 else 0
+        
+        Utils.print(612,"robot", "final board:" + str(self.board) + "\n" )
+        Utils.print(615,"robot","Final Result:" + str(result - left))
+
+    def choosePlace_test(self,maxRollback:int = 3,memory_limit:int = 626):
+
+        path = SMA.start(State(self.board.Copy(),None),maxRollback,memory_limit)
+        if(path):
+            count = 0
+            for state in path:
+                print("count:",count,"play:",state.slot)
+                count+=1
+            return path
+        else:
+            print("Does't have solution")
+            raise LookupError("SMA can not find a solution")
